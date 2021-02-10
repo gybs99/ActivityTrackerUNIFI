@@ -10,6 +10,7 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+#include "MainMenu.h"
 
 
 class ActivityTrackerApp : public wxApp {
@@ -17,7 +18,7 @@ public:
     ActivityTrackerApp();
     bool OnInit() override;
 private:
-
+    MainMenu* mainMenuWindow {nullptr};
 };
 
 #endif //ACTIVITYTRACKERUNIFI_ACTIVITYTRACKERAPP_H
