@@ -18,6 +18,8 @@ private:
     wxBoxSizer* mainMenuSizer;
     wxStaticText* introText;
     wxStaticText* dayText;
+    wxMenuBar* mainMenuBar;
+    wxMenu* registerField;
 };
 
 

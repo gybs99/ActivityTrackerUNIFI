@@ -8,6 +8,17 @@
 MainMenu::MainMenu() : wxFrame(nullptr, wxID_ANY, "Activity Tracker", wxPoint(30, 30),
                                wxSize(800,600)) {
 
+    registerField = new wxMenu;
+    registerField -> Append(1000, "&Display");
+    registerField -> AppendSeparator();
+    registerField -> Append(1001, "&Search by day");
+
+    mainMenuBar = new wxMenuBar;
+    mainMenuBar -> Append(registerField, "&Register");
+    SetMenuBar(mainMenuBar);
+    CreateStatusBar();
+    SetStatusText("Have a wonderful day!");
+
     mainMenuSizer = new wxBoxSizer(wxVERTICAL);
 
     introText = new wxStaticText(this, wxID_ANY, "Welcome, here you'll find a list of your daily tasks!");
