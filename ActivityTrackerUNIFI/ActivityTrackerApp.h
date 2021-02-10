@@ -15,7 +15,7 @@
 
 class ActivityTrackerApp : public wxApp {
 public:
-    ActivityTrackerApp();
+    ActivityTrackerApp() = default;
     bool OnInit() override;
 private:
     MainMenu* mainMenuWindow {nullptr};

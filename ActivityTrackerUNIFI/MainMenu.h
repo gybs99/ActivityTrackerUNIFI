@@ -16,6 +16,7 @@ public:
 
 private:
     wxBoxSizer* mainMenuSizer;
+    wxStaticText* introText;
 };
 
 
