@@ -8,28 +8,42 @@
 MainMenu::MainMenu() : wxFrame(nullptr, wxID_ANY, "Activity Tracker", wxPoint(30, 30),
                                wxSize(650,450), wxDEFAULT_FRAME_STYLE ^ wxRESIZE_BORDER) {
 
+    assembleMenuBar();                   // creates the menu bar
+
+    CreateStatusBar();
+    SetStatusText("Have a wonderful day!");                        // sets status bar
+
+    setStaticText();                    // add intro text
+
+    lookTodayButton = new wxButton(this, 1, "Sign it!");        // adds the button for new task
+
+    setBoxSizer();
+}
+
+void MainMenu::assembleMenuBar() {
+
     registerField = new wxMenu;
-    registerField -> Append(1000, "&Display");
+    registerField -> Append(1000, "&Display", "Display your activity list day by day.");
     registerField -> AppendSeparator();
-    registerField -> Append(1001, "&Search by day");
+    registerField -> Append(1001, "&Search by day" , "Display activities you've done in a particular day.");
 
     todayField = new wxMenu;
-    todayField -> Append(1000, "&Display");
+    todayField -> Append(1002, "&Display", "Display what you've done today.");
     todayField -> AppendSeparator();
-    todayField -> Append(1001, "&Add activity");
+    todayField -> Append(1003, "&Add activity", "Sign up a new activity for today.");
 
     aboutField = new wxMenu;
-    aboutField -> Append(1000, "&Info");
+    aboutField -> Append(1004, "&Info" , "Info about the development.");
 
     mainMenuBar = new wxMenuBar;
     mainMenuBar -> Append(registerField, "&Register");
     mainMenuBar -> Append(todayField, "&Today");
     mainMenuBar -> Append(aboutField, "&About");
     SetMenuBar(mainMenuBar);
-    CreateStatusBar();
-    SetStatusText("Have a wonderful day!");
 
-    mainMenuSizer = new wxBoxSizer(wxVERTICAL);
+}
+
+void MainMenu::setStaticText() {
 
     introText = new wxStaticText(this, wxID_ANY, "Welcome, here you'll find a  \n list of your daily done tasks!");
     introText -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
@@ -38,13 +52,17 @@ MainMenu::MainMenu() : wxFrame(nullptr, wxID_ANY, "Activity Tracker", wxPoint(30
     struct tm* timeStruct = localtime((&currentTime));    // Memory leak?
 
     dayText = new wxStaticText(this, wxID_ANY, "Today is " + std::to_string(timeStruct->tm_mday) + '/' +
-                                std::to_string(timeStruct->tm_mon + 1) + '/' + std::to_string(timeStruct->tm_year + 1900));
+                                               std::to_string(timeStruct->tm_mon + 1) + '/' + std::to_string(timeStruct->tm_year + 1900));
     dayText -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
 
     lookTodayText = new wxStaticText(this, wxID_ANY, "Have you done some important today? \n Sign it in your diary!");
     lookTodayText -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
 
-    lookTodayButton = new wxButton(this, 1, "Sign it!");
+}
+
+void MainMenu::setBoxSizer() {
+
+    mainMenuSizer = new wxBoxSizer(wxVERTICAL);
 
     mainMenuSizer -> Add(introText, 0, wxEXPAND | wxALL, 20);
     mainMenuSizer -> Add(dayText, 0 , wxEXPAND | wxALL, 20);

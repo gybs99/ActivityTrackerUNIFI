@@ -13,16 +13,19 @@
 class MainMenu : public wxFrame{
 public:
     MainMenu();
+    void assembleMenuBar();
+    void setStaticText();
+    void setBoxSizer();
 
 private:
-    wxBoxSizer* mainMenuSizer;
-    wxStaticText* introText;
-    wxStaticText* dayText;
-    wxStaticText* lookTodayText;
-    wxMenuBar* mainMenuBar;
-    wxMenu* registerField;
-    wxMenu* todayField;
-    wxMenu* aboutField;
+    wxBoxSizer* mainMenuSizer{};
+    wxStaticText* introText{};
+    wxStaticText* dayText{};
+    wxStaticText* lookTodayText{};
+    wxMenuBar* mainMenuBar{};
+    wxMenu* registerField{};
+    wxMenu* todayField{};
+    wxMenu* aboutField{};
     wxButton* lookTodayButton;
 };
 
