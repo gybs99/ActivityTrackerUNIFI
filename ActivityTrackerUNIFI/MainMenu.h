@@ -21,6 +21,8 @@ private:
     wxStaticText* lookTodayText;
     wxMenuBar* mainMenuBar;
     wxMenu* registerField;
+    wxMenu* todayField;
+    wxMenu* aboutField;
     wxButton* lookTodayButton;
 };
 

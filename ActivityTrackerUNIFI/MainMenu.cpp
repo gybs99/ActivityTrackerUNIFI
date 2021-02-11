@@ -6,15 +6,25 @@
 #include <ctime>
 
 MainMenu::MainMenu() : wxFrame(nullptr, wxID_ANY, "Activity Tracker", wxPoint(30, 30),
-                               wxSize(800,600)) {
+                               wxSize(650,450), wxDEFAULT_FRAME_STYLE ^ wxRESIZE_BORDER) {
 
     registerField = new wxMenu;
     registerField -> Append(1000, "&Display");
     registerField -> AppendSeparator();
     registerField -> Append(1001, "&Search by day");
 
+    todayField = new wxMenu;
+    todayField -> Append(1000, "&Display");
+    todayField -> AppendSeparator();
+    todayField -> Append(1001, "&Add activity");
+
+    aboutField = new wxMenu;
+    aboutField -> Append(1000, "&Info");
+
     mainMenuBar = new wxMenuBar;
     mainMenuBar -> Append(registerField, "&Register");
+    mainMenuBar -> Append(todayField, "&Today");
+    mainMenuBar -> Append(aboutField, "&About");
     SetMenuBar(mainMenuBar);
     CreateStatusBar();
     SetStatusText("Have a wonderful day!");
