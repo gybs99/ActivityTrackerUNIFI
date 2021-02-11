@@ -18,8 +18,10 @@ private:
     wxBoxSizer* mainMenuSizer;
     wxStaticText* introText;
     wxStaticText* dayText;
+    wxStaticText* lookTodayText;
     wxMenuBar* mainMenuBar;
     wxMenu* registerField;
+    wxButton* lookTodayButton;
 };
 
 
