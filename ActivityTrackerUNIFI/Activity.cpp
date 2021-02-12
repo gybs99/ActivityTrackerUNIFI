@@ -35,9 +35,23 @@ void Activity::setDescription(const std::string &newDescription) {
     Activity::description = newDescription;
 }
 
+
 Activity::~Activity() {
     delete startingTime;
     delete finishingTime;
+}
+
+void Activity::subscribeView(Observer *newView) {
+    activityViews.push_back(newView);
+}
+
+void Activity::unsubscribeView(Observer *removedView) {
+    activityViews.remove(removedView);
+}
+
+void Activity::notifyChange() {
+    for(auto view : activityViews)
+        view -> updateView();
 }
 
 

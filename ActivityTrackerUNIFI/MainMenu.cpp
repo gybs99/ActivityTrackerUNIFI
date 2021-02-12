@@ -78,5 +78,5 @@ void MainMenu::setBoxSizer() {
 
 void MainMenu::OnInfo(wxCommandEvent& event) {
     wxMessageBox(wxString("This program is made by Redi Niccolò"),
-                 wxString("Development Info"), wxOK | wxICON_INFORMATION);      // Need to fix it!
+                 wxString("Development Info"), wxOK | wxICON_INFORMATION);      // TODO Need to fix it!
 }

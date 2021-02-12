@@ -8,8 +8,10 @@
 
 #include <string>
 #include <ctime>
+#include <list>
+#include "Subject.h"
 
-class Activity {
+class Activity : public Subject {
 
 public:
     Activity(const std::string newType, const std::string newDescription, int startingMin, int startingHour,
@@ -25,11 +27,19 @@ public:
 
     void setDescription(const std::string &description);
 
+    void subscribeView(Observer *newView) override;
+
+    void unsubscribeView(Observer *removedView) override;
+
+    void notifyChange() override;
+
 private:
     std::string type;
     std::string description;
     struct tm* startingTime;
     struct tm* finishingTime;
+
+    std::list<Observer*> activityViews;
 };
 
 
