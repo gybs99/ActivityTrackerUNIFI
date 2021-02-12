@@ -10,23 +10,37 @@
 #include <wx/wx.h>
 #endif
 
+enum
+{
+    ID_LookRegister = 1,
+    ID_SearchDay = 2,
+    ID_Today = 3,
+    ID_AddActivity = 4,
+    ID_About = 5
+};
+
 class MainMenu : public wxFrame{
 public:
+
     MainMenu();
     void assembleMenuBar();
     void setStaticText();
     void setBoxSizer();
+    void OnInfo(wxCommandEvent& event);
 
 private:
-    wxBoxSizer* mainMenuSizer{};
-    wxStaticText* introText{};
-    wxStaticText* dayText{};
-    wxStaticText* lookTodayText{};
-    wxMenuBar* mainMenuBar{};
-    wxMenu* registerField{};
-    wxMenu* todayField{};
-    wxMenu* aboutField{};
-    wxButton* lookTodayButton;
+
+    wxBoxSizer* mainMenuSizer {nullptr};
+    wxStaticText* introText {nullptr};
+    wxStaticText* dayText {nullptr};
+    wxStaticText* lookTodayText {nullptr};
+    wxMenuBar* mainMenuBar {nullptr};
+    wxMenu* registerField {nullptr};
+    wxMenu* todayField {nullptr};
+    wxMenu* aboutField {nullptr};
+    wxButton* lookTodayButton {nullptr};
+    wxDECLARE_EVENT_TABLE();
+
 };
 
 

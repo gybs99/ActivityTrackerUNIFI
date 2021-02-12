@@ -5,6 +5,10 @@
 #include "MainMenu.h"
 #include <ctime>
 
+wxBEGIN_EVENT_TABLE(MainMenu, wxFrame)
+    EVT_MENU(ID_About, MainMenu::OnInfo)
+wxEND_EVENT_TABLE()
+
 MainMenu::MainMenu() : wxFrame(nullptr, wxID_ANY, "Activity Tracker", wxPoint(30, 30),
                                wxSize(650,450), wxDEFAULT_FRAME_STYLE ^ wxRESIZE_BORDER) {
 
@@ -23,17 +27,17 @@ MainMenu::MainMenu() : wxFrame(nullptr, wxID_ANY, "Activity Tracker", wxPoint(30
 void MainMenu::assembleMenuBar() {
 
     registerField = new wxMenu;
-    registerField -> Append(1000, "&Display", "Display your activity list day by day.");
+    registerField -> Append(ID_LookRegister, "&Display", "Display your activity list day by day.");
     registerField -> AppendSeparator();
-    registerField -> Append(1001, "&Search by day" , "Display activities you've done in a particular day.");
+    registerField -> Append(ID_SearchDay, "&Search by day" , "Display activities you've done in a particular day.");
 
     todayField = new wxMenu;
-    todayField -> Append(1002, "&Display", "Display what you've done today.");
+    todayField -> Append(ID_Today, "&Display", "Display what you've done today.");
     todayField -> AppendSeparator();
-    todayField -> Append(1003, "&Add activity", "Sign up a new activity for today.");
+    todayField -> Append(ID_AddActivity, "&Add activity", "Sign up a new activity for today.");
 
     aboutField = new wxMenu;
-    aboutField -> Append(1004, "&Info" , "Info about the development.");
+    aboutField -> Append(ID_About, "&Info" , "Info about the development.");
 
     mainMenuBar = new wxMenuBar;
     mainMenuBar -> Append(registerField, "&Register");
@@ -70,4 +74,9 @@ void MainMenu::setBoxSizer() {
     mainMenuSizer -> Add(lookTodayButton, 0, wxCENTER, 20);
 
     this -> SetSizer(mainMenuSizer);
+}
+
+void MainMenu::OnInfo(wxCommandEvent& event) {
+    wxMessageBox(wxString("This program is made by Redi Niccolò"),
+                 wxString("Development Info"), wxOK | wxICON_INFORMATION);      // Need to fix it!
 }
