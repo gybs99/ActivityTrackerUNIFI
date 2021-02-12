@@ -5,6 +5,25 @@
 #include "ActivityView.h"
 
 
-ActivityView::ActivityView(): wxFrame(nullptr, wxID_ANY, "Activity Visual") {
+ActivityView::ActivityView(std::shared_ptr<Activity> newActivity): wxFrame(nullptr, wxID_ANY, "Activity Visual"),
+                activityViewed(std::move(newActivity)) {
 
+    attachView();
+    description = new wxStaticText(this, 1, activityViewed -> getDescription());
+}
+
+void ActivityView::updateView() {
+
+}
+
+void ActivityView::attachView() {
+    activityViewed -> subscribeView(this);
+}
+
+void ActivityView::detachView() {
+    activityViewed -> unsubscribeView(this);
+}
+
+ActivityView::~ActivityView() {
+    activityViewed -> unsubscribeView(this);
 }

@@ -9,13 +9,33 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+#include "Observer.h"
+#include "Activity.h"
+#include <memory>
 
-
-class ActivityView : public wxFrame {
+class ActivityView : public wxFrame, public Observer {
 
 public:
-    ActivityView();
+    ActivityView(std::shared_ptr<Activity> newActivity);
+
+    ~ActivityView() override;
+
+    ActivityView(ActivityView&) = delete;
+
+    ActivityView& operator=(const ActivityView) = delete;
+
+    void updateView() override;
+
+    void attachView() override;
+
+    void detachView() override;
+
+
+
 private:
+    std::shared_ptr<Activity> activityViewed;
+
+    wxStaticText* description;
 };
 
 
