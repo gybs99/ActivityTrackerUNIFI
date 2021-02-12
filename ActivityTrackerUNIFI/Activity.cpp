@@ -4,12 +4,12 @@
 
 #include "Activity.h"
 
-Activity::Activity(std::string type, std::string description, int startingMin, int startingHour, int finishingMin,
-                   int finishingHour) : type(type), description(description) {
+Activity::Activity(const std::string newType, const std::string newDescription, int startingMin, int startingHour, int finishingMin,
+                   int finishingHour) : type(newType), description(newDescription) {
 
     time_t currentTime = time(nullptr);
     startingTime = localtime(&currentTime);             // using local time for creating instance and then modify it
-    finishingTime = localtime(&currentTime);            // for saving date and start/finish time
+    finishingTime = localtime(&currentTime);            // for saving date and start/finish time of the activity
 
     startingTime -> tm_min = startingMin;
     startingTime -> tm_hour = startingHour;
@@ -23,16 +23,16 @@ const std::string &Activity::getType() const {
     return type;
 }
 
-void Activity::setType(const std::string &type) {
-    Activity::type = type;
+void Activity::setType(const std::string &newType) {
+    Activity::type = newType;
 }
 
 const std::string &Activity::getDescription() const {
     return description;
 }
 
-void Activity::setDescription(const std::string &description) {
-    Activity::description = description;
+void Activity::setDescription(const std::string &newDescription) {
+    Activity::description = newDescription;
 }
 
 Activity::~Activity() {

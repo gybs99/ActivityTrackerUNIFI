@@ -12,6 +12,11 @@
 #endif
 #include "MainMenu.h"
 
+enum
+{
+    ID_Main = 1
+};
+
 
 class ActivityTrackerApp : public wxApp {
 public:

@@ -12,7 +12,7 @@
 class Activity {
 
 public:
-    Activity(std::string type, std::string description, int startingMin, int startingHour,
+    Activity(const std::string newType, const std::string newDescription, int startingMin, int startingHour,
              int finishingMin, int finishingHour);
 
     const std::string &getType() const;
