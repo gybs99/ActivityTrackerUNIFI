@@ -11,6 +11,9 @@
 #include <wx/wx.h>
 #endif
 #include "MainMenu.h"
+#include "Activity.h"
+#include "ActivityView.h"
+#include <memory>
 
 enum
 {
@@ -24,6 +27,8 @@ public:
     bool OnInit() override;
 private:
     MainMenu* mainMenuWindow {nullptr};
+    std::shared_ptr<Activity> newActivity;
+    ActivityView* actView {nullptr};
 };
 
 #endif //ACTIVITYTRACKERUNIFI_ACTIVITYTRACKERAPP_H

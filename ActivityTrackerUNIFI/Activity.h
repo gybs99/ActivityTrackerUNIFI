@@ -35,6 +35,16 @@ public:
 
 private:
     std::string type;
+public:
+    tm *getStartingTime() const;
+
+    void setStartingTime(tm *startingTime);
+
+    tm *getFinishingTime() const;
+
+    void setFinishingTime(tm *finishingTime);
+
+private:
     std::string description;
     struct tm* startingTime;
     struct tm* finishingTime;

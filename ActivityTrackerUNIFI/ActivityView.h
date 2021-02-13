@@ -30,12 +30,17 @@ public:
 
     void detachView() override;
 
-
+    void createViewText();
 
 private:
     std::shared_ptr<Activity> activityViewed;
+    std::string durationString;
 
-    wxStaticText* description;
+    wxStaticText* activityDescription;
+    wxStaticText* activityType;
+    wxStaticText* activityDuration;
+
+    wxBoxSizer* windowSizer;
 };
 
 
