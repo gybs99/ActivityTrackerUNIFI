@@ -5,22 +5,35 @@
 #include "ActivityView.h"
 
 
-ActivityView::ActivityView(std::shared_ptr<Activity> newActivity): wxFrame(nullptr, wxID_ANY, "Activity Visual"),
-                activityViewed(std::move(newActivity)) {
+ActivityView::ActivityView(std::shared_ptr<Activity> newActivity): wxFrame(nullptr, wxID_ANY, "Activity Visual",
+                      wxDefaultPosition, wxSize(600,400)), activityViewed(std::move(newActivity)) {
 
     attachView();
 
     assembleMenuBar();
 
+    CreateStatusBar();
+
     createViewText();
 
-    windowSizer = new wxBoxSizer(wxVERTICAL);
-    this -> SetSizer(windowSizer);
+    SetStatusText("Activity registered the " + std::to_string(activityViewed -> getTimeSet() -> day) + "/" +
+                    std::to_string(activityViewed -> getTimeSet() -> month) + "/" + std::to_string(activityViewed ->
+                    getTimeSet() -> year));
 
-    windowSizer -> Add(activityType, 0, wxEXPAND | wxALL, 20);
-    windowSizer -> Add(activityDescription, 0, wxEXPAND | wxALL, 20);
-    windowSizer -> Add(activityDuration, 0, wxEXPAND | wxALL, 20);
+    backButton = new wxButton(this, 8, "OK");
 
+    topSizer = new wxBoxSizer(wxVERTICAL);
+    topSizer -> Add(activityType, 1, wxEXPAND | wxALL, 20);
+    topSizer -> Add(activityDescription, 1, wxEXPAND | wxALL, 20);
+
+    bottomSizer = new wxBoxSizer(wxVERTICAL);
+    bottomSizer -> Add(activityDuration, 0, wxEXPAND | wxALL, 20);
+    bottomSizer -> Add(backButton, 0, wxALIGN_RIGHT, 20);
+
+    topSizer -> Add(bottomSizer, 0, wxEXPAND | wxALL, 20);
+
+    SetMinSize(wxSize(425,350));
+    this -> SetSizer(topSizer);
 
 }
 

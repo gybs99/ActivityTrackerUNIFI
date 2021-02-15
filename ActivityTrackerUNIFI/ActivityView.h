@@ -45,7 +45,9 @@ private:
     wxMenu* editField {nullptr};
     wxMenuBar* activityMenuBar {nullptr};
 
-    wxBoxSizer* windowSizer;
+    wxButton* backButton {nullptr};
+    wxBoxSizer* topSizer;
+    wxBoxSizer* bottomSizer;
 };
 
 
