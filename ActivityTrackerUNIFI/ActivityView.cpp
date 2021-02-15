@@ -10,6 +10,8 @@ ActivityView::ActivityView(std::shared_ptr<Activity> newActivity): wxFrame(nullp
 
     attachView();
 
+    assembleMenuBar();
+
     createViewText();
 
     windowSizer = new wxBoxSizer(wxVERTICAL);
@@ -45,12 +47,24 @@ void ActivityView::createViewText() {
     activityDescription = new wxStaticText(this, 1, activityViewed -> getDescription());
     activityDescription -> SetFont(wxFont(15,wxROMAN, wxNORMAL, wxNORMAL));
 
-    durationString = std::to_string(activityViewed -> getStartingTime() -> tm_hour) + std::string(":") +
-                     std::to_string(activityViewed -> getStartingTime() -> tm_min) + std::string("   ") +
-                     std::to_string(activityViewed -> getFinishingTime() -> tm_hour) + std::string (":") +
-                     std::to_string(activityViewed -> getFinishingTime() -> tm_min);
+    durationString = std::to_string(activityViewed -> getTimeSet() -> startingHour) + std::string(":") +
+                     std::to_string(activityViewed -> getTimeSet() -> startingMin) + std::string("   ") +
+                     std::to_string(activityViewed -> getTimeSet() -> finishingHour) + std::string (":") +
+                     std::to_string(activityViewed -> getTimeSet() -> finishingMin);
 
     activityDuration = new wxStaticText(this, 3,"Duration: " + durationString);
     activityDuration -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
+
+}
+
+void ActivityView::assembleMenuBar() {
+
+    editField = new wxMenu;
+    editField -> Append(5, "&Modify", "Change info about this activity");
+    editField -> Append(6, "&Delete", "Delete this activity");
+
+    activityMenuBar = new wxMenuBar;
+    activityMenuBar -> Append(editField, "Edit");
+    SetMenuBar(activityMenuBar);
 
 }

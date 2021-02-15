@@ -4,39 +4,22 @@
 
 #include "Activity.h"
 
-Activity::Activity(const std::string newType, const std::string newDescription, int startingMin, int startingHour, int finishingMin,
-                   int finishingHour) : type(newType), description(newDescription) {
+Activity::Activity(const std::string& newType, const std::string& newDescription, int startingMin, int startingHour, int finishingMin,
+                   int finishingHour) : type(newType), description(newDescription){
 
-    time_t currentTime = time(nullptr);
-    startingTime = localtime(&currentTime);             // using local time for creating instance and then modify it
-    finishingTime = localtime(&currentTime);            // for saving date and start/finish time of the activity
+    setStartFinishTime(startingMin, startingHour, finishingMin, finishingHour);
 
-    startingTime -> tm_min = startingMin;
-    startingTime -> tm_hour = startingHour;
+    time_t currentDate = time(nullptr);
+    Date = localtime(&currentDate);
 
-    finishingTime -> tm_min = finishingMin;
-    finishingTime -> tm_hour = finishingHour;
+    timeSet -> day = Date -> tm_mday;
+    timeSet -> month = Date -> tm_mon + 1;
+    timeSet -> year = Date -> tm_year + 1900;
 
 }
-
-const std::string &Activity::getType() const {
-    return type;
-}
-
-void Activity::setType(const std::string &newType) {
-    Activity::type = newType;
-}
-
-const std::string &Activity::getDescription() const {
-    return description;
-}
-
-void Activity::setDescription(const std::string &newDescription) {
-    Activity::description = newDescription;
-}
-
 
 Activity::~Activity() {
+    delete timeSet;
 }
 
 void Activity::subscribeView(Observer *newView) {
@@ -52,21 +35,38 @@ void Activity::notifyChange() {
         view -> updateView();
 }
 
-tm *Activity::getStartingTime() const {
-    return startingTime;
+void Activity::setStartFinishTime(int startingMin, int startingHour, int finishingMin, int finishingHour) {
+    timeSet = new startFinishTime;
+    timeSet -> startingMin = startingMin;
+    timeSet -> startingHour = startingHour;
+    timeSet -> finishingMin = finishingMin;
+    timeSet -> finishingHour = finishingHour;
 }
 
-void Activity::setStartingTime(tm *startingTime) {
-    Activity::startingTime = startingTime;
+startFinishTime *Activity::getTimeSet() const {
+    return timeSet;
 }
 
-tm *Activity::getFinishingTime() const {
-    return finishingTime;
+void Activity::setTimeSet(startFinishTime *timeSet) {
+    Activity::timeSet = timeSet;
 }
 
-void Activity::setFinishingTime(tm *finishingTime) {
-    Activity::finishingTime = finishingTime;
+const std::string &Activity::getDescription() const {
+    return description;
 }
+
+void Activity::setDescription(const std::string &description) {
+    Activity::description = description;
+}
+
+const std::string &Activity::getType() const {
+    return type;
+}
+
+void Activity::setType(const std::string &type) {
+    Activity::type = type;
+}
+
 
 
 

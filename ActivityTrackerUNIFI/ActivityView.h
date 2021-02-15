@@ -32,13 +32,18 @@ public:
 
     void createViewText();
 
+    void assembleMenuBar();
+
 private:
     std::shared_ptr<Activity> activityViewed;
     std::string durationString;
 
-    wxStaticText* activityDescription;
-    wxStaticText* activityType;
-    wxStaticText* activityDuration;
+    wxStaticText* activityDescription {nullptr};
+    wxStaticText* activityType {nullptr};
+    wxStaticText* activityDuration {nullptr};
+
+    wxMenu* editField {nullptr};
+    wxMenuBar* activityMenuBar {nullptr};
 
     wxBoxSizer* windowSizer;
 };

@@ -11,21 +11,24 @@
 #include <list>
 #include "Subject.h"
 
+struct startFinishTime
+{
+    int startingMin;
+    int startingHour;
+    int finishingMin;
+    int finishingHour;
+    int day;
+    int month;
+    int year;
+};
+
 class Activity : public Subject {
 
 public:
-    Activity(const std::string newType, const std::string newDescription, int startingMin, int startingHour,
+    Activity(const std::string& newType, const std::string& newDescription, int startingMin, int startingHour,
              int finishingMin, int finishingHour);
 
-    const std::string &getType() const;
-
-    virtual ~Activity();
-
-    void setType(const std::string &type);
-
-    const std::string &getDescription() const;
-
-    void setDescription(const std::string &description);
+    ~Activity() override;
 
     void subscribeView(Observer *newView) override;
 
@@ -33,22 +36,26 @@ public:
 
     void notifyChange() override;
 
+    void setStartFinishTime(int startingMin, int startingHour, int finishingMin, int finishingHour);
+
+    startFinishTime *getTimeSet() const;
+
+    void setTimeSet(startFinishTime *timeSet);
+
+    const std::string &getDescription() const;
+
+    void setDescription(const std::string &description);
+
+    const std::string &getType() const;
+
+    void setType(const std::string &type);
+
 private:
-    std::string type;
-public:
-    tm *getStartingTime() const;
 
-    void setStartingTime(tm *startingTime);
-
-    tm *getFinishingTime() const;
-
-    void setFinishingTime(tm *finishingTime);
-
-private:
     std::string description;
-    struct tm* startingTime;
-    struct tm* finishingTime;
-
+    struct tm* Date;
+    std::string type;
+    struct startFinishTime* timeSet {nullptr};
     std::list<Observer*> activityViews;
 };
 
