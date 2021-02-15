@@ -32,7 +32,7 @@ ActivityView::ActivityView(std::shared_ptr<Activity> newActivity): wxFrame(nullp
 
     topSizer -> Add(bottomSizer, 0, wxEXPAND | wxALL, 20);
 
-    SetMinSize(wxSize(425,350));
+    SetMinSize(wxSize(425,400));
     this -> SetSizer(topSizer);
 
 }
