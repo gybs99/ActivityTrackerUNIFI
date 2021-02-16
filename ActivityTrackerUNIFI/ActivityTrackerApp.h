@@ -13,6 +13,7 @@
 #include "MainMenu.h"
 #include "Activity.h"
 #include "ActivityView.h"
+#include "AddNewActivityView.h"
 #include <memory>
 
 enum
@@ -29,6 +30,7 @@ private:
     MainMenu* mainMenuWindow {nullptr};
     std::shared_ptr<Activity> newActivity;
     ActivityView* actView {nullptr};
+    AddNewActivityView* addActivityView {nullptr};
 };
 
 #endif //ACTIVITYTRACKERUNIFI_ACTIVITYTRACKERAPP_H
