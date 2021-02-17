@@ -12,12 +12,10 @@ bool ActivityTrackerApp::OnInit() {
     mainMenuWindow ->SetId(ID_Main);
 
     newActivity = std::make_shared<Activity>("Sport", "Today i've run for 30 minutes.", 10, 10, 30, 12);
-    actView = new ActivityView(newActivity);
-    addActivityView = new AddNewActivityView();
+    //actView = new ActivityView(newActivity);
+    addActivityView = new AddNewActivityView(mainMenuWindow);
 
     mainMenuWindow -> Show();
-    actView -> Show();
-    addActivityView -> Show();
     return true;
 }
 

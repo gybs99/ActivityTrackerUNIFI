@@ -13,9 +13,23 @@
 class AddNewActivityView : public wxFrame {
 
 public:
-    AddNewActivityView();
+    AddNewActivityView(wxFrame* mainMenu);
 
     void createMinHoursVectors();
+
+    void assembleTypeView();
+
+    void assembleDescriptionView();
+
+    void assembleDurationView();
+
+    void assembleTimeStartView();
+
+    void assembleTimeFinishView();
+
+    void assembleButtonsView();
+
+    void onClose(wxCloseEvent& event);
 
 private:
 
@@ -36,9 +50,13 @@ private:
     wxBoxSizer* typeSizer;
     wxBoxSizer* durationSizer;
     wxBoxSizer* timeFinishSizer;
+    wxBoxSizer* buttonsSizer;
 
-    wxChoice* typeChoiceList;
-    wxChoice* startingHourList;
+    wxButton* acceptButton;
+    wxButton* cancelButton;
+
+    wxComboBox* typeChoiceList;
+    wxComboBox* startingHourList;
     wxComboBox* startingMinList;
     wxComboBox* finishingHourList;
     wxComboBox* finishingMinList;
@@ -46,6 +64,8 @@ private:
     wxString types[numberOfTypes] = {wxT("Sport"), wxT("Work"), wxT("Hobby"), wxT("Other")};
     wxString hours[numberOfHours];
     wxString mins[numberOfMinutes];
+
+    wxDECLARE_EVENT_TABLE();
 
 };
 

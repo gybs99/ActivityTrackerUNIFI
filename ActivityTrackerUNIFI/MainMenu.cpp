@@ -6,7 +6,8 @@
 #include <ctime>
 
 wxBEGIN_EVENT_TABLE(MainMenu, wxFrame)
-    EVT_MENU(ID_About, MainMenu::OnInfo)
+    EVT_MENU(ID_About, MainMenu::onInfo)
+    EVT_BUTTON(ID_SignInButton, MainMenu::onSignInButton)
 wxEND_EVENT_TABLE()
 
 MainMenu::MainMenu() : wxFrame(nullptr, wxID_ANY, "Activity Tracker", wxPoint(30, 30),
@@ -19,9 +20,11 @@ MainMenu::MainMenu() : wxFrame(nullptr, wxID_ANY, "Activity Tracker", wxPoint(30
 
     setStaticText();                    // add intro text
 
-    lookTodayButton = new wxButton(this, 1, "Sign it!");        // adds the button for new task
+    lookTodayButton = new wxButton(this, ID_SignInButton, "Sign it!");        // adds the button for new task
 
     setBoxSizer();
+
+    addActivityView = new AddNewActivityView(this);
 }
 
 void MainMenu::assembleMenuBar() {
@@ -76,7 +79,11 @@ void MainMenu::setBoxSizer() {
     this -> SetSizer(mainMenuSizer);
 }
 
-void MainMenu::OnInfo(wxCommandEvent& event) {
+void MainMenu::onInfo(wxCommandEvent& event) {
     wxMessageBox(wxString("This program is made by Redi Niccolò"),
-                 wxString("Development Info"), wxOK | wxICON_INFORMATION);      // TODO Need to fix it!
+                 wxString("Development Info"), wxOK | wxICON_INFORMATION);      // FIXME : Doesn't show the message
+}
+
+void MainMenu::onSignInButton(wxCommandEvent &event) {
+    addActivityView -> Show(true);
 }
