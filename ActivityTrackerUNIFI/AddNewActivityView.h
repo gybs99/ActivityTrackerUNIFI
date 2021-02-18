@@ -9,6 +9,12 @@
 #include <wx/wx.h>
 #endif
 #include <vector>
+#include <ctime>
+
+enum
+{
+    ID_CancelButton = 1
+};
 
 class AddNewActivityView : public wxFrame {
 
@@ -31,9 +37,13 @@ public:
 
     void onClose(wxCloseEvent& event);
 
+    void onCancel(wxCommandEvent& event);
+
+    void resetForm();
+
 private:
 
-    const int static numberOfTypes = 4;
+    const int static numberOfTypes = 5;
     const int static numberOfMinutes = 60;
     const int static numberOfHours = 24;
 
@@ -61,7 +71,7 @@ private:
     wxComboBox* finishingHourList;
     wxComboBox* finishingMinList;
 
-    wxString types[numberOfTypes] = {wxT("Sport"), wxT("Work"), wxT("Hobby"), wxT("Other")};
+    wxString types[numberOfTypes] = {wxT("..."),wxT("Sport"), wxT("Work"), wxT("Hobby"), wxT("Other")};
     wxString hours[numberOfHours];
     wxString mins[numberOfMinutes];
 

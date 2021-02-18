@@ -7,6 +7,7 @@
 
 wxBEGIN_EVENT_TABLE(MainMenu, wxFrame)
     EVT_MENU(ID_About, MainMenu::onInfo)
+    EVT_MENU(ID_AddActivity, MainMenu::onAddActivityMenu)
     EVT_BUTTON(ID_SignInButton, MainMenu::onSignInButton)
 wxEND_EVENT_TABLE()
 
@@ -86,4 +87,10 @@ void MainMenu::onInfo(wxCommandEvent& event) {
 
 void MainMenu::onSignInButton(wxCommandEvent &event) {
     addActivityView -> Show(true);
+    this -> Enable(false);
+}
+
+void MainMenu::onAddActivityMenu(wxCommandEvent &event) {
+    addActivityView -> Show(true);
+    this -> Enable(false);
 }

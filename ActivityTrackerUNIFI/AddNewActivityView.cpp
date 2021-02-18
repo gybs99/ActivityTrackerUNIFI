@@ -5,12 +5,13 @@
 #include "AddNewActivityView.h"
 
 wxBEGIN_EVENT_TABLE(AddNewActivityView, wxFrame)
+    EVT_BUTTON(ID_CancelButton, AddNewActivityView::onCancel)
     EVT_CLOSE(AddNewActivityView::onClose)
 wxEND_EVENT_TABLE()
 
 AddNewActivityView::AddNewActivityView(wxFrame* mainMenu) : wxFrame(mainMenu, wxID_ANY, "Add a new Activity") {
 
-    SetMinSize(wxSize(600,500));
+    this -> SetMinSize(wxSize(600,500));
 
     viewSizer = new wxBoxSizer(wxVERTICAL);
 
@@ -27,8 +28,14 @@ AddNewActivityView::AddNewActivityView(wxFrame* mainMenu) : wxFrame(mainMenu, wx
     viewSizer -> Add(descriptionTextBox, 1, wxEXPAND | wxTOP | wxLEFT | wxRIGHT, 20);
     viewSizer -> Add(durationSizer, 0, wxEXPAND | wxALL, 0);
     viewSizer -> Add(timeFinishSizer, 0, wxEXPAND | wxALL, 0);
-    viewSizer -> Add(buttonsSizer, 0, wxEXPAND | wxALL, 10);
+    viewSizer -> Add(buttonsSizer, 0, wxEXPAND | wxALL, 0);
 
+    time_t currentTime = time(nullptr);
+    struct tm* displayDate = localtime((&currentTime));
+
+    this -> CreateStatusBar();
+    this -> SetStatusText(std::to_string(displayDate -> tm_mday) + "/" + std::to_string(displayDate -> tm_mon + 1) +
+                    "/" + std::to_string(displayDate -> tm_year + 1900));
     this -> SetSizer(viewSizer);
 }
 
@@ -77,8 +84,8 @@ void AddNewActivityView::assembleTypeView() {
     typeText = new wxStaticText(this, wxID_ANY, "Type: ");
     typeText -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
 
-    typeChoiceList = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxSize(100,40),
-                                    4, types, wxCB_READONLY);
+    typeChoiceList = new wxComboBox(this, wxID_ANY, "...", wxDefaultPosition, wxSize(100,40),
+                                    5, types, wxCB_READONLY);
 
     typeSizer = new wxBoxSizer(wxHORIZONTAL);
     typeSizer -> Add(typeText, 0 , wxALL, 20);
@@ -88,13 +95,13 @@ void AddNewActivityView::assembleTypeView() {
 
 void AddNewActivityView::assembleTimeStartView() {
 
-    startingHourList = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxSize(80, 40),
+    startingHourList = new wxComboBox(this, wxID_ANY, "00", wxDefaultPosition, wxSize(80, 40),
                                       numberOfHours, hours, wxCB_READONLY);
 
     timeSpacer1 = new wxStaticText(this, wxID_ANY, ":");
     timeSpacer1 -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
 
-    startingMinList = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxSize(80,40),
+    startingMinList = new wxComboBox(this, wxID_ANY, "00", wxDefaultPosition, wxSize(80,40),
                                      numberOfMinutes, mins, wxCB_READONLY);
 
 
@@ -108,13 +115,13 @@ void AddNewActivityView::assembleTimeStartView() {
 
 void AddNewActivityView::assembleTimeFinishView() {
 
-    finishingHourList = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxSize(80, 40),
+    finishingHourList = new wxComboBox(this, wxID_ANY, "00", wxDefaultPosition, wxSize(80, 40),
                                        numberOfHours, hours, wxCB_READONLY);
 
     timeSpacer2 = new wxStaticText(this, wxID_ANY, ":");
     timeSpacer2 -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
 
-    finishingMinList = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition, wxSize(80,40),
+    finishingMinList = new wxComboBox(this, wxID_ANY, "00", wxDefaultPosition, wxSize(80,40),
                                       numberOfMinutes, mins, wxCB_READONLY);
 
     timeFinishText = new wxStaticText(this, wxID_ANY, "                  Finish ");
@@ -132,7 +139,7 @@ void AddNewActivityView::assembleButtonsView() {
 
     buttonsSizer = new wxBoxSizer(wxHORIZONTAL);
     acceptButton = new wxButton(this, wxID_ANY, "Create");
-    cancelButton = new wxButton(this, wxID_ANY, "Cancel");
+    cancelButton = new wxButton(this, ID_CancelButton, "Cancel");
 
     buttonsSizer -> AddStretchSpacer(2);
     buttonsSizer -> Add(acceptButton, 0, wxALIGN_RIGHT | wxALL, 20);
@@ -141,5 +148,28 @@ void AddNewActivityView::assembleButtonsView() {
 }
 
 void AddNewActivityView::onClose(wxCloseEvent& event) {
+
+    resetForm();
     this -> Show(false);
+    m_parent -> Enable(true);
+
+}
+
+void AddNewActivityView::onCancel(wxCommandEvent& event) {
+
+    resetForm();
+    this -> Show(false);
+    m_parent -> Enable(true);
+
+}
+
+void AddNewActivityView::resetForm() {
+
+    typeChoiceList -> SetValue("...");
+    descriptionTextBox -> SetValue("");
+    startingHourList -> SetValue("00");
+    startingMinList -> SetValue("00");
+    finishingMinList -> SetValue("00");
+    finishingHourList -> SetValue("00");
+
 }

@@ -30,7 +30,7 @@ public:
     void setBoxSizer();
     void onInfo(wxCommandEvent& event);
     void onSignInButton(wxCommandEvent& event);
-    void onAddActivityExit(wxCloseEvent& event);
+    void onAddActivityMenu(wxCommandEvent& event);
 
 private:
 
