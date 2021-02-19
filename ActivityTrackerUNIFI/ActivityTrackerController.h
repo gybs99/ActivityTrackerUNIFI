@@ -12,8 +12,8 @@ class ActivityTrackerController {
 
 public:
     ActivityTrackerController();
-    void createActivity(std::string &newType, std::string &newDescription, int startingMin,
-                        int startingHour, int finishingMin, int finishingHour);
+    void createActivity(std::string newType, std::string newDescription, std::string startingMin,
+                        std::string startingHour, std::string finishingMin, std::string finishingHour);
 
 private:
     std::shared_ptr<Activity> managedActivity {nullptr};

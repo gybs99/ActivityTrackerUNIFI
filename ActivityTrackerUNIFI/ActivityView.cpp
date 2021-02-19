@@ -60,10 +60,10 @@ void ActivityView::createViewText() {
     activityDescription = new wxStaticText(this, 1, activityViewed -> getDescription());
     activityDescription -> SetFont(wxFont(15,wxROMAN, wxNORMAL, wxNORMAL));
 
-    durationString = std::to_string(activityViewed -> getTimeSet() -> startingHour) + std::string(":") +
-                     std::to_string(activityViewed -> getTimeSet() -> startingMin) + std::string("   ") +
-                     std::to_string(activityViewed -> getTimeSet() -> finishingHour) + std::string (":") +
-                     std::to_string(activityViewed -> getTimeSet() -> finishingMin);
+    durationString = activityViewed -> getTimeSet() -> startingHour + std::string(":") +
+                     activityViewed -> getTimeSet() -> startingMin + std::string("   ") +
+                     activityViewed -> getTimeSet() -> finishingHour + std::string (":") +
+                     activityViewed -> getTimeSet() -> finishingMin;
 
     activityDuration = new wxStaticText(this, 3,"Duration: " + durationString);
     activityDuration -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));

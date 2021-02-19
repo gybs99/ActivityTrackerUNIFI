@@ -180,7 +180,7 @@ void AddNewActivityView::resetForm() {
 
 void AddNewActivityView::onCreate(wxCommandEvent &event) {
 
-    std::string newType = typeChoiceList -> GetValue().ToStdString();
-    std::string newDescription = descriptionTextBox -> GetValue().ToStdString();
-    controller -> createActivity(newType,newDescription,10,10,10,10);
+    controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(),
+                                 startingMinList -> GetValue().ToStdString(), startingHourList -> GetValue().ToStdString(),
+                                 finishingMinList -> GetValue().ToStdString(), finishingHourList -> GetValue().ToStdString());
 }

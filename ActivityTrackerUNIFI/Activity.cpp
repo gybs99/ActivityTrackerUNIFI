@@ -4,10 +4,10 @@
 
 #include "Activity.h"
 
-Activity::Activity(std::string newType, std::string newDescription, int startingMin, int startingHour, int finishingMin,
-                   int finishingHour) : type(std::move(newType)), description(std::move(newDescription)){
+Activity::Activity(std::string newType, std::string newDescription, std::string startingMin, std::string startingHour, std::string finishingMin,
+                   std::string finishingHour) : type(std::move(newType)), description(std::move(newDescription)){
 
-    setStartFinishTime(startingMin, startingHour, finishingMin, finishingHour);
+    setStartFinishTime(std::move(startingMin), std::move(startingHour), std::move(finishingMin), std::move(finishingHour));
 
     time_t currentDate = time(nullptr);
     Date = localtime(&currentDate);
@@ -35,12 +35,12 @@ void Activity::notifyChange() {
         view -> updateView();
 }
 
-void Activity::setStartFinishTime(int startingMin, int startingHour, int finishingMin, int finishingHour) {
+void Activity::setStartFinishTime(std::string startingMin, std::string startingHour, std::string finishingMin, std::string finishingHour) {
     timeSet = new startFinishTime;
-    timeSet -> startingMin = startingMin;
-    timeSet -> startingHour = startingHour;
-    timeSet -> finishingMin = finishingMin;
-    timeSet -> finishingHour = finishingHour;
+    timeSet -> startingMin = std::move(startingMin);
+    timeSet -> startingHour = std::move(startingHour);
+    timeSet -> finishingMin = std::move(finishingMin);
+    timeSet -> finishingHour = std::move(finishingHour);
 }
 
 startFinishTime *Activity::getTimeSet() const {

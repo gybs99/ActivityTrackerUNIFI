@@ -13,10 +13,10 @@
 
 struct startFinishTime
 {
-    int startingMin;
-    int startingHour;
-    int finishingMin;
-    int finishingHour;
+    std::string startingMin;
+    std::string startingHour;
+    std::string finishingMin;
+    std::string finishingHour;
     int day;
     int month;
     int year;
@@ -25,8 +25,8 @@ struct startFinishTime
 class Activity : public Subject {
 
 public:
-    Activity(std::string newType, std::string newDescription, int startingMin, int startingHour,
-             int finishingMin, int finishingHour);
+    Activity(std::string newType, std::string newDescription, std::string startingMin, std::string startingHour,
+             std::string finishingMin, std::string finishingHour);
 
     ~Activity() override;
 
@@ -36,7 +36,7 @@ public:
 
     void notifyChange() override;
 
-    void setStartFinishTime(int startingMin, int startingHour, int finishingMin, int finishingHour);
+    void setStartFinishTime(std::string startingMin, std::string startingHour, std::string finishingMin, std::string finishingHour);
 
     startFinishTime *getTimeSet() const;
 
