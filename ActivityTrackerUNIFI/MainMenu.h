@@ -9,6 +9,7 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #include "AddNewActivityView.h"
+#include "ActivityTrackerController.h"
 #endif
 
 enum
@@ -24,7 +25,7 @@ enum
 class MainMenu : public wxFrame{
 public:
 
-    MainMenu();
+    MainMenu(std::shared_ptr<ActivityTrackerController>);
     void assembleMenuBar();
     void setStaticText();
     void setBoxSizer();
@@ -48,6 +49,8 @@ private:
     wxButton* lookTodayButton {nullptr};
 
     wxFrame* addActivityView {nullptr};
+
+    std::shared_ptr<ActivityTrackerController> controller;
 
     wxDECLARE_EVENT_TABLE();
 

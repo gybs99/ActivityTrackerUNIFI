@@ -6,10 +6,13 @@
 
 wxBEGIN_EVENT_TABLE(AddNewActivityView, wxFrame)
     EVT_BUTTON(ID_CancelButton, AddNewActivityView::onCancel)
+    EVT_BUTTON(ID_CreateButton, AddNewActivityView::onCreate)
     EVT_CLOSE(AddNewActivityView::onClose)
 wxEND_EVENT_TABLE()
 
-AddNewActivityView::AddNewActivityView(wxFrame* mainMenu) : wxFrame(mainMenu, wxID_ANY, "Add a new Activity") {
+AddNewActivityView::AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController> controller) :
+                                                wxFrame(mainMenu, wxID_ANY, "Add a new Activity"), controller(controller) {
+
 
     this -> SetMinSize(wxSize(600,500));
 
@@ -138,7 +141,8 @@ void AddNewActivityView::assembleTimeFinishView() {
 void AddNewActivityView::assembleButtonsView() {
 
     buttonsSizer = new wxBoxSizer(wxHORIZONTAL);
-    acceptButton = new wxButton(this, wxID_ANY, "Create");
+
+    acceptButton = new wxButton(this, ID_CreateButton, "Create");
     cancelButton = new wxButton(this, ID_CancelButton, "Cancel");
 
     buttonsSizer -> AddStretchSpacer(2);
@@ -172,4 +176,11 @@ void AddNewActivityView::resetForm() {
     finishingMinList -> SetValue("00");
     finishingHourList -> SetValue("00");
 
+}
+
+void AddNewActivityView::onCreate(wxCommandEvent &event) {
+
+    std::string newType = typeChoiceList -> GetValue().ToStdString();
+    std::string newDescription = descriptionTextBox -> GetValue().ToStdString();
+    controller -> createActivity(newType,newDescription,10,10,10,10);
 }

@@ -11,8 +11,9 @@ wxBEGIN_EVENT_TABLE(MainMenu, wxFrame)
     EVT_BUTTON(ID_SignInButton, MainMenu::onSignInButton)
 wxEND_EVENT_TABLE()
 
-MainMenu::MainMenu() : wxFrame(nullptr, wxID_ANY, "Activity Tracker", wxPoint(30, 30),
-                               wxSize(650,450), wxDEFAULT_FRAME_STYLE ^ wxRESIZE_BORDER) {
+MainMenu::MainMenu(std::shared_ptr<ActivityTrackerController> controller)
+                            : wxFrame(nullptr, wxID_ANY, "Activity Tracker",
+                              wxPoint(30, 30), wxSize(650,450), wxDEFAULT_FRAME_STYLE ^ wxRESIZE_BORDER), controller(controller) {
 
     assembleMenuBar();                   // creates the menu bar
 
@@ -25,7 +26,7 @@ MainMenu::MainMenu() : wxFrame(nullptr, wxID_ANY, "Activity Tracker", wxPoint(30
 
     setBoxSizer();
 
-    addActivityView = new AddNewActivityView(this);
+    addActivityView = new AddNewActivityView(this, controller);
 }
 
 void MainMenu::assembleMenuBar() {
@@ -57,7 +58,7 @@ void MainMenu::setStaticText() {
     introText -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
 
     time_t currentTime = time(nullptr);
-    struct tm* timeStruct = localtime((&currentTime));    // Memory leak?
+    struct tm* timeStruct = localtime((&currentTime));
 
     dayText = new wxStaticText(this, wxID_ANY, "Today is " + std::to_string(timeStruct->tm_mday) + '/' +
                                                std::to_string(timeStruct->tm_mon + 1) + '/' + std::to_string(timeStruct->tm_year + 1900));

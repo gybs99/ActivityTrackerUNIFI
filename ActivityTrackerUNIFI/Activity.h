@@ -25,7 +25,7 @@ struct startFinishTime
 class Activity : public Subject {
 
 public:
-    Activity(const std::string& newType, const std::string& newDescription, int startingMin, int startingHour,
+    Activity(std::string newType, std::string newDescription, int startingMin, int startingHour,
              int finishingMin, int finishingHour);
 
     ~Activity() override;

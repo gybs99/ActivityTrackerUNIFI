@@ -4,8 +4,8 @@
 
 #include "Activity.h"
 
-Activity::Activity(const std::string& newType, const std::string& newDescription, int startingMin, int startingHour, int finishingMin,
-                   int finishingHour) : type(newType), description(newDescription){
+Activity::Activity(std::string newType, std::string newDescription, int startingMin, int startingHour, int finishingMin,
+                   int finishingHour) : type(std::move(newType)), description(std::move(newDescription)){
 
     setStartFinishTime(startingMin, startingHour, finishingMin, finishingHour);
 

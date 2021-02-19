@@ -14,6 +14,7 @@
 #include "Activity.h"
 #include "ActivityView.h"
 #include "AddNewActivityView.h"
+#include "ActivityTrackerController.h"
 #include <memory>
 
 enum
@@ -28,8 +29,7 @@ public:
     bool OnInit() override;
 private:
     MainMenu* mainMenuWindow {nullptr};
-    std::shared_ptr<Activity> newActivity;
-    ActivityView* actView {nullptr};
+    std::shared_ptr<ActivityTrackerController> appController;
     AddNewActivityView* addActivityView {nullptr};
 };
 

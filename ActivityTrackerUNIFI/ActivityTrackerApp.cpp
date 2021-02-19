@@ -8,12 +8,12 @@
 wxIMPLEMENT_APP(ActivityTrackerApp);
 
 bool ActivityTrackerApp::OnInit() {
-    mainMenuWindow = new MainMenu();
+    appController = std::make_shared<ActivityTrackerController>();
+    mainMenuWindow = new MainMenu(appController);
     mainMenuWindow ->SetId(ID_Main);
 
-    newActivity = std::make_shared<Activity>("Sport", "Today i've run for 30 minutes.", 10, 10, 30, 12);
-    //actView = new ActivityView(newActivity);
-    addActivityView = new AddNewActivityView(mainMenuWindow);
+
+    addActivityView = new AddNewActivityView(mainMenuWindow, appController);
 
     mainMenuWindow -> Show();
     return true;

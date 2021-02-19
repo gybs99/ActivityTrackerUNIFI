@@ -10,16 +10,18 @@
 #endif
 #include <vector>
 #include <ctime>
+#include "ActivityTrackerController.h"
 
 enum
 {
-    ID_CancelButton = 1
+    ID_CancelButton = 1,
+    ID_CreateButton = 2
 };
 
 class AddNewActivityView : public wxFrame {
 
 public:
-    AddNewActivityView(wxFrame* mainMenu);
+    AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController>);
 
     void createMinHoursVectors();
 
@@ -38,6 +40,8 @@ public:
     void onClose(wxCloseEvent& event);
 
     void onCancel(wxCommandEvent& event);
+
+    void onCreate(wxCommandEvent& event);
 
     void resetForm();
 
@@ -74,6 +78,8 @@ private:
     wxString types[numberOfTypes] = {wxT("..."),wxT("Sport"), wxT("Work"), wxT("Hobby"), wxT("Other")};
     wxString hours[numberOfHours];
     wxString mins[numberOfMinutes];
+
+    std::shared_ptr<ActivityTrackerController> controller;
 
     wxDECLARE_EVENT_TABLE();
 
