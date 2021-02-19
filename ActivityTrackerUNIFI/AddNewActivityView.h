@@ -47,33 +47,33 @@ public:
 
 private:
 
-    const int static numberOfTypes = 5;
-    const int static numberOfMinutes = 60;
-    const int static numberOfHours = 24;
+    const int static numberOfTypes {5};
+    const int static numberOfMinutes {60};
+    const int static numberOfHours {24};
 
-    wxStaticText* typeText;
-    wxStaticText* descriptionText;
-    wxStaticText* durationText;
-    wxStaticText* timeFinishText;
-    wxStaticText* timeSpacer1;
-    wxStaticText* timeSpacer2;
+    wxStaticText* typeText {nullptr};
+    wxStaticText* descriptionText {nullptr};
+    wxStaticText* durationText {nullptr};
+    wxStaticText* timeFinishText {nullptr};
+    wxStaticText* timeSpacer1 {nullptr};
+    wxStaticText* timeSpacer2 {nullptr};
 
-    wxTextCtrl* descriptionTextBox;
+    wxTextCtrl* descriptionTextBox {nullptr};
 
-    wxBoxSizer* viewSizer;
-    wxBoxSizer* typeSizer;
-    wxBoxSizer* durationSizer;
-    wxBoxSizer* timeFinishSizer;
-    wxBoxSizer* buttonsSizer;
+    wxBoxSizer* viewSizer {nullptr};
+    wxBoxSizer* typeSizer {nullptr};
+    wxBoxSizer* durationSizer {nullptr};
+    wxBoxSizer* timeFinishSizer {nullptr};
+    wxBoxSizer* buttonsSizer {nullptr};
 
-    wxButton* acceptButton;
-    wxButton* cancelButton;
+    wxButton* acceptButton {nullptr};
+    wxButton* cancelButton {nullptr};
 
-    wxComboBox* typeChoiceList;
-    wxComboBox* startingHourList;
-    wxComboBox* startingMinList;
-    wxComboBox* finishingHourList;
-    wxComboBox* finishingMinList;
+    wxComboBox* typeChoiceList {nullptr};
+    wxComboBox* startingHourList {nullptr};
+    wxComboBox* startingMinList {nullptr};
+    wxComboBox* finishingHourList {nullptr};
+    wxComboBox* finishingMinList {nullptr};
 
     wxString types[numberOfTypes] = {wxT("..."),wxT("Sport"), wxT("Work"), wxT("Hobby"), wxT("Other")};
     wxString hours[numberOfHours];

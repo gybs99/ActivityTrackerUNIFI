@@ -16,7 +16,7 @@
 class ActivityView : public wxFrame, public Observer {
 
 public:
-    ActivityView(std::shared_ptr<Activity> newActivity);
+    explicit ActivityView(std::shared_ptr<Activity> newActivity);
 
     ~ActivityView() override;
 

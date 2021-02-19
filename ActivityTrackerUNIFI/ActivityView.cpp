@@ -12,11 +12,11 @@ ActivityView::ActivityView(std::shared_ptr<Activity> newActivity): wxFrame(nullp
 
     assembleMenuBar();
 
-    CreateStatusBar();
+    this -> CreateStatusBar();
 
     createViewText();
 
-    SetStatusText("Activity registered the " + std::to_string(activityViewed -> getTimeSet() -> day) + "/" +
+    this -> SetStatusText("Activity registered the " + std::to_string(activityViewed -> getTimeSet() -> day) + "/" +
                     std::to_string(activityViewed -> getTimeSet() -> month) + "/" + std::to_string(activityViewed ->
                     getTimeSet() -> year));
 
@@ -32,7 +32,7 @@ ActivityView::ActivityView(std::shared_ptr<Activity> newActivity): wxFrame(nullp
 
     topSizer -> Add(bottomSizer, 0, wxEXPAND | wxALL, 20);
 
-    SetMinSize(wxSize(425,400));
+    this -> SetMinSize(wxSize(425,400));
     this -> SetSizer(topSizer);
 
 }

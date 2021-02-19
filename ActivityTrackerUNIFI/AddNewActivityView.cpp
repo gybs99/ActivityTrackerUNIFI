@@ -11,7 +11,7 @@ wxBEGIN_EVENT_TABLE(AddNewActivityView, wxFrame)
 wxEND_EVENT_TABLE()
 
 AddNewActivityView::AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController> controller) :
-                                                wxFrame(mainMenu, wxID_ANY, "Add a new Activity"), controller(controller) {
+                                                wxFrame(mainMenu, wxID_ANY, "Add a new Activity"), controller(std::move(controller)) {
 
 
     this -> SetMinSize(wxSize(600,500));
