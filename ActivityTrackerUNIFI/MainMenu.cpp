@@ -11,14 +11,14 @@ wxBEGIN_EVENT_TABLE(MainMenu, wxFrame)
     EVT_BUTTON(ID_SignInButton, MainMenu::onSignInButton)
 wxEND_EVENT_TABLE()
 
-MainMenu::MainMenu(std::shared_ptr<ActivityTrackerController> controller)
+MainMenu::MainMenu(std::shared_ptr<ActivityTrackerController> newController)
                             : wxFrame(nullptr, wxID_ANY, "Activity Tracker",
-                              wxPoint(30, 30), wxSize(650,450), wxDEFAULT_FRAME_STYLE ^ wxRESIZE_BORDER), controller(controller) {
+                              wxPoint(30, 30), wxSize(650,450), wxDEFAULT_FRAME_STYLE ^ wxRESIZE_BORDER), controller(std::move(newController)) {
 
     assembleMenuBar();                   // creates the menu bar
 
-    CreateStatusBar();
-    SetStatusText("Have a wonderful day!");                        // sets status bar
+    this -> CreateStatusBar();
+    this -> SetStatusText("Have a wonderful day!");                        // sets status bar
 
     setStaticText();                    // add intro text
 

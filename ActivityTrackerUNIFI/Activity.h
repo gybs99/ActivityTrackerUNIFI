@@ -40,15 +40,15 @@ public:
 
     startFinishTime *getTimeSet() const;
 
-    void setTimeSet(startFinishTime *timeSet);
+    void setTimeSet(startFinishTime *newTimeSet);
 
     const std::string &getDescription() const;
 
-    void setDescription(const std::string &description);
+    void setDescription(const std::string &newDescription);
 
     const std::string &getType() const;
 
-    void setType(const std::string &type);
+    void setType(const std::string &newType);
 
 private:
 

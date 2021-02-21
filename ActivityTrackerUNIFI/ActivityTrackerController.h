@@ -11,7 +11,7 @@
 class ActivityTrackerController {
 
 public:
-    ActivityTrackerController();
+    ActivityTrackerController() = default;
     void createActivity(std::string newType, std::string newDescription, std::string startingMin,
                         std::string startingHour, std::string finishingMin, std::string finishingHour);
 

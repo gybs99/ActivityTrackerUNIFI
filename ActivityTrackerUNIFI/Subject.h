@@ -15,7 +15,7 @@ public:
     virtual void unsubscribeView(Observer* removedView) = 0;
     virtual void notifyChange() = 0;
 
-    virtual ~Subject() {}
+    virtual ~Subject() = default;
 
 };
 

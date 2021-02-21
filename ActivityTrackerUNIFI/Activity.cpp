@@ -47,24 +47,24 @@ startFinishTime *Activity::getTimeSet() const {
     return timeSet;
 }
 
-void Activity::setTimeSet(startFinishTime *timeSet) {
-    Activity::timeSet = timeSet;
+void Activity::setTimeSet(startFinishTime *newTimeSet) {
+    Activity::timeSet = newTimeSet;
 }
 
 const std::string &Activity::getDescription() const {
     return description;
 }
 
-void Activity::setDescription(const std::string &description) {
-    Activity::description = description;
+void Activity::setDescription(const std::string &newDescription) {
+    Activity::description = newDescription;
 }
 
 const std::string &Activity::getType() const {
     return type;
 }
 
-void Activity::setType(const std::string &type) {
-    Activity::type = type;
+void Activity::setType(const std::string &newType) {
+    Activity::type = newType;
 }
 
 

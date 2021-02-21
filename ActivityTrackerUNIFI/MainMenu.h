@@ -25,7 +25,7 @@ enum
 class MainMenu : public wxFrame{
 public:
 
-    MainMenu(std::shared_ptr<ActivityTrackerController>);
+    explicit MainMenu(std::shared_ptr<ActivityTrackerController> newController);
     void assembleMenuBar();
     void setStaticText();
     void setBoxSizer();
