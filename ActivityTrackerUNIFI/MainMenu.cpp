@@ -87,11 +87,17 @@ void MainMenu::onInfo(wxCommandEvent& event) {
 }
 
 void MainMenu::onSignInButton(wxCommandEvent &event) {
-    addActivityView -> Show(true);
+
+    addActivityView = new AddNewActivityView(this, controller);
+    addActivityView -> Show();
     this -> Enable(false);
+
 }
 
 void MainMenu::onAddActivityMenu(wxCommandEvent &event) {
-    addActivityView -> Show(true);
+
+    addActivityView = new AddNewActivityView(this, controller);
+    addActivityView -> Show();
     this -> Enable(false);
+
 }

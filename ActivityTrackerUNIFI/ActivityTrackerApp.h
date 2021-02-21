@@ -30,7 +30,6 @@ public:
 private:
     MainMenu* mainMenuWindow {nullptr};
     std::shared_ptr<ActivityTrackerController> appController;
-    AddNewActivityView* addActivityView {nullptr};
 };
 
 #endif //ACTIVITYTRACKERUNIFI_ACTIVITYTRACKERAPP_H

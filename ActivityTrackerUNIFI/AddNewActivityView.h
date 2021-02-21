@@ -10,6 +10,7 @@
 #endif
 #include <vector>
 #include <ctime>
+#include <iostream>
 #include "ActivityTrackerController.h"
 
 enum
@@ -43,7 +44,6 @@ public:
 
     void onCreate(wxCommandEvent& event);
 
-    void resetForm();
 
 private:
 

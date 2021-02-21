@@ -153,30 +153,18 @@ void AddNewActivityView::assembleButtonsView() {
 
 void AddNewActivityView::onClose(wxCloseEvent& event) {
 
-    resetForm();
-    this -> Show(false);
     m_parent -> Enable(true);
+    this -> Destroy();
 
 }
 
 void AddNewActivityView::onCancel(wxCommandEvent& event) {
 
-    resetForm();
-    this -> Show(false);
     m_parent -> Enable(true);
+    this -> Destroy();
 
 }
 
-void AddNewActivityView::resetForm() {
-
-    typeChoiceList -> SetValue("...");
-    descriptionTextBox -> SetValue("");
-    startingHourList -> SetValue("00");
-    startingMinList -> SetValue("00");
-    finishingMinList -> SetValue("00");
-    finishingHourList -> SetValue("00");
-
-}
 
 void AddNewActivityView::onCreate(wxCommandEvent &event) {
 
