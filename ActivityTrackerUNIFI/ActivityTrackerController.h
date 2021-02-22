@@ -6,6 +6,7 @@
 #define ACTIVITYTRACKERUNIFI_ACTIVITYTRACKERCONTROLLER_H
 #include "Activity.h"
 #include "ActivityView.h"
+#include "DailyActivityRegister.h"
 
 
 class ActivityTrackerController {
@@ -16,7 +17,10 @@ public:
                         std::string startingHour, std::string finishingMin, std::string finishingHour);
 
 private:
+
     std::shared_ptr<Activity> managedActivity {nullptr};
+    std::shared_ptr<DailyActivityRegister> todayRegister {nullptr};
+
 };
 
 
