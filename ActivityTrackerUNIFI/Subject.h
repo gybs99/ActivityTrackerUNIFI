@@ -5,8 +5,9 @@
 #ifndef ACTIVITYTRACKERUNIFI_SUBJECT_H
 #define ACTIVITYTRACKERUNIFI_SUBJECT_H
 
-#include "Observer.h"
 #include <memory>
+#include "Observer.h"
+
 
 class Subject {
 public:

@@ -5,13 +5,16 @@
 #ifndef ACTIVITYTRACKERUNIFI_ACTIVITYVIEW_H
 #define ACTIVITYTRACKERUNIFI_ACTIVITYVIEW_H
 
+#include <memory>
+
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+
 #include "Observer.h"
 #include "Activity.h"
-#include <memory>
+
 
 class ActivityView : public wxFrame, public Observer {
 

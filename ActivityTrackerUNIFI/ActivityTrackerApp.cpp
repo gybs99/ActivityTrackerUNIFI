@@ -15,3 +15,10 @@ bool ActivityTrackerApp::OnInit() {
     return true;
 }
 
+bool ActivityTrackerApp::OnExceptionInMainLoop() {
+
+    wxMessageBox("An error has occurred, please restart the app");
+    return false;
+
+}
+

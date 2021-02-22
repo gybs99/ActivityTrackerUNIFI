@@ -26,7 +26,6 @@ MainMenu::MainMenu(std::shared_ptr<ActivityTrackerController> newController)
 
     setBoxSizer();
 
-    addActivityView = new AddNewActivityView(this, controller);
 }
 
 void MainMenu::assembleMenuBar() {

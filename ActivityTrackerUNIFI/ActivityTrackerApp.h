@@ -6,16 +6,19 @@
 #define ACTIVITYTRACKERUNIFI_ACTIVITYTRACKERAPP_H
 
 #include <iostream>
+#include <memory>
+
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+
 #include "MainMenu.h"
 #include "Activity.h"
 #include "ActivityView.h"
 #include "AddNewActivityView.h"
 #include "ActivityTrackerController.h"
-#include <memory>
+
 
 enum
 {
@@ -25,11 +28,16 @@ enum
 
 class ActivityTrackerApp : public wxApp {
 public:
+
     ActivityTrackerApp() = default;
     bool OnInit() override;
+    bool OnExceptionInMainLoop() override;
+
 private:
+
     MainMenu* mainMenuWindow {nullptr};
     std::shared_ptr<ActivityTrackerController> appController;
+
 };
 
 #endif //ACTIVITYTRACKERUNIFI_ACTIVITYTRACKERAPP_H

@@ -4,13 +4,16 @@
 
 #ifndef ACTIVITYTRACKERUNIFI_ADDNEWACTIVITYVIEW_H
 #define ACTIVITYTRACKERUNIFI_ADDNEWACTIVITYVIEW_H
+
+#include <vector>
+#include <ctime>
+#include <iostream>
+
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
-#include <vector>
-#include <ctime>
-#include <iostream>
+
 #include "ActivityTrackerController.h"
 
 enum
