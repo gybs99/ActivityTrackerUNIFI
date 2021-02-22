@@ -19,20 +19,18 @@ public:
 
     DailyActivityRegisterView();
 
+    void assembleView();
+
     void updateView() override;
 
     void attachView() override;
 
     void detachView() override;
 
-    ~DailyActivityRegisterView() override;
-
 private:
 
     wxBoxSizer* viewSizer {nullptr};
-
     wxBoxSizer* listSizer {nullptr};
-    wxBoxSizer* buttonSizer {nullptr};
 
     wxListBox* listOfActivity {nullptr};
     wxButton* addButton {nullptr};

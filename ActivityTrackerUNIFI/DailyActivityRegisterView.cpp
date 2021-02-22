@@ -6,6 +6,24 @@
 
 DailyActivityRegisterView::DailyActivityRegisterView() : wxFrame(nullptr, wxID_ANY, "Register") {
 
+    assembleView();
+
+}
+
+void DailyActivityRegisterView::updateView() {
+
+}
+
+void DailyActivityRegisterView::attachView() {
+    registerViewed -> subscribeView(this);
+}
+
+void DailyActivityRegisterView::detachView() {
+    registerViewed -> unsubscribeView(this);
+}
+
+void DailyActivityRegisterView::assembleView() {
+
     viewSizer = new wxBoxSizer(wxVERTICAL);
     listSizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -22,20 +40,5 @@ DailyActivityRegisterView::DailyActivityRegisterView() : wxFrame(nullptr, wxID_A
 
     this -> SetSizer(viewSizer);
 
-}
-
-void DailyActivityRegisterView::updateView() {
-
-}
-
-void DailyActivityRegisterView::attachView() {
-
-}
-
-void DailyActivityRegisterView::detachView() {
-
-}
-
-DailyActivityRegisterView::~DailyActivityRegisterView() {
 
 }
