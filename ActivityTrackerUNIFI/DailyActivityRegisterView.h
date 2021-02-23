@@ -31,6 +31,8 @@ public:
 
     void detachView() override;
 
+    void onClose(wxCloseEvent& event);
+
 private:
 
     wxBoxSizer* viewSizer {nullptr};
@@ -41,6 +43,7 @@ private:
 
     std::shared_ptr<DailyActivityRegister> registerViewed {nullptr};
 
+    wxDECLARE_EVENT_TABLE();
 };
 
 

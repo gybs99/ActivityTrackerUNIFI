@@ -8,6 +8,7 @@
 wxBEGIN_EVENT_TABLE(MainMenu, wxFrame)
     EVT_MENU(ID_About, MainMenu::onInfo)
     EVT_MENU(ID_AddActivity, MainMenu::onAddActivityMenu)
+    EVT_MENU(ID_Today, MainMenu::onToday)
     EVT_BUTTON(ID_SignInButton, MainMenu::onSignInButton)
 wxEND_EVENT_TABLE()
 
@@ -81,8 +82,8 @@ void MainMenu::setBoxSizer() {
 }
 
 void MainMenu::onInfo(wxCommandEvent& event) {
-    wxMessageBox(wxString("This program is made by Redi Niccolò"),
-                 wxString("Development Info"), wxOK | wxICON_INFORMATION);      // FIXME : Doesn't show the message
+    wxMessageBox(wxT("This program is made by Redi Niccolò"),
+                 wxT("Development Info"), wxOK | wxICON_INFORMATION, this);
 }
 
 void MainMenu::onSignInButton(wxCommandEvent &event) {
@@ -99,4 +100,30 @@ void MainMenu::onAddActivityMenu(wxCommandEvent &event) {
     addActivityView -> Show();
     this -> Enable(false);
 
+}
+
+void MainMenu::onToday(wxCommandEvent &event) {
+
+    if(controller -> getTodayRegister() != nullptr) {
+
+        dailyRegisterView = new DailyActivityRegisterView(this, controller->getTodayRegister());
+        dailyRegisterView -> Show();
+        this -> Enable(false);
+
+    }
+    else {
+
+        wxMessageDialog emptyRegisterDialog(this, wxT("You don't add any done activity for today! \n Do you want to create a new one?"),
+                                        wxT("Warning: "), wxYES_NO | wxICON_EXCLAMATION);
+        int choice = emptyRegisterDialog.ShowModal();
+
+        if(choice == wxID_YES) {
+
+            addActivityView = new AddNewActivityView(this, controller);
+            addActivityView->Show();
+            this->Enable(false);
+
+        }
+
+    }
 }

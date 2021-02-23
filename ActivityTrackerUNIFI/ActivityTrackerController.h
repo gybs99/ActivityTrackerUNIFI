@@ -17,6 +17,8 @@ public:
     void createActivity(std::string newType, std::string newDescription, std::string startingMin,
                         std::string startingHour, std::string finishingMin, std::string finishingHour);
 
+    const std::shared_ptr<DailyActivityRegister> &getTodayRegister() const;
+
 private:
 
     std::shared_ptr<Activity> managedActivity {nullptr};

@@ -8,9 +8,12 @@
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
+#endif
+
+#include <iostream>
+
 #include "AddNewActivityView.h"
 #include "ActivityTrackerController.h"
-#endif
 
 enum
 {
@@ -32,6 +35,7 @@ public:
     void onInfo(wxCommandEvent& event);
     void onSignInButton(wxCommandEvent& event);
     void onAddActivityMenu(wxCommandEvent& event);
+    void onToday(wxCommandEvent& event);
 
 private:
 
@@ -49,6 +53,7 @@ private:
     wxButton* lookTodayButton {nullptr};
 
     wxFrame* addActivityView {nullptr};
+    wxFrame* dailyRegisterView {nullptr};
 
     std::shared_ptr<ActivityTrackerController> controller;
 

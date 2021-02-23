@@ -4,6 +4,10 @@
 
 #include "DailyActivityRegisterView.h"
 
+wxBEGIN_EVENT_TABLE(DailyActivityRegisterView, wxFrame)
+    EVT_CLOSE(DailyActivityRegisterView::onClose)
+wxEND_EVENT_TABLE()
+
 DailyActivityRegisterView::DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<DailyActivityRegister> newRegisterViewed) :
                                 wxFrame(mainMenu, wxID_ANY, "Register"), registerViewed(std::move(newRegisterViewed)) {
 
@@ -53,5 +57,12 @@ void DailyActivityRegisterView::createActivityList() {
                             itr.second->getTimeSet()->finishingMin);
 
     }
+
+}
+
+void DailyActivityRegisterView::onClose(wxCloseEvent& event) {
+
+    m_parent -> Enable(true);
+    this -> Destroy();
 
 }

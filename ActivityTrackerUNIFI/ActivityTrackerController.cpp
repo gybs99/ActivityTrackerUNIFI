@@ -15,10 +15,11 @@ void ActivityTrackerController::createActivity(std::string newType, std::string 
         todayRegister = std::make_shared<DailyActivityRegister>();
     todayRegister -> addNewActivity(managedActivity);
 
-    auto todayRegisterView = new DailyActivityRegisterView(nullptr,todayRegister);
-    todayRegisterView -> Show();
-
     auto addActivityView = new ActivityView(managedActivity);
     addActivityView -> Show();
 
+}
+
+const std::shared_ptr<DailyActivityRegister> &ActivityTrackerController::getTodayRegister() const {
+    return todayRegister;
 }
