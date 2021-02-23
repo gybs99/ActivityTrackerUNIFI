@@ -4,8 +4,10 @@
 
 #include "DailyActivityRegisterView.h"
 
-DailyActivityRegisterView::DailyActivityRegisterView() : wxFrame(nullptr, wxID_ANY, "Register") {
+DailyActivityRegisterView::DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<DailyActivityRegister> newRegisterViewed) :
+                                wxFrame(mainMenu, wxID_ANY, "Register"), registerViewed(std::move(newRegisterViewed)) {
 
+    attachView();
     assembleView();
 
 }
@@ -28,8 +30,7 @@ void DailyActivityRegisterView::assembleView() {
     listSizer = new wxBoxSizer(wxHORIZONTAL);
 
     listOfActivity = new wxListBox(this, wxID_ANY, wxDefaultPosition);
-    listOfActivity -> Append("Example 1");
-    listOfActivity -> Append("Example 2");
+    createActivityList();
 
     listSizer -> Add(listOfActivity,1, wxEXPAND);
 
@@ -40,5 +41,17 @@ void DailyActivityRegisterView::assembleView() {
 
     this -> SetSizer(viewSizer);
 
+
+}
+
+void DailyActivityRegisterView::createActivityList() {
+
+    for (auto itr : registerViewed -> getListOfActivity()) {
+
+        listOfActivity -> Append(itr.second->getType() + "    " + itr.second->getTimeSet()->startingHour+ ":" +
+                            itr.second->getTimeSet()->startingMin + "  " + itr.second->getTimeSet()->finishingHour + ":" +
+                            itr.second->getTimeSet()->finishingMin);
+
+    }
 
 }

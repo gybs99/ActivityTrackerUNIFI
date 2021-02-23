@@ -13,9 +13,6 @@ bool ActivityTrackerApp::OnInit() {
     mainMenuWindow ->SetId(ID_Main);
     mainMenuWindow -> Show();
 
-    DailyActivityRegisterView* registerView = new DailyActivityRegisterView();
-    registerView -> Show();
-
     return true;
 }
 

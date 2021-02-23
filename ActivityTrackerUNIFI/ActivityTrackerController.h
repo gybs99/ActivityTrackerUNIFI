@@ -7,6 +7,7 @@
 #include "Activity.h"
 #include "ActivityView.h"
 #include "DailyActivityRegister.h"
+#include "DailyActivityRegisterView.h"
 
 
 class ActivityTrackerController {
@@ -20,7 +21,6 @@ private:
 
     std::shared_ptr<Activity> managedActivity {nullptr};
     std::shared_ptr<DailyActivityRegister> todayRegister {nullptr};
-
 };
 
 

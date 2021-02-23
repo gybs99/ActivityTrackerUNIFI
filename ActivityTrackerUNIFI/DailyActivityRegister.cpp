@@ -2,6 +2,7 @@
 // Created by redi on 22/02/21.
 //
 
+#include <map>
 #include "DailyActivityRegister.h"
 
 DailyActivityRegister::DailyActivityRegister() {
@@ -26,9 +27,16 @@ void DailyActivityRegister::unsubscribeView(Observer *removedView) {
 }
 
 void DailyActivityRegister::addNewActivity(std::shared_ptr<Activity> newActivity) {
-    listOfActivity.push_back(std::move(newActivity));
+
+    listOfActivity.insert(std::make_pair(activityID, newActivity));
+    activityID++;
+
 }
 
 void DailyActivityRegister::notifyChange() {
 
+}
+
+const std::map<int, std::shared_ptr<Activity>> &DailyActivityRegister::getListOfActivity() const {
+    return listOfActivity;
 }

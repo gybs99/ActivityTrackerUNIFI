@@ -10,6 +10,8 @@
 #include <wx/wx.h>
 #endif
 
+
+
 #include "Observer.h"
 #include "DailyActivityRegister.h"
 
@@ -17,9 +19,11 @@ class DailyActivityRegisterView : public wxFrame ,public Observer {
 
 public:
 
-    DailyActivityRegisterView();
+    DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<DailyActivityRegister> registerViewed);
 
     void assembleView();
+
+    void createActivityList();
 
     void updateView() override;
 

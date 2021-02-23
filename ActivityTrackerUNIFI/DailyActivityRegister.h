@@ -6,6 +6,9 @@
 #define ACTIVITYTRACKERUNIFI_DAILYACTIVITYREGISTER_H
 
 #include <ctime>
+#include <map>
+#include <iostream>
+
 #include "Activity.h"
 
 struct Date
@@ -29,12 +32,15 @@ public:
 
     void addNewActivity(std::shared_ptr<Activity> newActivity);
 
+    const std::map<int, std::shared_ptr<Activity>> &getListOfActivity() const;
+
 private:
 
-    std::list<std::shared_ptr<Activity>> listOfActivity {nullptr};
+    std::map<int,std::shared_ptr<Activity>> listOfActivity;
     Date* date {nullptr};
     struct tm* currentTime;
     std::list<Observer*> registerViews {nullptr};
+    int activityID = 0;
 
 };
 
