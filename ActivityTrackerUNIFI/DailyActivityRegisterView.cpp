@@ -5,11 +5,15 @@
 #include "DailyActivityRegisterView.h"
 
 wxBEGIN_EVENT_TABLE(DailyActivityRegisterView, wxFrame)
+    EVT_LISTBOX_DCLICK(ID_ActivityList, DailyActivityRegisterView::onClickingActivity)
     EVT_CLOSE(DailyActivityRegisterView::onClose)
 wxEND_EVENT_TABLE()
 
-DailyActivityRegisterView::DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<DailyActivityRegister> newRegisterViewed) :
-                                wxFrame(mainMenu, wxID_ANY, "Register"), registerViewed(std::move(newRegisterViewed)) {
+DailyActivityRegisterView::DailyActivityRegisterView(wxFrame* mainMenu,
+                                                     std::shared_ptr<DailyActivityRegister> newRegisterViewed,
+                                                     std::shared_ptr<ActivityTrackerController> newController) :
+                                                     wxFrame(mainMenu, wxID_ANY, "Register"),
+                                                     registerViewed(std::move(newRegisterViewed)), controller(std::move(newController)) {
 
     attachView();
     assembleView();
@@ -33,7 +37,7 @@ void DailyActivityRegisterView::assembleView() {
     viewSizer = new wxBoxSizer(wxVERTICAL);
     listSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    listOfActivity = new wxListBox(this, wxID_ANY, wxDefaultPosition);
+    listOfActivity = new wxListBox(this, ID_ActivityList, wxDefaultPosition);
     createActivityList();
 
     listSizer -> Add(listOfActivity,1, wxEXPAND);
@@ -64,5 +68,12 @@ void DailyActivityRegisterView::onClose(wxCloseEvent& event) {
 
     m_parent -> Enable(true);
     this -> Destroy();
+
+}
+
+void DailyActivityRegisterView::onClickingActivity(wxCommandEvent &event) {
+
+    activityDisplayed = new ActivityView(this, controller -> getActivitySelected(listOfActivity->GetSelection()));
+    activityDisplayed -> Show();
 
 }

@@ -171,4 +171,8 @@ void AddNewActivityView::onCreate(wxCommandEvent &event) {
     controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(),
                                  startingMinList -> GetValue().ToStdString(), startingHourList -> GetValue().ToStdString(),
                                  finishingMinList -> GetValue().ToStdString(), finishingHourList -> GetValue().ToStdString());
+    wxMessageBox(wxT("Your done task is added to  your register! \n Check the daily register for review it"), wxT("Activity added"), wxOK | wxICON_INFORMATION);
+    m_parent -> Enable(true);
+    this -> Destroy();
+
 }

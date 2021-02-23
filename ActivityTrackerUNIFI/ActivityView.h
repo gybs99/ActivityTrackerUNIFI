@@ -19,7 +19,7 @@
 class ActivityView : public wxFrame, public Observer {
 
 public:
-    explicit ActivityView(std::shared_ptr<Activity> newActivity);
+    explicit ActivityView(wxFrame* registerView, std::shared_ptr<Activity> newActivity);
 
     ~ActivityView() override;
 
@@ -37,6 +37,8 @@ public:
 
     void assembleMenuBar();
 
+    void onClose(wxCloseEvent& event);
+
 private:
     std::shared_ptr<Activity> activityViewed;
     std::string durationString;
@@ -51,6 +53,8 @@ private:
     wxButton* backButton {nullptr};
     wxBoxSizer* topSizer;
     wxBoxSizer* bottomSizer;
+
+    wxDECLARE_EVENT_TABLE();
 };
 
 

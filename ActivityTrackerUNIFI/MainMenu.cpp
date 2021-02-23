@@ -106,7 +106,7 @@ void MainMenu::onToday(wxCommandEvent &event) {
 
     if(controller -> getTodayRegister() != nullptr) {
 
-        dailyRegisterView = new DailyActivityRegisterView(this, controller->getTodayRegister());
+        dailyRegisterView = new DailyActivityRegisterView(this, controller->getTodayRegister(), controller);
         dailyRegisterView -> Show();
         this -> Enable(false);
 

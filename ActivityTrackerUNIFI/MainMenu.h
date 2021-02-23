@@ -14,6 +14,7 @@
 
 #include "AddNewActivityView.h"
 #include "ActivityTrackerController.h"
+#include "DailyActivityRegisterView.h"
 
 enum
 {

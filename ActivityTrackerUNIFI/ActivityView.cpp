@@ -4,8 +4,12 @@
 
 #include "ActivityView.h"
 
+wxBEGIN_EVENT_TABLE(ActivityView, wxFrame)
+    EVT_CLOSE(ActivityView::onClose)
+wxEND_EVENT_TABLE()
 
-ActivityView::ActivityView(std::shared_ptr<Activity> newActivity): wxFrame(nullptr, wxID_ANY, "Activity Visual",
+
+ActivityView::ActivityView(wxFrame* registerView, std::shared_ptr<Activity> newActivity): wxFrame(registerView, wxID_ANY, "Activity Visual",
                       wxDefaultPosition, wxSize(600,400)), activityViewed(std::move(newActivity)) {
 
     attachView();
@@ -79,5 +83,12 @@ void ActivityView::assembleMenuBar() {
     activityMenuBar = new wxMenuBar;
     activityMenuBar -> Append(editField, "Edit");
     SetMenuBar(activityMenuBar);
+
+}
+
+void ActivityView::onClose(wxCloseEvent &event) {
+
+    m_parent -> Enable(true);
+    this -> Destroy();
 
 }

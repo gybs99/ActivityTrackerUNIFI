@@ -11,15 +11,23 @@
 #endif
 
 
-
+#include "ActivityTrackerController.h"
 #include "Observer.h"
 #include "DailyActivityRegister.h"
+#include "ActivityView.h"
+
+enum
+{
+    ID_ActivityList = 1
+};
+
 
 class DailyActivityRegisterView : public wxFrame ,public Observer {
 
 public:
 
-    DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<DailyActivityRegister> registerViewed);
+    DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<DailyActivityRegister> registerViewed,
+                              std::shared_ptr<ActivityTrackerController> newController);
 
     void assembleView();
 
@@ -33,6 +41,8 @@ public:
 
     void onClose(wxCloseEvent& event);
 
+    void onClickingActivity(wxCommandEvent& event);
+
 private:
 
     wxBoxSizer* viewSizer {nullptr};
@@ -42,6 +52,9 @@ private:
     wxButton* addButton {nullptr};
 
     std::shared_ptr<DailyActivityRegister> registerViewed {nullptr};
+    std::shared_ptr<ActivityTrackerController> controller {nullptr};
+
+    ActivityView* activityDisplayed {nullptr};
 
     wxDECLARE_EVENT_TABLE();
 };
