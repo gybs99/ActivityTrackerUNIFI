@@ -15,10 +15,12 @@
 #include "Observer.h"
 #include "DailyActivityRegister.h"
 #include "ActivityView.h"
+#include "AddNewActivityView.h"
 
 enum
 {
-    ID_ActivityList = 1
+    ID_ActivityList = 1,
+    ID_AddActivityButton = 2
 };
 
 
@@ -43,6 +45,8 @@ public:
 
     void onClickingActivity(wxCommandEvent& event);
 
+    void onAddActivity(wxCommandEvent& event);
+
 private:
 
     wxBoxSizer* viewSizer {nullptr};
@@ -55,6 +59,7 @@ private:
     std::shared_ptr<ActivityTrackerController> controller {nullptr};
 
     ActivityView* activityDisplayed {nullptr};
+    AddNewActivityView* addActivityView {nullptr};
 
     wxDECLARE_EVENT_TABLE();
 };

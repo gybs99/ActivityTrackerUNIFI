@@ -6,6 +6,7 @@
 
 wxBEGIN_EVENT_TABLE(DailyActivityRegisterView, wxFrame)
     EVT_LISTBOX_DCLICK(ID_ActivityList, DailyActivityRegisterView::onClickingActivity)
+    EVT_BUTTON(ID_AddActivityButton, DailyActivityRegisterView::onAddActivity)
     EVT_CLOSE(DailyActivityRegisterView::onClose)
 wxEND_EVENT_TABLE()
 
@@ -42,7 +43,7 @@ void DailyActivityRegisterView::assembleView() {
 
     listSizer -> Add(listOfActivity,1, wxEXPAND);
 
-    addButton = new wxButton(this, wxID_ANY, "Add Activity");
+    addButton = new wxButton(this, ID_AddActivityButton, "Add Activity");
 
     viewSizer -> Add(listSizer, 1, wxEXPAND | wxALL, 20);
     viewSizer -> Add(addButton, 0, wxCENTER | wxALL, 20);
@@ -75,5 +76,13 @@ void DailyActivityRegisterView::onClickingActivity(wxCommandEvent &event) {
 
     activityDisplayed = new ActivityView(this, controller -> getActivitySelected(listOfActivity->GetSelection()));
     activityDisplayed -> Show();
+
+}
+
+void DailyActivityRegisterView::onAddActivity(wxCommandEvent &event) {
+
+    addActivityView = new AddNewActivityView(this, controller);
+    addActivityView->Show();
+    this->Enable(false);
 
 }
