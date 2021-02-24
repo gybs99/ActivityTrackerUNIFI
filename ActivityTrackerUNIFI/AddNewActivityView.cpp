@@ -168,11 +168,36 @@ void AddNewActivityView::onCancel(wxCommandEvent& event) {
 
 void AddNewActivityView::onCreate(wxCommandEvent &event) {
 
-    controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(),
-                                 startingMinList -> GetValue().ToStdString(), startingHourList -> GetValue().ToStdString(),
-                                 finishingMinList -> GetValue().ToStdString(), finishingHourList -> GetValue().ToStdString());
-    wxMessageBox(wxT("Your done task is added to your register! \n Check the daily register for review it"), wxT("Activity added"), wxOK | wxICON_INFORMATION);
-    m_parent -> Enable(true);
-    this -> Destroy();
+    if (typeChoiceList -> GetValue() == "...")
+        wxMessageBox(wxT("To save your done task, you need to set almost a type."), wxT("Warning!"), wxOK | wxICON_EXCLAMATION);
+    else {
+        if (std::atoi(startingHourList -> GetValue()) > std::atoi(finishingHourList -> GetValue())) {
+            wxMessageBox(wxT("Time format is not valid! Please fix it and try again."), wxT("Warning!"), wxOK | wxICON_EXCLAMATION);
+        }
+        else {
+            if (std::atoi(startingHourList -> GetValue()) == std::atoi(finishingHourList -> GetValue()))
+                if (std::atoi(startingMinList -> GetValue()) >= std::atoi(finishingMinList -> GetValue()))
+                    wxMessageBox(wxT("Time format is not valid! Please fix it and try again."), wxT("Warning!"), wxOK | wxICON_EXCLAMATION);
+                else
+                {
+                    controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(),
+                                                 startingMinList -> GetValue().ToStdString(), startingHourList -> GetValue().ToStdString(),
+                                                 finishingMinList -> GetValue().ToStdString(), finishingHourList -> GetValue().ToStdString());
+                    wxMessageBox(wxT("Your done task is added to your register! \n Check the daily register for review it."), wxT("Activity added"), wxOK | wxICON_INFORMATION);
+                    m_parent -> Enable(true);
+                    this -> Destroy();
+                }
+            else
+            {
+                controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(),
+                                             startingMinList -> GetValue().ToStdString(), startingHourList -> GetValue().ToStdString(),
+                                             finishingMinList -> GetValue().ToStdString(), finishingHourList -> GetValue().ToStdString());
+                wxMessageBox(wxT("Your done task is added to your register! \n Check the daily register for review it"), wxT("Activity added"), wxOK | wxICON_INFORMATION);
+                m_parent -> Enable(true);
+                this -> Destroy();
+            }
+
+        }
+    }
 
 }
