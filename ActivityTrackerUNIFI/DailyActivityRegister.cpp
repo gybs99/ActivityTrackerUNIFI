@@ -35,6 +35,11 @@ void DailyActivityRegister::addNewActivity(std::shared_ptr<Activity> newActivity
 
 void DailyActivityRegister::notifyChange() {
 
+    for (auto itr : registerViews) {
+        if (itr)
+            itr -> updateView();
+    }
+
 }
 
 const std::map<int, std::shared_ptr<Activity>> &DailyActivityRegister::getListOfActivity() const {

@@ -14,6 +14,7 @@ void ActivityTrackerController::createActivity(std::string newType, std::string 
     if (!todayRegister)
         todayRegister = std::make_shared<DailyActivityRegister>();
     todayRegister -> addNewActivity(managedActivity);
+    todayRegister -> notifyChange();
 
 }
 

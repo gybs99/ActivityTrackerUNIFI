@@ -23,6 +23,12 @@ DailyActivityRegisterView::DailyActivityRegisterView(wxFrame* mainMenu,
 
 void DailyActivityRegisterView::updateView() {
 
+    int actualFields = listOfActivity->GetCount();
+
+    for (int i = actualFields - 1; i>=0 ; i--) {
+        listOfActivity -> Delete(i);
+    }
+    createActivityList();
 }
 
 void DailyActivityRegisterView::attachView() {
@@ -67,6 +73,7 @@ void DailyActivityRegisterView::createActivityList() {
 
 void DailyActivityRegisterView::onClose(wxCloseEvent& event) {
 
+    detachView();
     m_parent -> Enable(true);
     this -> Destroy();
 
