@@ -16,6 +16,7 @@ DailyActivityRegisterView::DailyActivityRegisterView(wxFrame* mainMenu,
                                                      wxFrame(mainMenu, wxID_ANY, "Register"),
                                                      registerViewed(std::move(newRegisterViewed)), controller(std::move(newController)) {
 
+    this -> SetMinSize(wxSize(600,400));
     attachView();
     assembleView();
 
@@ -49,10 +50,14 @@ void DailyActivityRegisterView::assembleView() {
 
     listSizer -> Add(listOfActivity,1, wxEXPAND);
 
+    infoText = new wxStaticText(this, wxID_ANY, "    Double click an activity to display it!");
+    infoText -> SetFont(wxFont(15,wxROMAN, wxNORMAL, wxNORMAL));
+
     addButton = new wxButton(this, ID_AddActivityButton, "Add Activity");
 
     viewSizer -> Add(listSizer, 1, wxEXPAND | wxALL, 20);
-    viewSizer -> Add(addButton, 0, wxCENTER | wxALL, 20);
+    viewSizer -> Add(infoText, 1, wxALL);
+    viewSizer -> Add(addButton, 0, wxCENTER | wxBOTTOM, 20);
 
     this -> SetSizer(viewSizer);
 

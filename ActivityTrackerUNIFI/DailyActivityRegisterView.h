@@ -54,6 +54,7 @@ private:
 
     wxListBox* listOfActivity {nullptr};
     wxButton* addButton {nullptr};
+    wxStaticText* infoText {nullptr};
 
     std::shared_ptr<DailyActivityRegister> registerViewed {nullptr};
     std::shared_ptr<ActivityTrackerController> controller {nullptr};
