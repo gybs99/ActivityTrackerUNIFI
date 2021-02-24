@@ -5,6 +5,7 @@
 #include "ActivityView.h"
 
 wxBEGIN_EVENT_TABLE(ActivityView, wxFrame)
+    EVT_BUTTON(ID_OKButton, ActivityView::onOK)
     EVT_CLOSE(ActivityView::onClose)
 wxEND_EVENT_TABLE()
 
@@ -24,7 +25,7 @@ ActivityView::ActivityView(wxFrame* registerView, std::shared_ptr<Activity> newA
                     std::to_string(activityViewed -> getTimeSet() -> month) + "/" + std::to_string(activityViewed ->
                     getTimeSet() -> year));
 
-    backButton = new wxButton(this, 8, "OK");
+    backButton = new wxButton(this, ID_OKButton, "OK");
 
     topSizer = new wxBoxSizer(wxVERTICAL);
     topSizer -> Add(activityType, 1, wxEXPAND | wxALL, 20);
@@ -87,6 +88,13 @@ void ActivityView::assembleMenuBar() {
 }
 
 void ActivityView::onClose(wxCloseEvent &event) {
+
+    m_parent -> Enable(true);
+    this -> Destroy();
+
+}
+
+void ActivityView::onOK(wxCommandEvent &event) {
 
     m_parent -> Enable(true);
     this -> Destroy();

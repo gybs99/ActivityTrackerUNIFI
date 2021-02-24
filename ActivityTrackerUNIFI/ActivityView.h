@@ -15,6 +15,11 @@
 #include "Observer.h"
 #include "Activity.h"
 
+enum
+{
+    ID_OKButton = 1
+};
+
 
 class ActivityView : public wxFrame, public Observer {
 
@@ -38,6 +43,8 @@ public:
     void assembleMenuBar();
 
     void onClose(wxCloseEvent& event);
+
+    void onOK(wxCommandEvent& event);
 
 private:
     std::shared_ptr<Activity> activityViewed;
