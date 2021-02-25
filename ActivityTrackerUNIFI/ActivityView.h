@@ -15,11 +15,13 @@
 #include "Observer.h"
 #include "Activity.h"
 #include "ActivityTrackerController.h"
+#include "AddNewActivityView.h"
 
 enum
 {
     ID_OKButton = 1,
-    ID_Delete = 2
+    ID_Delete = 2,
+    ID_Modify = 3
 };
 
 
@@ -50,6 +52,10 @@ public:
 
     void onDelete(wxCommandEvent& event);
 
+    void onModify(wxCommandEvent& event);
+
+    void generateDurationString();
+
 private:
     std::shared_ptr<Activity> activityViewed;
     std::string durationString;
@@ -64,6 +70,8 @@ private:
     wxButton* backButton {nullptr};
     wxBoxSizer* topSizer;
     wxBoxSizer* bottomSizer;
+
+    AddNewActivityView* modifyView {nullptr};
 
     std::shared_ptr<ActivityTrackerController> controller {nullptr};
 

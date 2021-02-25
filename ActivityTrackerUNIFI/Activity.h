@@ -50,6 +50,9 @@ public:
 
     void setType(const std::string &newType);
 
+    void modifyInfo(std::string newType, std::string newDescription, std::string startingMin, std::string startingHour,
+                    std::string finishingMin, std::string finishingHour);
+
 private:
 
     std::string description;

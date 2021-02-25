@@ -6,6 +6,7 @@
 
 wxBEGIN_EVENT_TABLE(ActivityView, wxFrame)
     EVT_MENU(ID_Delete, ActivityView::onDelete)
+    EVT_MENU(ID_Modify, ActivityView::onModify)
     EVT_BUTTON(ID_OKButton, ActivityView::onOK)
     EVT_CLOSE(ActivityView::onClose)
 wxEND_EVENT_TABLE()
@@ -45,6 +46,12 @@ ActivityView::ActivityView(wxFrame* registerView, std::shared_ptr<Activity> newA
 }
 
 void ActivityView::updateView() {
+
+    activityType -> SetLabel(activityViewed -> getType());
+    activityDescription -> SetLabel(activityViewed -> getDescription());
+    generateDurationString();
+    activityDuration -> SetLabel("Duration: " + durationString);
+
 }
 
 void ActivityView::attachView() {
@@ -67,10 +74,7 @@ void ActivityView::createViewText() {
     activityDescription = new wxStaticText(this, 1, activityViewed -> getDescription());
     activityDescription -> SetFont(wxFont(15,wxROMAN, wxNORMAL, wxNORMAL));
 
-    durationString = activityViewed -> getTimeSet() -> startingHour + std::string(":") +
-                     activityViewed -> getTimeSet() -> startingMin + std::string("   ") +
-                     activityViewed -> getTimeSet() -> finishingHour + std::string (":") +
-                     activityViewed -> getTimeSet() -> finishingMin;
+    generateDurationString();
 
     activityDuration = new wxStaticText(this, 3,"Duration: " + durationString);
     activityDuration -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
@@ -80,7 +84,7 @@ void ActivityView::createViewText() {
 void ActivityView::assembleMenuBar() {
 
     editField = new wxMenu;
-    editField -> Append(5, "&Modify", "Change info about this activity");
+    editField -> Append(ID_Modify, "&Modify", "Change info about this activity");
     editField -> Append(ID_Delete, "&Delete", "Delete this activity");
 
     activityMenuBar = new wxMenuBar;
@@ -109,5 +113,22 @@ void ActivityView::onDelete(wxCommandEvent& wxCommandEvent) {
     wxMessageBox(wxT("Activity successfully deleted"), wxT(""), wxOK | wxICON_INFORMATION);
     m_parent -> Enable(true);
     this -> Destroy();
+
+}
+
+void ActivityView::onModify(wxCommandEvent& event) {
+
+    modifyView = new AddNewActivityView(this, controller, activityViewed);
+    modifyView -> Show();
+    this -> Enable(false);
+
+}
+
+void ActivityView::generateDurationString() {
+
+    durationString = activityViewed -> getTimeSet() -> startingHour + std::string(":") +
+                     activityViewed -> getTimeSet() -> startingMin + std::string("   ") +
+                     activityViewed -> getTimeSet() -> finishingHour + std::string (":") +
+                     activityViewed -> getTimeSet() -> finishingMin;
 
 }

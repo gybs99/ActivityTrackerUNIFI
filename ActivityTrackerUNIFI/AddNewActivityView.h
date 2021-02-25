@@ -27,6 +27,8 @@ class AddNewActivityView : public wxFrame {
 public:
     AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController>);
 
+    AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController>, std::shared_ptr<Activity> selectedActivity);
+
     void createMinHoursVectors();
 
     void assembleTypeView();
@@ -41,11 +43,15 @@ public:
 
     void assembleButtonsView();
 
+    int checkForm();
+
     void onClose(wxCloseEvent& event);
 
     void onCancel(wxCommandEvent& event);
 
     void onCreate(wxCommandEvent& event);
+
+    void onModify(wxCommandEvent& event);
 
 
 private:
@@ -82,7 +88,10 @@ private:
     wxString hours[numberOfHours];
     wxString mins[numberOfMinutes];
 
+
+
     std::shared_ptr<ActivityTrackerController> controller;
+    std::shared_ptr<Activity> activityToModify {nullptr};
 
     wxDECLARE_EVENT_TABLE();
 

@@ -67,6 +67,21 @@ void Activity::setType(const std::string &newType) {
     Activity::type = newType;
 }
 
+void Activity::modifyInfo(std::string newType, std::string newDescription, std::string newStartingMin, std::string newStartingHour,
+                          std::string newFinishingMin, std::string newFinishingHour) {
+
+    type = std::move(newType);
+    description = std::move(newDescription);
+
+    timeSet -> startingMin = std::move(newStartingMin);
+    timeSet -> startingHour = std::move(newStartingHour);
+    timeSet -> finishingMin = std::move(newFinishingMin);
+    timeSet -> finishingHour = std::move(newFinishingHour);
+
+    notifyChange();
+
+}
+
 
 
 

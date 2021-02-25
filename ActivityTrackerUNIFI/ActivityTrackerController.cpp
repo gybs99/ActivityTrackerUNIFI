@@ -29,3 +29,12 @@ const std::shared_ptr<Activity> &ActivityTrackerController::getActivitySelected(
 void ActivityTrackerController::removeActivity(std::shared_ptr<Activity>& selectedActivity) {
     todayRegister -> removeActivity(selectedActivity);
 }
+
+void ActivityTrackerController::modifyActivity(std::shared_ptr<Activity> &selectedActivity, std::string newType, std::string newDescription, std::string newStartingMin,
+                                               std::string newStartingHour, std::string newFinishingMin, std::string newFinishingHour) {
+
+    selectedActivity -> modifyInfo(std::move(newType), std::move(newDescription), std::move(newStartingMin), std::move(newStartingHour),
+                                   std::move(newFinishingMin), std::move(newFinishingHour));
+
+    todayRegister -> notifyChange();
+}
