@@ -5,13 +5,15 @@
 #include "ActivityView.h"
 
 wxBEGIN_EVENT_TABLE(ActivityView, wxFrame)
+    EVT_MENU(ID_Delete, ActivityView::onDelete)
     EVT_BUTTON(ID_OKButton, ActivityView::onOK)
     EVT_CLOSE(ActivityView::onClose)
 wxEND_EVENT_TABLE()
 
 
-ActivityView::ActivityView(wxFrame* registerView, std::shared_ptr<Activity> newActivity): wxFrame(registerView, wxID_ANY, "Activity Visual",
-                      wxDefaultPosition, wxSize(600,400)), activityViewed(std::move(newActivity)) {
+ActivityView::ActivityView(wxFrame* registerView, std::shared_ptr<Activity> newActivity, std::shared_ptr<ActivityTrackerController> newController): wxFrame(registerView, wxID_ANY,
+                      "Activity Visual", wxDefaultPosition, wxSize(600,400)), activityViewed(std::move(newActivity)),
+                      controller(std::move(newController)){
 
     attachView();
 
@@ -79,7 +81,7 @@ void ActivityView::assembleMenuBar() {
 
     editField = new wxMenu;
     editField -> Append(5, "&Modify", "Change info about this activity");
-    editField -> Append(6, "&Delete", "Delete this activity");
+    editField -> Append(ID_Delete, "&Delete", "Delete this activity");
 
     activityMenuBar = new wxMenuBar;
     activityMenuBar -> Append(editField, "Edit");
@@ -96,6 +98,15 @@ void ActivityView::onClose(wxCloseEvent &event) {
 
 void ActivityView::onOK(wxCommandEvent &event) {
 
+    m_parent -> Enable(true);
+    this -> Destroy();
+
+}
+
+void ActivityView::onDelete(wxCommandEvent& wxCommandEvent) {
+
+    controller -> removeActivity(activityViewed);
+    wxMessageBox(wxT("Activity successfully deleted"), wxT(""), wxOK | wxICON_INFORMATION);
     m_parent -> Enable(true);
     this -> Destroy();
 

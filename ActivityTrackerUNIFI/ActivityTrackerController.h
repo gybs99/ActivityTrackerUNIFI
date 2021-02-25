@@ -16,6 +16,8 @@ public:
     void createActivity(std::string newType, std::string newDescription, std::string startingMin,
                         std::string startingHour, std::string finishingMin, std::string finishingHour);
 
+    void removeActivity(std::shared_ptr<Activity>& selectedActivity);
+
     const std::shared_ptr<Activity> &getActivitySelected(int activitySelected);
 
     const std::shared_ptr<DailyActivityRegister> &getTodayRegister() const;

@@ -24,6 +24,12 @@ public:
 
     DailyActivityRegister();
 
+    ~DailyActivityRegister() override;
+
+    DailyActivityRegister(DailyActivityRegister&) = delete;
+
+    DailyActivityRegister& operator= (const DailyActivityRegister) = delete;
+
     void subscribeView(Observer *newView) override;
 
     void unsubscribeView(Observer *removedView) override;
@@ -32,7 +38,10 @@ public:
 
     void addNewActivity(std::shared_ptr<Activity> newActivity);
 
+    void removeActivity(std::shared_ptr<Activity>& selectedActivity);
+
     const std::map<int, std::shared_ptr<Activity>> &getListOfActivity() const;
+
 
 private:
 

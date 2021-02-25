@@ -14,17 +14,19 @@
 
 #include "Observer.h"
 #include "Activity.h"
+#include "ActivityTrackerController.h"
 
 enum
 {
-    ID_OKButton = 1
+    ID_OKButton = 1,
+    ID_Delete = 2
 };
 
 
 class ActivityView : public wxFrame, public Observer {
 
 public:
-    explicit ActivityView(wxFrame* registerView, std::shared_ptr<Activity> newActivity);
+    explicit ActivityView(wxFrame* registerView, std::shared_ptr<Activity> newActivity, std::shared_ptr<ActivityTrackerController> newController);
 
     ~ActivityView() override;
 
@@ -46,6 +48,8 @@ public:
 
     void onOK(wxCommandEvent& event);
 
+    void onDelete(wxCommandEvent& event);
+
 private:
     std::shared_ptr<Activity> activityViewed;
     std::string durationString;
@@ -60,6 +64,8 @@ private:
     wxButton* backButton {nullptr};
     wxBoxSizer* topSizer;
     wxBoxSizer* bottomSizer;
+
+    std::shared_ptr<ActivityTrackerController> controller {nullptr};
 
     wxDECLARE_EVENT_TABLE();
 };

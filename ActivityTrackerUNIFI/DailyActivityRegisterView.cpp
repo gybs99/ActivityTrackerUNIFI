@@ -86,7 +86,7 @@ void DailyActivityRegisterView::onClose(wxCloseEvent& event) {
 
 void DailyActivityRegisterView::onClickingActivity(wxCommandEvent &event) {
 
-    activityDisplayed = new ActivityView(this, controller -> getActivitySelected(listOfActivity->GetSelection()));
+    activityDisplayed = new ActivityView(this, controller -> getActivitySelected(listOfActivity->GetSelection()), controller);
     activityDisplayed -> Show();
 
 }

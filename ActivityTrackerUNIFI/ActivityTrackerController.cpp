@@ -25,3 +25,7 @@ const std::shared_ptr<DailyActivityRegister> &ActivityTrackerController::getToda
 const std::shared_ptr<Activity> &ActivityTrackerController::getActivitySelected(int activitySelected) {
     return todayRegister -> getListOfActivity().find(activitySelected) -> second;
 }
+
+void ActivityTrackerController::removeActivity(std::shared_ptr<Activity>& selectedActivity) {
+    todayRegister -> removeActivity(selectedActivity);
+}

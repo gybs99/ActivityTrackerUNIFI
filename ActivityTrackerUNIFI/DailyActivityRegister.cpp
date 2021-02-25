@@ -28,7 +28,7 @@ void DailyActivityRegister::unsubscribeView(Observer *removedView) {
 
 void DailyActivityRegister::addNewActivity(std::shared_ptr<Activity> newActivity) {
 
-    listOfActivity.insert(std::make_pair(activityID, newActivity));
+    listOfActivity.insert(std::make_pair(activityID, std::move(newActivity)));
     activityID++;
 
 }
@@ -44,4 +44,47 @@ void DailyActivityRegister::notifyChange() {
 
 const std::map<int, std::shared_ptr<Activity>> &DailyActivityRegister::getListOfActivity() const {
     return listOfActivity;
+}
+
+void DailyActivityRegister::removeActivity(std::shared_ptr<Activity>& selectedActivity) {
+
+    bool found = false;
+    auto itr = listOfActivity.begin();
+    int activityIDtoDelete;
+
+    while (!found)
+    {
+        if ( itr -> second == selectedActivity)
+        {
+            activityIDtoDelete = itr -> first;
+            found = true;
+        } else itr++;
+
+    }
+
+    listOfActivity.erase(activityIDtoDelete);
+
+    activityID = 0;
+    std::list<std::shared_ptr<Activity>> supportList;
+
+    for (auto itr1 : listOfActivity) {
+        supportList.push_back(itr1.second);
+    }
+
+    auto itr2 = listOfActivity.begin();
+    auto itr3 = listOfActivity.end();
+
+    listOfActivity.erase(itr2,itr3);
+
+    for (auto itr4 : supportList)
+    {
+        listOfActivity.insert(std::make_pair(activityID, itr4));
+        activityID++;
+    }
+
+    notifyChange();
+}
+
+DailyActivityRegister::~DailyActivityRegister() {
+    delete date;
 }
