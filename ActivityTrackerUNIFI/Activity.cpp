@@ -36,12 +36,14 @@ void Activity::notifyChange() {
 }
 
 void Activity::setStartFinishTime(std::string startingMin, std::string startingHour, std::string finishingMin, std::string finishingHour) {
+
     timeSet = new startFinishTime;
     timeSet -> startingMin = std::move(startingMin);
     timeSet -> startingHour = std::move(startingHour);
     timeSet -> finishingMin = std::move(finishingMin);
     timeSet -> finishingHour = std::move(finishingHour);
 }
+
 
 startFinishTime *Activity::getTimeSet() const {
     return timeSet;
@@ -53,10 +55,6 @@ void Activity::setTimeSet(startFinishTime *newTimeSet) {
 
 const std::string &Activity::getDescription() const {
     return description;
-}
-
-void Activity::setDescription(const std::string &newDescription) {
-    Activity::description = newDescription;
 }
 
 const std::string &Activity::getType() const {

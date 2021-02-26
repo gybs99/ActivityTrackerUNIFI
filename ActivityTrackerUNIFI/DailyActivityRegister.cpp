@@ -67,7 +67,7 @@ void DailyActivityRegister::removeActivity(std::shared_ptr<Activity>& selectedAc
     activityID = 0;
     std::list<std::shared_ptr<Activity>> supportList;
 
-    for (auto itr1 : listOfActivity) {
+    for (const auto& itr1 : listOfActivity) {
         supportList.push_back(itr1.second);
     }
 
@@ -76,7 +76,7 @@ void DailyActivityRegister::removeActivity(std::shared_ptr<Activity>& selectedAc
 
     listOfActivity.erase(itr2,itr3);
 
-    for (auto itr4 : supportList)
+    for (const auto& itr4 : supportList)
     {
         listOfActivity.insert(std::make_pair(activityID, itr4));
         activityID++;

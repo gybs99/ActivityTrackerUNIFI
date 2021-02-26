@@ -37,4 +37,5 @@ void ActivityTrackerController::modifyActivity(std::shared_ptr<Activity> &select
                                    std::move(newFinishingMin), std::move(newFinishingHour));
 
     todayRegister -> notifyChange();
+
 }

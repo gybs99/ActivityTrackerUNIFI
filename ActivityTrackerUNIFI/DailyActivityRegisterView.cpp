@@ -17,7 +17,7 @@ DailyActivityRegisterView::DailyActivityRegisterView(wxFrame* mainMenu,
                                                      registerViewed(std::move(newRegisterViewed)), controller(std::move(newController)) {
 
     this -> SetMinSize(wxSize(600,400));
-    attachView();
+    DailyActivityRegisterView :: attachView();
     assembleView();
 
 }
@@ -66,7 +66,7 @@ void DailyActivityRegisterView::assembleView() {
 
 void DailyActivityRegisterView::createActivityList() {
 
-    for (auto itr : registerViewed -> getListOfActivity()) {
+    for (const auto& itr : registerViewed -> getListOfActivity()) {
 
         listOfActivity -> Append(itr.second->getType() + "    " + itr.second->getTimeSet()->startingHour+ ":" +
                             itr.second->getTimeSet()->startingMin + "  " + itr.second->getTimeSet()->finishingHour + ":" +

@@ -44,8 +44,6 @@ public:
 
     const std::string &getDescription() const;
 
-    void setDescription(const std::string &newDescription);
-
     const std::string &getType() const;
 
     void setType(const std::string &newType);

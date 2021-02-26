@@ -16,7 +16,7 @@ ActivityView::ActivityView(wxFrame* registerView, std::shared_ptr<Activity> newA
                       "Activity Visual", wxDefaultPosition, wxSize(600,400)), activityViewed(std::move(newActivity)),
                       controller(std::move(newController)){
 
-    attachView();
+    ActivityView :: attachView();
 
     assembleMenuBar();
 

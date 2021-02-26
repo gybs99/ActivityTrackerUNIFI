@@ -44,7 +44,7 @@ AddNewActivityView::AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<Activi
 }
 
 AddNewActivityView::AddNewActivityView(wxFrame* registerView, std::shared_ptr<ActivityTrackerController> newController, std::shared_ptr<Activity> selectedActivity)
-                                        : AddNewActivityView(registerView, std::move(newController)) {
+                                        : AddNewActivityView(registerView, std::move(newController)){
 
     activityToModify = std::move(selectedActivity);
 
