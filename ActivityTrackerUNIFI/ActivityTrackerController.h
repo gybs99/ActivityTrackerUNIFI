@@ -26,6 +26,12 @@ public:
 
     const std::shared_ptr<DailyActivityRegister> &getTodayRegister() const;
 
+    void setTodayRegister(const std::shared_ptr<DailyActivityRegister> &todayRegister);
+
+    const std::shared_ptr<Activity> &getManagedActivity() const;
+
+    void setManagedActivity(const std::shared_ptr<Activity> &managedActivity);
+
 private:
 
     std::shared_ptr<Activity> managedActivity {nullptr};

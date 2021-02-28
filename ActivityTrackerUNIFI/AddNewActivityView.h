@@ -25,7 +25,7 @@ enum
 class AddNewActivityView : public wxFrame {
 
 public:
-    AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController>);
+    AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController> controller);
 
     AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController>, std::shared_ptr<Activity> selectedActivity);
 
@@ -52,6 +52,20 @@ public:
     void onCreate(wxCommandEvent& event);
 
     void onModify(wxCommandEvent& event);
+
+    wxComboBox *getTypeChoiceList() const;
+
+    wxTextCtrl *getDescriptionTextBox() const;
+
+    wxComboBox *getStartingHourList() const;
+
+    wxComboBox *getStartingMinList() const;
+
+    wxComboBox *getFinishingHourList() const;
+
+    wxComboBox *getFinishingMinList() const;
+
+    const std::shared_ptr<ActivityTrackerController> &getController() const;
 
 
 private:

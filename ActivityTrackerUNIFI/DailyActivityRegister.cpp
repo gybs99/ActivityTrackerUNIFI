@@ -35,10 +35,12 @@ void DailyActivityRegister::addNewActivity(std::shared_ptr<Activity> newActivity
 
 void DailyActivityRegister::notifyChange() {
 
-    for (auto itr : registerViews) {
-        if (itr)
-            itr -> updateView();
-    }
+    if (!registerViews.empty())
+        for (auto itr : registerViews) {
+            if (itr)
+                itr -> updateView();
+        }
+
 
 }
 

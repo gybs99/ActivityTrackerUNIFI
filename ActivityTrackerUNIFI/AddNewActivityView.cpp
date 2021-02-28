@@ -260,3 +260,31 @@ int AddNewActivityView::checkForm() {
 
 }
 
+wxComboBox *AddNewActivityView::getTypeChoiceList() const {
+    return typeChoiceList;
+}
+
+wxTextCtrl *AddNewActivityView::getDescriptionTextBox() const {
+    return descriptionTextBox;
+}
+
+wxComboBox *AddNewActivityView::getStartingHourList() const {
+    return startingHourList;
+}
+
+wxComboBox *AddNewActivityView::getStartingMinList() const {
+    return startingMinList;
+}
+
+wxComboBox *AddNewActivityView::getFinishingHourList() const {
+    return finishingHourList;
+}
+
+wxComboBox *AddNewActivityView::getFinishingMinList() const {
+    return finishingMinList;
+}
+
+const std::shared_ptr<ActivityTrackerController> &AddNewActivityView::getController() const {
+    return controller;
+}
+

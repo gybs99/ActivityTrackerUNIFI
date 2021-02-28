@@ -31,6 +31,7 @@ void Activity::unsubscribeView(Observer *removedView) {
 }
 
 void Activity::notifyChange() {
+    if (!activityViews.empty())
     for(auto view : activityViews)
         view -> updateView();
 }

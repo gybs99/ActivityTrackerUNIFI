@@ -39,3 +39,15 @@ void ActivityTrackerController::modifyActivity(std::shared_ptr<Activity> &select
     todayRegister -> notifyChange();
 
 }
+
+const std::shared_ptr<Activity> &ActivityTrackerController::getManagedActivity() const {
+    return managedActivity;
+}
+
+void ActivityTrackerController::setManagedActivity(const std::shared_ptr<Activity> &newManagedActivity) {
+    ActivityTrackerController::managedActivity = newManagedActivity;
+}
+
+void ActivityTrackerController::setTodayRegister(const std::shared_ptr<DailyActivityRegister> &todayRegister) {
+    ActivityTrackerController::todayRegister = todayRegister;
+}
