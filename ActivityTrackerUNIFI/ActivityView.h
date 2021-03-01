@@ -56,6 +56,10 @@ public:
 
     void generateDurationString();
 
+    const std::shared_ptr<ActivityTrackerController> &getController() const;
+
+    const std::shared_ptr<Activity> &getActivityViewed() const;
+
 private:
     std::shared_ptr<Activity> activityViewed;
     std::string durationString;

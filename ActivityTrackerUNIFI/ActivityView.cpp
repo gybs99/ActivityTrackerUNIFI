@@ -132,3 +132,11 @@ void ActivityView::generateDurationString() {
                      activityViewed -> getTimeSet() -> finishingMin;
 
 }
+
+const std::shared_ptr<ActivityTrackerController> &ActivityView::getController() const {
+    return controller;
+}
+
+const std::shared_ptr<Activity> &ActivityView::getActivityViewed() const {
+    return activityViewed;
+}
