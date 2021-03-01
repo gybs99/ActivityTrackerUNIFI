@@ -7,7 +7,7 @@
 class ActivityTestGUIFixture : public GUIFixture {
 
 protected:
-    AddNewActivityView* editActivityTest;
+    AddNewActivityView* editActivityTest {nullptr};
 
 };
 

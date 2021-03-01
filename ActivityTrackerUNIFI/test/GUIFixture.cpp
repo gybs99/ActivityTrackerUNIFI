@@ -12,7 +12,7 @@ public:
 
     std::shared_ptr<ActivityTrackerController> controller;
 
-    virtual bool OnInit() {
+    bool OnInit() override {
 
         controller = std::make_shared<ActivityTrackerController>();
         return true;
@@ -25,7 +25,7 @@ class GUIFixture : public ::testing::Test {
 
 protected:
     TestApp* testApp;
-    virtual void SetUp()
+    void SetUp() override
     {
         char appname[] = "ActivityFunctionTest.exe";
         int argc = 1;
@@ -36,7 +36,7 @@ protected:
         testApp -> OnInit();
     }
 
-    virtual void TearDown()
+    void TearDown() override
     {
         testApp -> OnExit();
         wxEntryCleanup();

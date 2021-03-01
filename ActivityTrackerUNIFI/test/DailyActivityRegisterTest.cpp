@@ -9,7 +9,7 @@
 class RegisterTestGUIFixture : public GUIFixture {
 protected:
 
-    ActivityView* activityTestView;
+    ActivityView* activityTestView {nullptr};
     std::shared_ptr<Activity> activityTest;
     std::shared_ptr<DailyActivityRegister> registerTest;
     int firstElementID = 0;                                     //In the activity list, the first activity added will have this value of ID, so we want to check if it will be present on the list
@@ -18,8 +18,8 @@ protected:
 
 
         testApp -> controller -> createActivity("Work", "Test Description", "00", "00", "01", "00");
-        activityTest = std::move(testApp -> controller -> getManagedActivity());
-        registerTest = std::move(testApp -> controller -> getTodayRegister());
+        activityTest = testApp -> controller -> getManagedActivity();
+        registerTest = testApp -> controller -> getTodayRegister();
     }
 
 };
@@ -37,7 +37,7 @@ TEST_F(RegisterTestGUIFixture, DeleteAnActivityFromRegister) {
     createActivity();
 
     activityTestView = new ActivityView(nullptr, activityTest, testApp -> controller);
-    std::shared_ptr<Activity> activityFromView = std::move(activityTestView -> getActivityViewed());
+    std::shared_ptr<Activity> activityFromView = activityTestView -> getActivityViewed();
 
     activityTestView -> getController() -> removeActivity(activityFromView);
 
