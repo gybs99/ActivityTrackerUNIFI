@@ -71,3 +71,8 @@ std::shared_ptr<DailyActivityRegister> ActivityTrackerController::getRegisterSel
     return loadedHistory -> getSelectedRegister(std::move(date));
 }
 
+void ActivityTrackerController::removeRegister() {
+    loadedHistory -> removeRegister(todayRegister);
+    todayRegister = nullptr;
+}
+

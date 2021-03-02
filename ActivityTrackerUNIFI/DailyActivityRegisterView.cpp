@@ -17,6 +17,9 @@ DailyActivityRegisterView::DailyActivityRegisterView(wxFrame* mainMenu,
                                                      registerViewed(std::move(newRegisterViewed)), controller(std::move(newController)) {
 
     this -> SetMinSize(wxSize(600,350));
+    this -> SetTitle(std::to_string(registerViewed -> getDate() -> day) + "/" + std::to_string(registerViewed -> getDate() -> month) + "/" +
+                     std::to_string(registerViewed -> getDate() -> year));
+
     DailyActivityRegisterView :: attachView();
     assembleRegisterView();
 
@@ -28,6 +31,8 @@ DailyActivityRegisterView::DailyActivityRegisterView(wxFrame *mainMenu,
 {
 
     this -> SetMinSize(wxSize(600,350));
+    this -> SetTitle("History");
+
     viewSizer = new wxBoxSizer(wxVERTICAL);
     listSizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -111,6 +116,11 @@ void DailyActivityRegisterView::onClose(wxCloseEvent& event) {
     if (registerViewed)
     {
         detachView();
+
+        if (controller -> getTodayRegister() -> getListOfActivity().empty()) {
+            controller -> removeRegister();
+        }
+
         m_parent -> Enable(true);
         this -> Destroy();
     }
@@ -156,6 +166,8 @@ void DailyActivityRegisterView::onClickingDate(wxCommandEvent& event) {
     DailyActivityRegisterView :: attachView();
     updateView();
 
+    this -> SetTitle(std::to_string(registerViewed -> getDate() -> day) + "/" + std::to_string(registerViewed -> getDate() -> month) + "/" +
+                     std::to_string(registerViewed -> getDate() -> year));
 
     infoText -> SetLabel("    Double click an activity to display it!");
 

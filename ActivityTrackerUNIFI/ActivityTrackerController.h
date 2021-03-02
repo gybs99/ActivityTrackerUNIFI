@@ -28,6 +28,8 @@ public:
 
     std::shared_ptr<DailyActivityRegister> getRegisterSelected(std::string date);
 
+    void removeRegister();
+
     const std::shared_ptr<DailyActivityRegister> &getTodayRegister() const;
 
     const std::shared_ptr<ActivityTrackerHistory> &getLoadedHistory() const;
