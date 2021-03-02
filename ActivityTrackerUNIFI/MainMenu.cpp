@@ -9,6 +9,7 @@ wxBEGIN_EVENT_TABLE(MainMenu, wxFrame)
     EVT_MENU(ID_About, MainMenu::onInfo)
     EVT_MENU(ID_AddActivity, MainMenu::onAddActivityMenu)
     EVT_MENU(ID_Today, MainMenu::onToday)
+    EVT_MENU(ID_LookHistory, MainMenu::onShowHistory)
     EVT_BUTTON(ID_SignInButton, MainMenu::onSignInButton)
 wxEND_EVENT_TABLE()
 
@@ -32,9 +33,7 @@ MainMenu::MainMenu(std::shared_ptr<ActivityTrackerController> newController)
 void MainMenu::assembleMenuBar() {
 
     registerField = new wxMenu;
-    registerField -> Append(ID_LookRegister, "&Display", "Display your activity list day by day.");
-    registerField -> AppendSeparator();
-    registerField -> Append(ID_SearchDay, "&Search by day" , "Display activities you've done in a particular day.");
+    registerField -> Append(ID_LookHistory, "&Show", "Display your archive of done tasks day by day.");
 
     todayField = new wxMenu;
     todayField -> Append(ID_Today, "&Display", "Display what you've done today.");
@@ -45,7 +44,7 @@ void MainMenu::assembleMenuBar() {
     aboutField -> Append(ID_About, "&Info" , "Info about the development.");
 
     mainMenuBar = new wxMenuBar;
-    mainMenuBar -> Append(registerField, "&Register");
+    mainMenuBar -> Append(registerField, "&History");
     mainMenuBar -> Append(todayField, "&Today");
     mainMenuBar -> Append(aboutField, "&About");
     SetMenuBar(mainMenuBar);
@@ -126,4 +125,18 @@ void MainMenu::onToday(wxCommandEvent &event) {
         }
 
     }
+}
+
+void MainMenu::onShowHistory(wxCommandEvent& event) {
+
+    if (controller -> getLoadedHistory() -> getHistory().empty())
+            wxMessageBox(wxT("History is now empty! In History will be added date in which there was added one or more activity!"),
+                         wxT("Error"), wxOK | wxICON_EXCLAMATION);
+    else
+    {
+        dailyRegisterView = new DailyActivityRegisterView(this, controller);
+        dailyRegisterView -> Show();
+        this -> Enable(false);
+    }
+
 }

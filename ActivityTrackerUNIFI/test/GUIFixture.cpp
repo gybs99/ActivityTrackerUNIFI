@@ -4,6 +4,7 @@
 
 #include "gtest/gtest.h"
 #include "../AddNewActivityView.h"
+#include "../ActivityTrackerHistory.h"
 #include "wx/uiaction.h"
 
 class TestApp : public wxApp {
@@ -11,10 +12,12 @@ class TestApp : public wxApp {
 public:
 
     std::shared_ptr<ActivityTrackerController> controller;
+    std::shared_ptr<ActivityTrackerHistory> history;
 
     bool OnInit() override {
 
-        controller = std::make_shared<ActivityTrackerController>();
+        history = std::make_shared<ActivityTrackerHistory>();
+        controller = std::make_shared<ActivityTrackerController>(history);
         return true;
 
     }

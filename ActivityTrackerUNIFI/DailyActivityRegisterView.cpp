@@ -16,9 +16,39 @@ DailyActivityRegisterView::DailyActivityRegisterView(wxFrame* mainMenu,
                                                      wxFrame(mainMenu, wxID_ANY, "Register"),
                                                      registerViewed(std::move(newRegisterViewed)), controller(std::move(newController)) {
 
-    this -> SetMinSize(wxSize(600,400));
+    this -> SetMinSize(wxSize(600,350));
     DailyActivityRegisterView :: attachView();
-    assembleView();
+    assembleRegisterView();
+
+}
+
+DailyActivityRegisterView::DailyActivityRegisterView(wxFrame *mainMenu,
+                                                     std::shared_ptr<ActivityTrackerController> newController): wxFrame(mainMenu, wxID_ANY, "Register"),
+                                                     controller(std::move(newController))
+{
+
+    this -> SetMinSize(wxSize(600,350));
+    viewSizer = new wxBoxSizer(wxVERTICAL);
+    listSizer = new wxBoxSizer(wxHORIZONTAL);
+
+    listOfActivity = new wxListBox(this, ID_ActivityList, wxDefaultPosition);
+    listOfActivity -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingDate, this, ID_ActivityList);
+    createRegisterList();
+    listSizer -> Add(listOfActivity,1, wxEXPAND);
+
+    infoText = new wxStaticText(this, wxID_ANY, "    Double click a date to display corresponding register!");
+    infoText -> SetFont(wxFont(15,wxROMAN, wxNORMAL, wxNORMAL));
+
+    addButton = new wxButton(this, ID_AddActivityButton, "Add Activity");
+
+
+    viewSizer -> Add(listSizer, 1, wxEXPAND | wxALL, 20);
+    viewSizer -> Add(infoText, 1, wxALL);
+    viewSizer -> Add(addButton, 0, wxCENTER | wxBOTTOM, 20);
+
+    addButton -> Enable(false);
+
+    this -> SetSizer(viewSizer);
 
 }
 
@@ -40,7 +70,7 @@ void DailyActivityRegisterView::detachView() {
     registerViewed -> unsubscribeView(this);
 }
 
-void DailyActivityRegisterView::assembleView() {
+void DailyActivityRegisterView::assembleRegisterView() {
 
     viewSizer = new wxBoxSizer(wxVERTICAL);
     listSizer = new wxBoxSizer(wxHORIZONTAL);
@@ -78,10 +108,17 @@ void DailyActivityRegisterView::createActivityList() {
 
 void DailyActivityRegisterView::onClose(wxCloseEvent& event) {
 
-    detachView();
-    m_parent -> Enable(true);
-    this -> Destroy();
-
+    if (registerViewed)
+    {
+        detachView();
+        m_parent -> Enable(true);
+        this -> Destroy();
+    }
+    else
+    {
+        m_parent -> Enable(true);
+        this -> Destroy();
+    }
 }
 
 void DailyActivityRegisterView::onClickingActivity(wxCommandEvent &event) {
@@ -98,3 +135,34 @@ void DailyActivityRegisterView::onAddActivity(wxCommandEvent &event) {
     this->Enable(false);
 
 }
+
+void DailyActivityRegisterView::createRegisterList() {
+
+    for (const auto& itr : controller -> getLoadedHistory() -> getHistory()) {
+
+        listOfActivity -> Append(std::to_string(itr -> getDate() -> day) + "/" + std::to_string(itr -> getDate() -> month) + "/" +
+                                 std::to_string(itr -> getDate() -> year));
+
+    }
+
+}
+
+void DailyActivityRegisterView::onClickingDate(wxCommandEvent& event) {
+
+    int dateSelected = listOfActivity -> GetSelection();
+
+    registerViewed = controller -> getRegisterSelected(listOfActivity -> GetString(dateSelected).ToStdString());
+
+    DailyActivityRegisterView :: attachView();
+    updateView();
+
+
+    infoText -> SetLabel("    Double click an activity to display it!");
+
+    listOfActivity -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingActivity, this, ID_ActivityList);
+
+    addButton -> Enable(true);
+
+}
+
+

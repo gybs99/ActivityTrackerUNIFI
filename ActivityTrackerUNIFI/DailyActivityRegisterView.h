@@ -31,9 +31,13 @@ public:
     DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<DailyActivityRegister> registerViewed,
                               std::shared_ptr<ActivityTrackerController> newController);
 
-    void assembleView();
+    DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController> newController);
+
+    void assembleRegisterView();
 
     void createActivityList();
+
+    void createRegisterList();
 
     void updateView() override;
 
@@ -46,6 +50,8 @@ public:
     void onClickingActivity(wxCommandEvent& event);
 
     void onAddActivity(wxCommandEvent& event);
+
+    void onClickingDate(wxCommandEvent& event);
 
 private:
 

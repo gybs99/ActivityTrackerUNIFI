@@ -90,3 +90,7 @@ void DailyActivityRegister::removeActivity(std::shared_ptr<Activity>& selectedAc
 DailyActivityRegister::~DailyActivityRegister() {
     delete date;
 }
+
+Date *DailyActivityRegister::getDate() const {
+    return date;
+}

@@ -35,6 +35,7 @@ public:
 
 private:
 
+    std::shared_ptr<ActivityTrackerHistory> history;
     MainMenu* mainMenuWindow {nullptr};
     std::shared_ptr<ActivityTrackerController> appController;
 

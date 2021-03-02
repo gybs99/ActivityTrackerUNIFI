@@ -5,14 +5,25 @@
 #include "ActivityTrackerController.h"
 
 
+ActivityTrackerController::ActivityTrackerController(std::shared_ptr<ActivityTrackerHistory> loadingHistory) : loadedHistory(std::move(loadingHistory)){
+
+    todayRegister = loadedHistory -> searchTodayRegister();
+
+}
+
 void ActivityTrackerController::createActivity(std::string newType, std::string newDescription, std::string startingMin,
                                                std::string startingHour, std::string finishingMin, std::string finishingHour) {
 
     managedActivity = std::make_shared<Activity>(std::move(newType), std::move(newDescription), std::move(startingMin),
                                                  std::move(startingHour), std::move(finishingMin), std::move(finishingHour));
 
-    if (!todayRegister)
+    if (!todayRegister) {
+
         todayRegister = std::make_shared<DailyActivityRegister>();
+        loadedHistory -> addRegister(todayRegister);
+
+    }
+
     todayRegister -> addNewActivity(managedActivity);
     todayRegister -> notifyChange();
 
@@ -48,6 +59,15 @@ void ActivityTrackerController::setManagedActivity(const std::shared_ptr<Activit
     ActivityTrackerController::managedActivity = newManagedActivity;
 }
 
-void ActivityTrackerController::setTodayRegister(const std::shared_ptr<DailyActivityRegister> &todayRegister) {
-    ActivityTrackerController::todayRegister = todayRegister;
+void ActivityTrackerController::setTodayRegister(const std::shared_ptr<DailyActivityRegister> &newTodayRegister) {
+    ActivityTrackerController::todayRegister = newTodayRegister;
 }
+
+const std::shared_ptr<ActivityTrackerHistory> &ActivityTrackerController::getLoadedHistory() const {
+    return loadedHistory;
+}
+
+std::shared_ptr<DailyActivityRegister> ActivityTrackerController::getRegisterSelected(std::string date) {
+    return loadedHistory -> getSelectedRegister(std::move(date));
+}
+

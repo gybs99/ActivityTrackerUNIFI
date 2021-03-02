@@ -7,13 +7,15 @@
 
 #include "Activity.h"
 #include "DailyActivityRegister.h"
+#include "ActivityTrackerHistory.h"
 
 
 class ActivityTrackerController {
 
 public:
 
-    ActivityTrackerController() = default;
+    ActivityTrackerController(std::shared_ptr<ActivityTrackerHistory> loadingHistory);
+
     void createActivity(std::string newType, std::string newDescription, std::string startingMin,
                         std::string startingHour, std::string finishingMin, std::string finishingHour);
 
@@ -24,7 +26,11 @@ public:
 
     const std::shared_ptr<Activity> &getActivitySelected(int activitySelected);
 
+    std::shared_ptr<DailyActivityRegister> getRegisterSelected(std::string date);
+
     const std::shared_ptr<DailyActivityRegister> &getTodayRegister() const;
+
+    const std::shared_ptr<ActivityTrackerHistory> &getLoadedHistory() const;
 
     void setTodayRegister(const std::shared_ptr<DailyActivityRegister> &todayRegister);
 
@@ -36,6 +42,7 @@ private:
 
     std::shared_ptr<Activity> managedActivity {nullptr};
     std::shared_ptr<DailyActivityRegister> todayRegister {nullptr};
+    std::shared_ptr<ActivityTrackerHistory> loadedHistory {nullptr};
 
 };
 

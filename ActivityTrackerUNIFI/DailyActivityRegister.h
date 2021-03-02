@@ -42,6 +42,8 @@ public:
 
     const std::map<int, std::shared_ptr<Activity>> &getListOfActivity() const;
 
+    Date *getDate() const;
+
 
 private:
 

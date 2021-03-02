@@ -8,7 +8,10 @@
 wxIMPLEMENT_APP(ActivityTrackerApp);
 
 bool ActivityTrackerApp::OnInit() {
-    appController = std::make_shared<ActivityTrackerController>();
+
+    history = std::make_shared<ActivityTrackerHistory>();
+    appController = std::make_shared<ActivityTrackerController>(history);
+
     mainMenuWindow = new MainMenu(appController);
     mainMenuWindow ->SetId(ID_Main);
     mainMenuWindow -> Show();
@@ -18,7 +21,7 @@ bool ActivityTrackerApp::OnInit() {
 
 bool ActivityTrackerApp::OnExceptionInMainLoop() {
 
-    wxMessageBox("An error has occurred, please restart the app");
+    wxMessageBox(wxT("An error has occurred, please restart the app"));
     return false;
 
 }

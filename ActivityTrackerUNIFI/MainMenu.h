@@ -18,7 +18,7 @@
 
 enum
 {
-    ID_LookRegister = 1,
+    ID_LookHistory = 1,
     ID_SearchDay = 2,
     ID_Today = 3,
     ID_AddActivity = 4,
@@ -37,6 +37,7 @@ public:
     void onSignInButton(wxCommandEvent& event);
     void onAddActivityMenu(wxCommandEvent& event);
     void onToday(wxCommandEvent& event);
+    void onShowHistory(wxCommandEvent& event);
 
 private:
 
