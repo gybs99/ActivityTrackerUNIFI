@@ -17,14 +17,14 @@ MainMenu::MainMenu(std::shared_ptr<ActivityTrackerController> newController)
                             : wxFrame(nullptr, wxID_ANY, "Activity Tracker",
                               wxPoint(30, 30), wxSize(650,450), wxDEFAULT_FRAME_STYLE ^ wxRESIZE_BORDER), controller(std::move(newController)) {
 
-    assembleMenuBar();                   // creates the menu bar
+    assembleMenuBar();
 
     this -> CreateStatusBar();
-    this -> SetStatusText("Have a wonderful day!");                        // sets status bar
+    this -> SetStatusText("Have a wonderful day!");
 
-    setStaticText();                    // add intro text
+    setStaticText();
 
-    lookTodayButton = new wxButton(this, ID_SignInButton, "Sign it!");        // adds the button for new task
+    lookTodayButton = new wxButton(this, ID_SignInButton, "Sign it!");
 
     setBoxSizer();
 
@@ -120,8 +120,8 @@ void MainMenu::onToday(wxCommandEvent &event) {
 
             addActivityView = new AddNewActivityView(this, controller);
             addActivityView->Show();
-            this->Enable(false);
-
+            this->Enable(false);                        // If there's no activity in the current date register, a message where it will be asked
+                                                               // to user if he wants to add a new activity, will be shown.
         }
 
     }

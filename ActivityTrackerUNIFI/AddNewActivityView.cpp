@@ -51,8 +51,8 @@ AddNewActivityView::AddNewActivityView(wxFrame* registerView, std::shared_ptr<Ac
     typeChoiceList -> SetValue(activityToModify -> getType());
     descriptionTextBox -> SetValue(activityToModify -> getDescription());
 
-    startingHourList -> SetValue(activityToModify -> getTimeSet() -> startingHour);
-    startingMinList -> SetValue(activityToModify -> getTimeSet() -> startingMin);
+    startingHourList -> SetValue(activityToModify -> getTimeSet() -> startingHour);                 // This constructor assemble the view in Modify mode,
+    startingMinList -> SetValue(activityToModify -> getTimeSet() -> startingMin);                   // so when i press "Modify" in activity view, this will appear
 
     finishingHourList -> SetValue(activityToModify -> getTimeSet() -> finishingHour);
     finishingMinList -> SetValue(activityToModify -> getTimeSet() -> finishingMin);

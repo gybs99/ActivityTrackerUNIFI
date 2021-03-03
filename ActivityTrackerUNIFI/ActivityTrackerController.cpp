@@ -19,8 +19,8 @@ void ActivityTrackerController::createActivity(std::string newType, std::string 
 
     if (!todayRegister) {
 
-        todayRegister = std::make_shared<DailyActivityRegister>();
-        loadedHistory -> addRegister(todayRegister);
+        todayRegister = std::make_shared<DailyActivityRegister>();          // If the activity is the first of the current day, a new reigster
+        loadedHistory -> addRegister(todayRegister);                     // will be created
 
     }
 
@@ -64,7 +64,7 @@ std::shared_ptr<DailyActivityRegister> ActivityTrackerController::getRegisterSel
 }
 
 void ActivityTrackerController::removeRegister() {
-    loadedHistory -> removeRegister(todayRegister);
-    todayRegister = nullptr;
+    loadedHistory -> removeRegister(todayRegister);               // if a register has no more activities and his view has been closed
+    todayRegister = nullptr;                                         // it will be deleted from the history
 }
 

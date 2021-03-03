@@ -25,9 +25,11 @@ enum
 class AddNewActivityView : public wxFrame {
 
 public:
-    AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController> controller);
+    AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController> controller);       // Standard constructor to add a new activity ("Create" mode)
 
-    AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController>, std::shared_ptr<Activity> selectedActivity);
+    AddNewActivityView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController>,
+            std::shared_ptr<Activity> selectedActivity);                                                // This constructor assemble the view in Modify mode,
+                                                                                                        // so when i press "Modify" in activity view, this will appear
 
     void createMinHoursVectors();
 

@@ -28,10 +28,10 @@ class DailyActivityRegisterView : public wxFrame ,public Observer {
 
 public:
 
-    DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<DailyActivityRegister> registerViewed,
+    DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<DailyActivityRegister> registerViewed,         // Daily Register view constructor
                               std::shared_ptr<ActivityTrackerController> newController);
 
-    DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController> newController);
+    DailyActivityRegisterView(wxFrame* mainMenu, std::shared_ptr<ActivityTrackerController> newController);         // History view constructor
 
     void assembleRegisterView();
 

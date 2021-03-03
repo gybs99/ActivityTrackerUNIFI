@@ -36,9 +36,9 @@ std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::getSelectedRegist
 
     int positionOfSlash = registerDate.find('/');
 
-    int day = std::atoi(registerDate.substr(0, positionOfSlash).c_str());
-
-    int previousPosition = positionOfSlash;
+    int day = std::atoi(registerDate.substr(0, positionOfSlash).c_str());           // For the fact that in the view, register's dates are saved
+                                                                                             // as strings, this method extract the needed information and convert it
+    int previousPosition = positionOfSlash;                                                  // to integer
 
     positionOfSlash = registerDate.find('/', positionOfSlash + 1);
     int month = std::atoi(registerDate.substr(previousPosition + 1, positionOfSlash - 1).c_str());

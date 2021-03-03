@@ -7,7 +7,7 @@
 
 DailyActivityRegister::DailyActivityRegister() {
 
-    time_t systemTime = time(nullptr);
+    time_t systemTime = time(nullptr);                  // Setting the current system date for creating the "today register"
     currentTime = localtime(&systemTime);
 
     date = new Date;
