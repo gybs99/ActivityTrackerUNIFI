@@ -55,6 +55,8 @@ public:
 
     void onClickingDate(wxCommandEvent& event);
 
+    wxListBox *getListOfActivity() const;
+
 private:
 
     wxBoxSizer* viewSizer {nullptr};

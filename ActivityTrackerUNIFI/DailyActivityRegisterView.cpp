@@ -181,4 +181,8 @@ void DailyActivityRegisterView::assembleHistoryView() {
 
 }
 
+wxListBox *DailyActivityRegisterView::getListOfActivity() const {
+    return listOfActivity;
+}
+
 
