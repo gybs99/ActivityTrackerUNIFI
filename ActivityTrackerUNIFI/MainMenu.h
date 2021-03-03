@@ -19,25 +19,33 @@
 enum
 {
     ID_LookHistory = 1,
-    ID_SearchDay = 2,
-    ID_Today = 3,
-    ID_AddActivity = 4,
-    ID_About = 5,
-    ID_SignInButton = 6
+    ID_Today = 2,
+    ID_AddActivity = 3,
+    ID_About = 4,
+    ID_SignInButton = 5
 };
 
 class MainMenu : public wxFrame{
 public:
 
     explicit MainMenu(std::shared_ptr<ActivityTrackerController> newController);
+
     void assembleMenuBar();
+
     void setStaticText();
+
     void setBoxSizer();
+
     void onInfo(wxCommandEvent& event);
+
     void onSignInButton(wxCommandEvent& event);
+
     void onAddActivityMenu(wxCommandEvent& event);
+
     void onToday(wxCommandEvent& event);
+
     void onShowHistory(wxCommandEvent& event);
+
 
 private:
 

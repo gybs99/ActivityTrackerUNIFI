@@ -5,9 +5,8 @@
 #include "ActivityTrackerHistory.h"
 
 
-ActivityTrackerHistory::ActivityTrackerHistory() {
+ActivityTrackerHistory::ActivityTrackerHistory() : systemTime(time(nullptr)) {
 
-    systemTime = time(nullptr);
     currentDate = localtime((&systemTime));
 
 }
@@ -30,25 +29,10 @@ const std::list<std::shared_ptr<DailyActivityRegister>> &ActivityTrackerHistory:
 }
 
 std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::searchTodayRegister() {
-
-
-        auto historyIterator = history.begin();
-
-        while (historyIterator != history.end()) {
-            if (((*historyIterator)->getDate()->year == currentDate->tm_year + 1900) &&
-                ((*historyIterator)->getDate()->month == currentDate->tm_mon + 1) &&
-                ((*historyIterator)->getDate()->day == currentDate->tm_year))
-
-                return (*historyIterator);
-
-        }
-
-        return nullptr;
-
-
+    return searchRegister(currentDate -> tm_mday, currentDate -> tm_mon + 1, currentDate -> tm_year + 1900);
 }
 
-std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::getSelectedRegister(std::string registerDate) {
+std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::getSelectedRegister(const std::string& registerDate) {
 
     int positionOfSlash = registerDate.find('/');
 
@@ -60,6 +44,13 @@ std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::getSelectedRegist
     int month = std::atoi(registerDate.substr(previousPosition + 1, positionOfSlash - 1).c_str());
 
     int year = std::atoi(registerDate.substr(positionOfSlash + 1, registerDate.length() - 1).c_str());
+
+    return searchRegister(day, month, year);
+
+
+}
+
+std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::searchRegister(int day, int month, int year) {
 
     auto historyIterator = history.begin();
 
@@ -75,6 +66,5 @@ std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::getSelectedRegist
     }
 
     return nullptr;
-
 
 }

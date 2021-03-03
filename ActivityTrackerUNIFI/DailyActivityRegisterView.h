@@ -35,6 +35,8 @@ public:
 
     void assembleRegisterView();
 
+    void assembleHistoryView();
+
     void createActivityList();
 
     void createRegisterList();

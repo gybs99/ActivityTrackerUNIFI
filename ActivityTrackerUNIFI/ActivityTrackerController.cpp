@@ -55,20 +55,12 @@ const std::shared_ptr<Activity> &ActivityTrackerController::getManagedActivity()
     return managedActivity;
 }
 
-void ActivityTrackerController::setManagedActivity(const std::shared_ptr<Activity> &newManagedActivity) {
-    ActivityTrackerController::managedActivity = newManagedActivity;
-}
-
-void ActivityTrackerController::setTodayRegister(const std::shared_ptr<DailyActivityRegister> &newTodayRegister) {
-    ActivityTrackerController::todayRegister = newTodayRegister;
-}
-
 const std::shared_ptr<ActivityTrackerHistory> &ActivityTrackerController::getLoadedHistory() const {
     return loadedHistory;
 }
 
 std::shared_ptr<DailyActivityRegister> ActivityTrackerController::getRegisterSelected(std::string date) {
-    return loadedHistory -> getSelectedRegister(std::move(date));
+    return loadedHistory -> getSelectedRegister(date);
 }
 
 void ActivityTrackerController::removeRegister() {

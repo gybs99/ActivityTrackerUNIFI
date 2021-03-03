@@ -20,9 +20,11 @@ public:
 
     std::shared_ptr<DailyActivityRegister> searchTodayRegister();
 
+    std::shared_ptr<DailyActivityRegister> searchRegister(int day, int month, int year);
+
     const std::list<std::shared_ptr<DailyActivityRegister>> &getHistory() const;
 
-    std::shared_ptr<DailyActivityRegister> getSelectedRegister(std::string registerDate);
+    std::shared_ptr<DailyActivityRegister> getSelectedRegister(const std::string& registerDate);
 
 
 private:

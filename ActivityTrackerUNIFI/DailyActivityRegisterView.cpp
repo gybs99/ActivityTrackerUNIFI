@@ -32,27 +32,7 @@ DailyActivityRegisterView::DailyActivityRegisterView(wxFrame *mainMenu,
 
     this -> SetMinSize(wxSize(600,350));
     this -> SetTitle("History");
-
-    viewSizer = new wxBoxSizer(wxVERTICAL);
-    listSizer = new wxBoxSizer(wxHORIZONTAL);
-
-    listOfActivity = new wxListBox(this, ID_ActivityList, wxDefaultPosition);
-    listOfActivity -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingDate, this, ID_ActivityList);
-    createRegisterList();
-    listSizer -> Add(listOfActivity,1, wxEXPAND);
-
-    infoText = new wxStaticText(this, wxID_ANY, "    Double click a date to display corresponding register!");
-    infoText -> SetFont(wxFont(15,wxROMAN, wxNORMAL, wxNORMAL));
-
-    addButton = new wxButton(this, ID_AddActivityButton, "Add Activity");
-
-
-    viewSizer -> Add(listSizer, 1, wxEXPAND | wxALL, 20);
-    viewSizer -> Add(infoText, 1, wxALL);
-    viewSizer -> Add(addButton, 0, wxCENTER | wxBOTTOM, 20);
-
-    addButton -> Enable(false);
-
+    assembleHistoryView();
     this -> SetSizer(viewSizer);
 
 }
@@ -174,6 +154,30 @@ void DailyActivityRegisterView::onClickingDate(wxCommandEvent& event) {
     listOfActivity -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingActivity, this, ID_ActivityList);
 
     addButton -> Enable(true);
+
+}
+
+void DailyActivityRegisterView::assembleHistoryView() {
+
+    viewSizer = new wxBoxSizer(wxVERTICAL);
+    listSizer = new wxBoxSizer(wxHORIZONTAL);
+
+    listOfActivity = new wxListBox(this, ID_ActivityList, wxDefaultPosition);
+    listOfActivity -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingDate, this, ID_ActivityList);
+    createRegisterList();
+    listSizer -> Add(listOfActivity,1, wxEXPAND);
+
+    infoText = new wxStaticText(this, wxID_ANY, "    Double click a date to display corresponding register!");
+    infoText -> SetFont(wxFont(15,wxROMAN, wxNORMAL, wxNORMAL));
+
+    addButton = new wxButton(this, ID_AddActivityButton, "Add Activity");
+
+
+    viewSizer -> Add(listSizer, 1, wxEXPAND | wxALL, 20);
+    viewSizer -> Add(infoText, 1, wxALL);
+    viewSizer -> Add(addButton, 0, wxCENTER | wxBOTTOM, 20);
+
+    addButton -> Enable(false);
 
 }
 

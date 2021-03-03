@@ -48,7 +48,7 @@ const std::map<int, std::shared_ptr<Activity>> &DailyActivityRegister::getListOf
     return listOfActivity;
 }
 
-void DailyActivityRegister::removeActivity(std::shared_ptr<Activity>& selectedActivity) {
+void DailyActivityRegister::removeActivity(const std::shared_ptr<Activity>& selectedActivity) {
 
     bool found = false;
     auto itr = listOfActivity.begin();

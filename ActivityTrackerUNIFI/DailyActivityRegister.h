@@ -38,7 +38,7 @@ public:
 
     void addNewActivity(std::shared_ptr<Activity> newActivity);
 
-    void removeActivity(std::shared_ptr<Activity>& selectedActivity);
+    void removeActivity(const std::shared_ptr<Activity>& selectedActivity);
 
     const std::map<int, std::shared_ptr<Activity>> &getListOfActivity() const;
 

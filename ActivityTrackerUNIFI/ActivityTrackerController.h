@@ -14,7 +14,7 @@ class ActivityTrackerController {
 
 public:
 
-    ActivityTrackerController(std::shared_ptr<ActivityTrackerHistory> loadingHistory);
+    explicit ActivityTrackerController(std::shared_ptr<ActivityTrackerHistory> loadingHistory);
 
     void createActivity(std::string newType, std::string newDescription, std::string startingMin,
                         std::string startingHour, std::string finishingMin, std::string finishingHour);
@@ -34,11 +34,8 @@ public:
 
     const std::shared_ptr<ActivityTrackerHistory> &getLoadedHistory() const;
 
-    void setTodayRegister(const std::shared_ptr<DailyActivityRegister> &todayRegister);
-
     const std::shared_ptr<Activity> &getManagedActivity() const;
 
-    void setManagedActivity(const std::shared_ptr<Activity> &managedActivity);
 
 private:
 
