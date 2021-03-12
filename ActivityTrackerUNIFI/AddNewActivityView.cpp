@@ -51,18 +51,18 @@ AddNewActivityView::AddNewActivityView(wxFrame* registerView, std::shared_ptr<Ac
     typeChoiceList -> SetValue(activityToModify -> getType());
     descriptionTextBox -> SetValue(activityToModify -> getDescription());
 
-    startingHourList -> SetValue(activityToModify -> getTimeSet() -> startingHour);                 // This constructor assemble the view in Modify mode,
-    startingMinList -> SetValue(activityToModify -> getTimeSet() -> startingMin);                   // so when i press "Modify" in activity view, this will appear
+    startingHourList -> SetValue(activityToModify -> getDateAndDuration().getStartingHour());                 // This constructor assemble the view in Modify mode,
+    startingMinList -> SetValue(activityToModify -> getDateAndDuration().getStartingMin());                   // so when i press "Modify" in activity view, this will appear
 
-    finishingHourList -> SetValue(activityToModify -> getTimeSet() -> finishingHour);
-    finishingMinList -> SetValue(activityToModify -> getTimeSet() -> finishingMin);
+    finishingHourList -> SetValue(activityToModify -> getDateAndDuration().getFinishingHour());
+    finishingMinList -> SetValue(activityToModify -> getDateAndDuration().getFinishingMin());
 
     acceptButton -> SetLabel("Modify");
 
     this -> SetLabel("Modify an activity");
 
-    this -> SetStatusText(std::to_string(activityToModify -> getTimeSet() -> day) + "/" + std::to_string(activityToModify -> getTimeSet() -> month)
-                            + "/" + std::to_string(activityToModify -> getTimeSet() -> year));
+    this -> SetStatusText(std::to_string(activityToModify -> getDateAndDuration().getDay()) + "/" + std::to_string(activityToModify -> getDateAndDuration().getMonth())
+                            + "/" + std::to_string(activityToModify -> getDateAndDuration().getYear()));
 
     acceptButton -> Bind(wxEVT_BUTTON, &AddNewActivityView::onModify, this, ID_CreateButton);
 
@@ -205,9 +205,10 @@ void AddNewActivityView::onCreate(wxCommandEvent &event) {
         return;
     }
 
-    controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(),
-                                 startingMinList -> GetValue().ToStdString(), startingHourList -> GetValue().ToStdString(),
-                                 finishingMinList -> GetValue().ToStdString(), finishingHourList -> GetValue().ToStdString());
+    ActivityTime newTimeSet(startingMinList -> GetValue().ToStdString(), startingHourList -> GetValue().ToStdString(),
+                            finishingMinList -> GetValue().ToStdString(), finishingHourList -> GetValue().ToStdString());
+
+    controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(), newTimeSet);
     wxMessageBox(wxT("Your done task is added to your register! \n Check the daily register for review it"), wxT("Activity added"), wxOK | wxICON_INFORMATION);
     m_parent -> Enable(true);
     this -> Destroy();

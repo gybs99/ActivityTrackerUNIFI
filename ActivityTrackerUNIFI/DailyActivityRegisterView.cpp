@@ -83,9 +83,9 @@ void DailyActivityRegisterView::createActivityList() {
 
     for (const auto& itr : registerViewed -> getListOfActivity()) {
 
-        listOfActivity -> Append(itr.second->getType() + "    " + itr.second->getTimeSet()->startingHour+ ":" +
-                            itr.second->getTimeSet()->startingMin + "  " + itr.second->getTimeSet()->finishingHour + ":" +
-                            itr.second->getTimeSet()->finishingMin);
+        listOfActivity -> Append(itr.second->getType() + "    " + itr.second->getDateAndDuration().getStartingHour()+ ":" +
+                            itr.second->getDateAndDuration().getStartingMin() + "  " + itr.second->getDateAndDuration().getFinishingHour()+ ":" +
+                            itr.second->getDateAndDuration().getFinishingMin());
 
     }
 

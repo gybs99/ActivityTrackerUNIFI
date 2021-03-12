@@ -16,7 +16,8 @@ protected:
 
     void createActivity() {
 
-        testApp -> controller -> createActivity("Work", "Test Description", "00", "00", "01", "00");
+        ActivityTime timeTest("00", "00", "01", "00");
+        testApp -> controller -> createActivity("Work", "Test Description", timeTest);
         activityTest = testApp -> controller -> getManagedActivity();
         registerTest = testApp -> controller -> getTodayRegister();
 

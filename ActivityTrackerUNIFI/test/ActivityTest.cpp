@@ -14,19 +14,17 @@ protected:
 
 TEST(Activity, StandardActivityConstruction)        // It sees if the Date with constructor is equal with the system one
 {                                                   // and if all the given parameters are OK
-    time_t currentTime = time(nullptr);
-    struct tm* currentSystemDate = localtime(&currentTime);
+    ActivityTime timeTest("10", "10", "30", "10");
 
-    Activity activityTest("Sport", "I've done some running",
-                                          "10", "10", "30", "10");
+    Activity activityTest("Sport", "I've done some running", timeTest);
 
-    ASSERT_EQ(currentSystemDate->tm_year + 1900, activityTest.getTimeSet() -> year);
-    ASSERT_EQ(currentSystemDate -> tm_mon + 1, activityTest.getTimeSet() -> month);
-    ASSERT_EQ(currentSystemDate -> tm_mday, activityTest.getTimeSet() -> day);
-    ASSERT_EQ("10", activityTest.getTimeSet() -> startingMin);
-    ASSERT_EQ("10", activityTest.getTimeSet() -> startingHour);
-    ASSERT_EQ("30", activityTest.getTimeSet() -> finishingMin);
-    ASSERT_EQ("10", activityTest.getTimeSet() -> finishingHour);
+    ASSERT_EQ(timeTest.getYear(), activityTest.getDateAndDuration().getYear());
+    ASSERT_EQ(timeTest.getMonth(), activityTest.getDateAndDuration().getMonth());
+    ASSERT_EQ(timeTest.getDay(), activityTest.getDateAndDuration().getDay());
+    ASSERT_EQ("10", activityTest.getDateAndDuration().getStartingMin());
+    ASSERT_EQ("10", activityTest.getDateAndDuration().getStartingHour());
+    ASSERT_EQ("30", activityTest.getDateAndDuration().getFinishingMin());
+    ASSERT_EQ("10", activityTest.getDateAndDuration().getFinishingHour());
 
 }
 
@@ -43,27 +41,28 @@ TEST_F(ActivityTestGUIFixture, CreateActivityForm)
     editActivityTest -> getFinishingHourList() -> SetValue("00");
     editActivityTest -> getFinishingMinList() -> SetValue("01");
 
-
+    ActivityTime timeTest(editActivityTest -> getStartingMinList() -> GetValue().ToStdString(),
+                          editActivityTest -> getStartingHourList() -> GetValue().ToStdString(),
+                          editActivityTest -> getFinishingMinList() -> GetValue().ToStdString(),
+                          editActivityTest -> getFinishingHourList() -> GetValue().ToStdString());
 
     editActivityTest -> getController() -> createActivity(editActivityTest -> getTypeChoiceList() -> GetValue().ToStdString(),
-                                                          editActivityTest -> getDescriptionTextBox() -> GetValue().ToStdString(),
-                                                          editActivityTest -> getStartingMinList() -> GetValue().ToStdString(),
-                                                          editActivityTest -> getStartingHourList() -> GetValue().ToStdString(),
-                                                          editActivityTest -> getFinishingMinList() -> GetValue().ToStdString(),
-                                                          editActivityTest -> getFinishingHourList() -> GetValue().ToStdString());
+                                                          editActivityTest -> getDescriptionTextBox() -> GetValue().ToStdString(), timeTest);
 
     ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getType(), "Work");
     ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getDescription(), "Test Description");
-    ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getTimeSet() -> startingMin, "00");
-    ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getTimeSet() -> startingHour, "00");
-    ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getTimeSet() -> finishingMin, "01");
-    ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getTimeSet() -> finishingHour, "00");
+    ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getDateAndDuration().getStartingMin(), "00");
+    ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getDateAndDuration().getStartingHour(), "00");
+    ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getDateAndDuration().getFinishingMin(), "01");
+    ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getDateAndDuration().getFinishingHour(), "00");
 
 }
 
 TEST_F(ActivityTestGUIFixture, ModifyActivityForm)
 {
-    testApp -> controller -> createActivity("Work", "Test Description to modify", "00", "00", "01", "00");
+    ActivityTime timeTest("00", "00", "01", "00");
+
+    testApp -> controller -> createActivity("Work", "Test Description to modify", timeTest);
 
     editActivityTest = new AddNewActivityView(nullptr, testApp -> controller, testApp -> controller -> getManagedActivity());
     editActivityTest -> Show();

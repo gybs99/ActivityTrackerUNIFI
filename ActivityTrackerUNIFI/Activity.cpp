@@ -4,22 +4,9 @@
 
 #include "Activity.h"
 
-Activity::Activity(std::string newType, std::string newDescription, std::string startingMin, std::string startingHour, std::string finishingMin,
-                   std::string finishingHour) : type(std::move(newType)), description(std::move(newDescription)){
+Activity::Activity(std::string newType, std::string newDescription, ActivityTime newTime) : type(std::move(newType)), description(std::move(newDescription)),
+                    dateAndDuration(std::move(newTime)) {
 
-    setStartFinishTime(std::move(startingMin), std::move(startingHour), std::move(finishingMin), std::move(finishingHour));
-
-    time_t currentDate = time(nullptr);
-    Date = localtime(&currentDate);
-
-    timeSet -> day = Date -> tm_mday;
-    timeSet -> month = Date -> tm_mon + 1;
-    timeSet -> year = Date -> tm_year + 1900;
-
-}
-
-Activity::~Activity() {
-    delete timeSet;
 }
 
 void Activity::subscribeView(Observer *newView) {
@@ -34,24 +21,6 @@ void Activity::notifyChange() {
     if (!activityViews.empty())
     for(auto view : activityViews)
         view -> updateView();
-}
-
-void Activity::setStartFinishTime(std::string startingMin, std::string startingHour, std::string finishingMin, std::string finishingHour) {
-
-    timeSet = new startFinishTime;
-    timeSet -> startingMin = std::move(startingMin);
-    timeSet -> startingHour = std::move(startingHour);
-    timeSet -> finishingMin = std::move(finishingMin);
-    timeSet -> finishingHour = std::move(finishingHour);
-}
-
-
-startFinishTime *Activity::getTimeSet() const {
-    return timeSet;
-}
-
-void Activity::setTimeSet(startFinishTime *newTimeSet) {
-    Activity::timeSet = newTimeSet;
 }
 
 const std::string &Activity::getDescription() const {
@@ -72,13 +41,17 @@ void Activity::modifyInfo(std::string newType, std::string newDescription, std::
     type = std::move(newType);
     description = std::move(newDescription);
 
-    timeSet -> startingMin = std::move(newStartingMin);
-    timeSet -> startingHour = std::move(newStartingHour);
-    timeSet -> finishingMin = std::move(newFinishingMin);
-    timeSet -> finishingHour = std::move(newFinishingHour);
+    dateAndDuration.setStartingMin(newStartingMin);
+    dateAndDuration.setStartingHour(newStartingHour);
+    dateAndDuration.setFinishingMin(newFinishingMin);
+    dateAndDuration.setFinishingHour(newFinishingHour);
 
     notifyChange();
 
+}
+
+const ActivityTime &Activity::getDateAndDuration() const {
+    return dateAndDuration;
 }
 
 

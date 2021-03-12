@@ -16,8 +16,7 @@ public:
 
     explicit ActivityTrackerController(std::shared_ptr<ActivityTrackerHistory> loadingHistory);
 
-    void createActivity(std::string newType, std::string newDescription, std::string startingMin,
-                        std::string startingHour, std::string finishingMin, std::string finishingHour);
+    void createActivity(std::string newType, std::string newDescription, ActivityTime newTime);
 
     void removeActivity(std::shared_ptr<Activity>& selectedActivity);
 

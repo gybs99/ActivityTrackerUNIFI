@@ -7,40 +7,22 @@
 
 
 #include <string>
-#include <ctime>
 #include <list>
 #include "Subject.h"
+#include "ActivityTime.h"
 
-struct startFinishTime
-{
-    std::string startingMin;
-    std::string startingHour;
-    std::string finishingMin;
-    std::string finishingHour;
-    int day;
-    int month;
-    int year;
-};
 
 class Activity : public Subject {
 
 public:
-    Activity(std::string newType, std::string newDescription, std::string startingMin, std::string startingHour,
-             std::string finishingMin, std::string finishingHour);
 
-    ~Activity() override;
+    Activity(std::string newType, std::string newDescription, ActivityTime newTime);
 
     void subscribeView(Observer *newView) override;
 
     void unsubscribeView(Observer *removedView) override;
 
     void notifyChange() override;
-
-    void setStartFinishTime(std::string startingMin, std::string startingHour, std::string finishingMin, std::string finishingHour);
-
-    startFinishTime *getTimeSet() const;
-
-    void setTimeSet(startFinishTime *newTimeSet);
 
     const std::string &getDescription() const;
 
@@ -51,12 +33,13 @@ public:
     void modifyInfo(std::string newType, std::string newDescription, std::string startingMin, std::string startingHour,
                     std::string finishingMin, std::string finishingHour);
 
+    const ActivityTime &getDateAndDuration() const;
+
 private:
 
     std::string description;
-    struct tm* Date;
+    ActivityTime dateAndDuration;
     std::string type;
-    struct startFinishTime* timeSet {nullptr};
     std::list<Observer*> activityViews;
 };
 

@@ -24,9 +24,9 @@ ActivityView::ActivityView(wxFrame* registerView, std::shared_ptr<Activity> newA
 
     createViewText();
 
-    this -> SetStatusText("Activity registered the " + std::to_string(activityViewed -> getTimeSet() -> day) + "/" +
-                    std::to_string(activityViewed -> getTimeSet() -> month) + "/" + std::to_string(activityViewed ->
-                    getTimeSet() -> year));
+    this -> SetStatusText("Activity registered the " + std::to_string(activityViewed -> getDateAndDuration().getDay()) + "/" +
+                    std::to_string(activityViewed -> getDateAndDuration().getMonth()) + "/" + std::to_string(activityViewed ->
+                    getDateAndDuration().getYear()));
 
     backButton = new wxButton(this, ID_OKButton, "OK");
 
@@ -126,10 +126,10 @@ void ActivityView::onModify(wxCommandEvent& event) {
 
 void ActivityView::generateDurationString() {
 
-    durationString = activityViewed -> getTimeSet() -> startingHour + std::string(":") +
-                     activityViewed -> getTimeSet() -> startingMin + std::string("   ") +
-                     activityViewed -> getTimeSet() -> finishingHour + std::string (":") +
-                     activityViewed -> getTimeSet() -> finishingMin;
+    durationString = activityViewed -> getDateAndDuration().getStartingHour() + std::string(":") +
+                     activityViewed -> getDateAndDuration().getStartingMin() + std::string("   ") +
+                     activityViewed -> getDateAndDuration().getFinishingHour() + std::string (":") +
+                     activityViewed -> getDateAndDuration().getFinishingMin();
 
 }
 
