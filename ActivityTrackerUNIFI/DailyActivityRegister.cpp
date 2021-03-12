@@ -5,19 +5,6 @@
 #include <map>
 #include "DailyActivityRegister.h"
 
-DailyActivityRegister::DailyActivityRegister() {
-
-    time_t systemTime = time(nullptr);                  // Setting the current system date for creating the "today register"
-    currentTime = localtime(&systemTime);
-
-    date = new Date;
-
-    date -> day = currentTime -> tm_mday;
-    date -> month = currentTime -> tm_mon + 1;
-    date -> year = currentTime -> tm_year + 1900;
-
-}
-
 void DailyActivityRegister::subscribeView(Observer *newView) {
     registerViews.push_back(newView);
 }
@@ -87,10 +74,7 @@ void DailyActivityRegister::removeActivity(const std::shared_ptr<Activity>& sele
     notifyChange();
 }
 
-DailyActivityRegister::~DailyActivityRegister() {
-    delete date;
+const Date &DailyActivityRegister::getRegisterDate() const {
+    return registerDate;
 }
 
-Date *DailyActivityRegister::getDate() const {
-    return date;
-}

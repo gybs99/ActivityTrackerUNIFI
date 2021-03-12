@@ -17,8 +17,8 @@ DailyActivityRegisterView::DailyActivityRegisterView(wxFrame* mainMenu,
                                                      registerViewed(std::move(newRegisterViewed)), controller(std::move(newController)) {
 
     this -> SetMinSize(wxSize(600,350));
-    this -> SetTitle(std::to_string(registerViewed -> getDate() -> day) + "/" + std::to_string(registerViewed -> getDate() -> month) + "/" +
-                     std::to_string(registerViewed -> getDate() -> year));
+    this -> SetTitle(std::to_string(registerViewed -> getRegisterDate().getDay()) + "/" + std::to_string(registerViewed -> getRegisterDate().getMonth()) + "/" +
+                     std::to_string(registerViewed -> getRegisterDate().getYear()));
 
     DailyActivityRegisterView :: attachView();
     assembleRegisterView();
@@ -130,8 +130,8 @@ void DailyActivityRegisterView::createRegisterList() {
 
     for (const auto& itr : controller -> getLoadedHistory() -> getHistory()) {
 
-        listOfActivity -> Append(std::to_string(itr -> getDate() -> day) + "/" + std::to_string(itr -> getDate() -> month) + "/" +
-                                 std::to_string(itr -> getDate() -> year));
+        listOfActivity -> Append(std::to_string(itr -> getRegisterDate().getDay()) + "/" + std::to_string(itr -> getRegisterDate().getMonth()) + "/" +
+                                 std::to_string(itr -> getRegisterDate().getYear()));
 
     }
 
@@ -146,8 +146,8 @@ void DailyActivityRegisterView::onClickingDate(wxCommandEvent& event) {
     DailyActivityRegisterView :: attachView();
     updateView();
 
-    this -> SetTitle(std::to_string(registerViewed -> getDate() -> day) + "/" + std::to_string(registerViewed -> getDate() -> month) + "/" +
-                     std::to_string(registerViewed -> getDate() -> year));
+    this -> SetTitle(std::to_string(registerViewed -> getRegisterDate().getDay()) + "/" + std::to_string(registerViewed -> getRegisterDate().getMonth()) + "/" +
+                     std::to_string(registerViewed -> getRegisterDate().getYear()));
 
     infoText -> SetLabel("    Double click an activity to display it!");
 

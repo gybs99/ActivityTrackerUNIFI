@@ -25,9 +25,9 @@ protected:
 
     void getRegisterDateInfo() {
 
-        registerTestDay = registerTest -> getDate() -> day;
-        registerTestMonth = registerTest -> getDate() -> month;
-        registerTestYear = registerTest -> getDate() -> year;
+        registerTestDay = registerTest -> getRegisterDate().getDay();
+        registerTestMonth = registerTest -> getRegisterDate().getMonth();
+        registerTestYear = registerTest -> getRegisterDate().getYear();
 
     }
 

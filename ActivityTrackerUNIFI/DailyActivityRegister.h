@@ -8,27 +8,13 @@
 #include <ctime>
 #include <map>
 #include <iostream>
-
+#include "Date.h"
 #include "Activity.h"
 
-struct Date
-{
-    int day;
-    int month;
-    int year;
-};
 
 class DailyActivityRegister : public Subject {
 
 public:
-
-    DailyActivityRegister();
-
-    ~DailyActivityRegister() override;
-
-    DailyActivityRegister(DailyActivityRegister&) = delete;
-
-    DailyActivityRegister& operator= (const DailyActivityRegister) = delete;
 
     void subscribeView(Observer *newView) override;
 
@@ -42,16 +28,15 @@ public:
 
     const std::map<int, std::shared_ptr<Activity>> &getListOfActivity() const;
 
-    Date *getDate() const;
-
+    const Date &getRegisterDate() const;
 
 private:
 
     std::map<int,std::shared_ptr<Activity>> listOfActivity;
-    Date* date {nullptr};
     struct tm* currentTime;
     std::list<Observer*> registerViews {nullptr};
     int activityID = 0;
+    Date registerDate;
 
 };
 

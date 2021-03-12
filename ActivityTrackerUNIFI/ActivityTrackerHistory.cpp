@@ -55,9 +55,9 @@ std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::searchRegister(in
     auto historyIterator = history.begin();
 
     while (historyIterator != history.end()) {
-        if (((*historyIterator)->getDate()->year == year) &&
-            ((*historyIterator)->getDate()->month == month) &&
-            ((*historyIterator)->getDate()->day == day))
+        if (((*historyIterator)->getRegisterDate().getYear() == year) &&
+            ((*historyIterator)->getRegisterDate().getMonth() == month) &&
+            ((*historyIterator)->getRegisterDate().getDay() == day))
 
             return (*historyIterator);
         else
