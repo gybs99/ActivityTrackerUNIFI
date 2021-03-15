@@ -55,14 +55,14 @@ public:
 
     void onClickingDate(wxCommandEvent& event);
 
-    wxListBox *getListOfActivity() const;
+    wxListBox *getListOfEntries() const;
 
 private:
 
     wxBoxSizer* viewSizer {nullptr};
     wxBoxSizer* listSizer {nullptr};
 
-    wxListBox* listOfActivity {nullptr};
+    wxListBox* listOfEntries {nullptr};
     wxButton* addButton {nullptr};
     wxStaticText* infoText {nullptr};
 

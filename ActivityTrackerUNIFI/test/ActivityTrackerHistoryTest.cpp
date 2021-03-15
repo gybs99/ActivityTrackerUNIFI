@@ -42,7 +42,7 @@ TEST_F(HistoryTestFixture, AddRegisterTest) {
     historyView = new DailyActivityRegisterView(nullptr, testApp -> controller);
     historyView -> Show();
 
-    ASSERT_TRUE(historyView -> getListOfActivity() -> GetCount() != 0);
+    ASSERT_TRUE(historyView->getListOfEntries() -> GetCount() != 0);
     ASSERT_EQ(testApp -> controller -> getLoadedHistory() -> searchRegister(registerTestDay, registerTestMonth, registerTestYear), registerTest);
 
 }
@@ -57,7 +57,7 @@ TEST_F(HistoryTestFixture, RemoveRegisterTest) {
     historyView = new DailyActivityRegisterView(nullptr, testApp -> controller);
     historyView -> Show();
 
-    ASSERT_TRUE(historyView -> getListOfActivity() -> GetCount() == 0);
+    ASSERT_TRUE(historyView->getListOfEntries() -> GetCount() == 0);
     ASSERT_EQ(testApp -> controller -> getLoadedHistory() -> searchRegister(registerTestDay, registerTestMonth, registerTestYear), nullptr);
 
 }

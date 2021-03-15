@@ -6,7 +6,7 @@
 #define ACTIVITYTRACKERUNIFI_DAILYACTIVITYREGISTER_H
 
 #include <ctime>
-#include <map>
+#include <vector>
 #include <iostream>
 #include "Date.h"
 #include "Activity.h"
@@ -26,16 +26,19 @@ public:
 
     void removeActivity(const std::shared_ptr<Activity>& selectedActivity);
 
-    const std::map<int, std::shared_ptr<Activity>> &getListOfActivity() const;
+    std::shared_ptr<Activity>& findActivity(int activitySelected);
 
     const Date &getRegisterDate() const;
 
+    bool isListOfActivityEmpty();
+
+    int getNumberOfActivity();
+
 private:
 
-    std::map<int,std::shared_ptr<Activity>> listOfActivity;
-    struct tm* currentTime;
+    std::vector<std::shared_ptr<Activity>> listOfActivity;
+    tm* currentTime;
     std::list<Observer*> registerViews {nullptr};
-    int activityID = 0;
     Date registerDate;
 
 };

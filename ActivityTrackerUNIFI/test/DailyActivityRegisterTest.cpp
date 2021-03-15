@@ -29,7 +29,7 @@ TEST_F(RegisterTestGUIFixture, AddActivityToRegister) {
 
     createActivity();
 
-    EXPECT_TRUE(registerTest -> getListOfActivity().find(firstElementID) != registerTest -> getListOfActivity().end() );
+    EXPECT_TRUE(!registerTest->isListOfActivityEmpty() );
 
 }
 
@@ -42,6 +42,6 @@ TEST_F(RegisterTestGUIFixture, DeleteAnActivityFromRegister) {
 
     activityTestView -> getController() -> removeActivity(activityFromView);
 
-    EXPECT_TRUE(registerTest -> getListOfActivity().find(0) == registerTest -> getListOfActivity().end());
+    EXPECT_TRUE(registerTest->isListOfActivityEmpty());
 
 }

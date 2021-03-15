@@ -19,7 +19,7 @@ int ActivityTrackerController::createActivity(std::string newType, std::string n
 
         if (!todayRegister) {
 
-            todayRegister = std::make_shared<DailyActivityRegister>();          // If the activity is the first of the current day, a new reigster
+            todayRegister = std::make_shared<DailyActivityRegister>();          // If the activity is the first of the current day, a new register
             loadedHistory->addRegister(todayRegister);                     // will be created
 
         }
@@ -41,7 +41,7 @@ const std::shared_ptr<DailyActivityRegister> &ActivityTrackerController::getToda
 }
 
 const std::shared_ptr<Activity> &ActivityTrackerController::getActivitySelected(int activitySelected) {
-    return todayRegister -> getListOfActivity().find(activitySelected) -> second;
+    return todayRegister -> findActivity(activitySelected);
 }
 
 void ActivityTrackerController::removeActivity(std::shared_ptr<Activity>& selectedActivity) {

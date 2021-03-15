@@ -15,9 +15,7 @@ void DailyActivityRegister::unsubscribeView(Observer *removedView) {
 
 void DailyActivityRegister::addNewActivity(std::shared_ptr<Activity> newActivity) {
 
-    listOfActivity.insert(std::make_pair(activityID, std::move(newActivity)));
-    activityID++;
-
+    listOfActivity.push_back(std::move(newActivity));
 }
 
 void DailyActivityRegister::notifyChange() {
@@ -28,49 +26,25 @@ void DailyActivityRegister::notifyChange() {
                 itr -> updateView();
         }
 
-
 }
 
-const std::map<int, std::shared_ptr<Activity>> &DailyActivityRegister::getListOfActivity() const {
-    return listOfActivity;
-}
+
 
 void DailyActivityRegister::removeActivity(const std::shared_ptr<Activity>& selectedActivity) {
 
     bool found = false;
     auto itr = listOfActivity.begin();
-    int activityIDtoDelete;
 
     while (!found)
     {
-        if ( itr -> second == selectedActivity)
+        if ( (*itr) == selectedActivity)
         {
-            activityIDtoDelete = itr -> first;
+            listOfActivity.erase(itr);
             found = true;
-        } else itr++;
+        }
+        else itr++;
 
     }
-
-    listOfActivity.erase(activityIDtoDelete);
-
-    activityID = 0;
-    std::list<std::shared_ptr<Activity>> supportList;
-
-    for (const auto& itr1 : listOfActivity) {
-        supportList.push_back(itr1.second);
-    }
-
-    auto itr2 = listOfActivity.begin();
-    auto itr3 = listOfActivity.end();
-
-    listOfActivity.erase(itr2,itr3);
-
-    for (const auto& itr4 : supportList)
-    {
-        listOfActivity.insert(std::make_pair(activityID, itr4));
-        activityID++;
-    }
-
     notifyChange();
 }
 
@@ -78,3 +52,14 @@ const Date &DailyActivityRegister::getRegisterDate() const {
     return registerDate;
 }
 
+std::shared_ptr<Activity>& DailyActivityRegister::findActivity(int activitySelected) {
+    return listOfActivity[activitySelected];
+}
+
+bool DailyActivityRegister::isListOfActivityEmpty() {
+    return listOfActivity.empty();
+}
+
+int DailyActivityRegister::getNumberOfActivity() {
+    return listOfActivity.size();
+}

@@ -39,10 +39,10 @@ DailyActivityRegisterView::DailyActivityRegisterView(wxFrame *mainMenu,
 
 void DailyActivityRegisterView::updateView() {
 
-    int actualFields = listOfActivity->GetCount();
+    int actualFields = listOfEntries->GetCount();
 
     for (int i = actualFields - 1; i>=0 ; i--) {
-        listOfActivity -> Delete(i);
+        listOfEntries -> Delete(i);
     }
     createActivityList();
 }
@@ -60,10 +60,10 @@ void DailyActivityRegisterView::assembleRegisterView() {
     viewSizer = new wxBoxSizer(wxVERTICAL);
     listSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    listOfActivity = new wxListBox(this, ID_ActivityList, wxDefaultPosition);
+    listOfEntries = new wxListBox(this, ID_ActivityList, wxDefaultPosition);
     createActivityList();
 
-    listSizer -> Add(listOfActivity,1, wxEXPAND);
+    listSizer -> Add(listOfEntries, 1, wxEXPAND);
 
     infoText = new wxStaticText(this, wxID_ANY, "    Double click an activity to display it!");
     infoText -> SetFont(wxFont(15,wxROMAN, wxNORMAL, wxNORMAL));
@@ -81,11 +81,12 @@ void DailyActivityRegisterView::assembleRegisterView() {
 
 void DailyActivityRegisterView::createActivityList() {
 
-    for (const auto& itr : registerViewed -> getListOfActivity()) {
+    for (int registerPos = 0; registerPos < registerViewed -> getNumberOfActivity(); ++registerPos) {
 
-        listOfActivity -> Append(itr.second->getType() + "    " + itr.second->getDateAndDuration().getStartingHour()+ ":" +
-                            itr.second->getDateAndDuration().getStartingMin() + "  " + itr.second->getDateAndDuration().getFinishingHour()+ ":" +
-                            itr.second->getDateAndDuration().getFinishingMin());
+        listOfEntries -> Append(registerViewed -> findActivity(registerPos) -> getType() + "    " + registerViewed -> findActivity(registerPos) ->
+                getDateAndDuration().getStartingHour() + ":" + registerViewed->findActivity(registerPos) -> getDateAndDuration().getStartingMin() +
+                "  " + registerViewed -> findActivity(registerPos) -> getDateAndDuration().getFinishingHour() + ":" +
+                registerViewed->findActivity(registerPos) -> getDateAndDuration().getFinishingMin());
 
     }
 
@@ -97,7 +98,7 @@ void DailyActivityRegisterView::onClose(wxCloseEvent& event) {
     {
         detachView();
 
-        if (controller -> getTodayRegister() -> getListOfActivity().empty()) {
+        if (controller -> getTodayRegister() -> isListOfActivityEmpty()) {
             controller -> removeRegister();
         }
 
@@ -113,7 +114,7 @@ void DailyActivityRegisterView::onClose(wxCloseEvent& event) {
 
 void DailyActivityRegisterView::onClickingActivity(wxCommandEvent &event) {
 
-    activityDisplayed = new ActivityView(this, controller -> getActivitySelected(listOfActivity->GetSelection()), controller);
+    activityDisplayed = new ActivityView(this, controller -> getActivitySelected(listOfEntries->GetSelection()), controller);
     activityDisplayed -> Show();
 
 }
@@ -130,8 +131,8 @@ void DailyActivityRegisterView::createRegisterList() {
 
     for (const auto& itr : controller -> getLoadedHistory() -> getHistory()) {
 
-        listOfActivity -> Append(std::to_string(itr -> getRegisterDate().getDay()) + "/" + std::to_string(itr -> getRegisterDate().getMonth()) + "/" +
-                                 std::to_string(itr -> getRegisterDate().getYear()));
+        listOfEntries -> Append(std::to_string(itr -> getRegisterDate().getDay()) + "/" + std::to_string(itr -> getRegisterDate().getMonth()) + "/" +
+                                std::to_string(itr -> getRegisterDate().getYear()));
 
     }
 
@@ -139,9 +140,9 @@ void DailyActivityRegisterView::createRegisterList() {
 
 void DailyActivityRegisterView::onClickingDate(wxCommandEvent& event) {
 
-    int dateSelected = listOfActivity -> GetSelection();
+    int dateSelected = listOfEntries -> GetSelection();
 
-    registerViewed = controller -> getRegisterSelected(listOfActivity -> GetString(dateSelected).ToStdString());
+    registerViewed = controller -> getRegisterSelected(listOfEntries -> GetString(dateSelected).ToStdString());
 
     DailyActivityRegisterView :: attachView();
     updateView();
@@ -151,7 +152,7 @@ void DailyActivityRegisterView::onClickingDate(wxCommandEvent& event) {
 
     infoText -> SetLabel("    Double click an activity to display it!");
 
-    listOfActivity -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingActivity, this, ID_ActivityList);
+    listOfEntries -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingActivity, this, ID_ActivityList);
 
     addButton -> Enable(true);
 
@@ -162,10 +163,10 @@ void DailyActivityRegisterView::assembleHistoryView() {
     viewSizer = new wxBoxSizer(wxVERTICAL);
     listSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    listOfActivity = new wxListBox(this, ID_ActivityList, wxDefaultPosition);
-    listOfActivity -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingDate, this, ID_ActivityList);
+    listOfEntries = new wxListBox(this, ID_ActivityList, wxDefaultPosition);
+    listOfEntries -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingDate, this, ID_ActivityList);
     createRegisterList();
-    listSizer -> Add(listOfActivity,1, wxEXPAND);
+    listSizer -> Add(listOfEntries, 1, wxEXPAND);
 
     infoText = new wxStaticText(this, wxID_ANY, "    Double click a date to display corresponding register!");
     infoText -> SetFont(wxFont(15,wxROMAN, wxNORMAL, wxNORMAL));
@@ -181,8 +182,8 @@ void DailyActivityRegisterView::assembleHistoryView() {
 
 }
 
-wxListBox *DailyActivityRegisterView::getListOfActivity() const {
-    return listOfActivity;
+wxListBox *DailyActivityRegisterView::getListOfEntries() const {
+    return listOfEntries;
 }
 
 
