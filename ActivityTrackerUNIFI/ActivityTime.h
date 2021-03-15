@@ -5,6 +5,7 @@
 #ifndef ACTIVITYTRACKERUNIFI_ACTIVITYTIME_H
 #define ACTIVITYTRACKERUNIFI_ACTIVITYTIME_H
 #include "Date.h"
+#include "WrongTimeFormatException.h"
 
 class ActivityTime : public Date {
 
@@ -12,6 +13,10 @@ public:
 
     ActivityTime(std::string newStartingMin, std::string newStartingHour,
                  std::string newFinishingMin, std::string newFinishingHour);
+
+    ActivityTime& operator=(const ActivityTime& toCopy) = default;
+
+    int checkTimeFormat();
 
     const std::string &getStartingMin() const;
 

@@ -20,8 +20,7 @@ public:
 
     void removeActivity(std::shared_ptr<Activity>& selectedActivity);
 
-    void modifyActivity(std::shared_ptr<Activity>& selectedActivity, std::string newType, std::string newDescription, std::string startingMin,
-                        std::string startingHour, std::string finishingMin, std::string finishingHour);
+    void modifyActivity(std::shared_ptr<Activity>& selectedActivity, std::string newType, std::string newDescription, const ActivityTime& newTime);
 
     const std::shared_ptr<Activity> &getActivitySelected(int activitySelected);
 

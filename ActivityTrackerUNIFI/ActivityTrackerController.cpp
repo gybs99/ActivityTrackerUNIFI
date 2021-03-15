@@ -39,11 +39,12 @@ void ActivityTrackerController::removeActivity(std::shared_ptr<Activity>& select
     todayRegister -> removeActivity(selectedActivity);
 }
 
-void ActivityTrackerController::modifyActivity(std::shared_ptr<Activity> &selectedActivity, std::string newType, std::string newDescription, std::string newStartingMin,
-                                               std::string newStartingHour, std::string newFinishingMin, std::string newFinishingHour) {
+void ActivityTrackerController::modifyActivity(std::shared_ptr<Activity> &selectedActivity, std::string newType, std::string newDescription,
+                                               const ActivityTime& newTime) {
 
-    selectedActivity -> modifyInfo(std::move(newType), std::move(newDescription), std::move(newStartingMin), std::move(newStartingHour),
-                                   std::move(newFinishingMin), std::move(newFinishingHour));
+    const_cast<ActivityTime &>(selectedActivity->getDateAndDuration()) = newTime;
+
+    selectedActivity -> modifyInfo(std::move(newType), std::move(newDescription));
 
     todayRegister -> notifyChange();
 

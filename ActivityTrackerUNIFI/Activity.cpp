@@ -7,6 +7,8 @@
 Activity::Activity(std::string newType, std::string newDescription, ActivityTime newTime) : type(std::move(newType)), description(std::move(newDescription)),
                     dateAndDuration(std::move(newTime)) {
 
+
+
 }
 
 void Activity::subscribeView(Observer *newView) {
@@ -35,17 +37,10 @@ void Activity::setType(const std::string &newType) {
     Activity::type = newType;
 }
 
-void Activity::modifyInfo(std::string newType, std::string newDescription, std::string newStartingMin, std::string newStartingHour,
-                          std::string newFinishingMin, std::string newFinishingHour) {
+void Activity::modifyInfo(std::string newType, std::string newDescription) {
 
     type = std::move(newType);
     description = std::move(newDescription);
-
-    dateAndDuration.setStartingMin(newStartingMin);
-    dateAndDuration.setStartingHour(newStartingHour);
-    dateAndDuration.setFinishingMin(newFinishingMin);
-    dateAndDuration.setFinishingHour(newFinishingHour);
-
     notifyChange();
 
 }

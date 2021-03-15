@@ -71,12 +71,13 @@ TEST_F(ActivityTestGUIFixture, ModifyActivityForm)
 
     std::shared_ptr<Activity> activityTest = testApp -> controller -> getManagedActivity();
 
+    ActivityTime newTimeSet(editActivityTest -> getStartingMinList() -> GetValue().ToStdString(),
+                            editActivityTest -> getStartingHourList() -> GetValue().ToStdString(),
+                            editActivityTest -> getFinishingMinList() -> GetValue().ToStdString(),
+                            editActivityTest -> getFinishingHourList() -> GetValue().ToStdString());
+
     testApp -> controller -> modifyActivity(activityTest, editActivityTest -> getTypeChoiceList() -> GetValue().ToStdString(),
-                                            editActivityTest -> getDescriptionTextBox() -> GetValue().ToStdString(),
-                                            editActivityTest -> getStartingMinList() -> GetValue().ToStdString(),
-                                            editActivityTest -> getStartingHourList() -> GetValue().ToStdString(),
-                                            editActivityTest -> getFinishingMinList() -> GetValue().ToStdString(),
-                                            editActivityTest -> getFinishingHourList() -> GetValue().ToStdString());
+                                            editActivityTest -> getDescriptionTextBox() -> GetValue().ToStdString(), newTimeSet);
 
     ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getDescription(), "Test Description modified");
 

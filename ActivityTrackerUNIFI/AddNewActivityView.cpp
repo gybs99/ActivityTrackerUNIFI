@@ -200,18 +200,24 @@ void AddNewActivityView::onCreate(wxCommandEvent &event) {
     if(checkResult == 1) {
         wxMessageBox(wxT("To save your done task, you need to set almost a type."), wxT("Warning!"), wxOK | wxICON_EXCLAMATION);
         return;
-    } else if (checkResult == 2) {
+    }
+    try
+    {
+        ActivityTime newTimeSet(startingMinList->GetValue().ToStdString(), startingHourList->GetValue().ToStdString(),
+                                finishingMinList->GetValue().ToStdString(),
+                                finishingHourList->GetValue().ToStdString());
+        controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(), newTimeSet);
+        wxMessageBox(wxT("Your done task is added to your register! \n Check the daily register for review it"), wxT("Activity added"), wxOK | wxICON_INFORMATION);
+        m_parent -> Enable(true);
+        this -> Destroy();
+
+    }
+    catch (const WrongTimeFormatException& timeError) {
+
         wxMessageBox(wxT("Time format is not valid! Please fix it and try again."), wxT("Warning!"), wxOK | wxICON_EXCLAMATION);
         return;
+
     }
-
-    ActivityTime newTimeSet(startingMinList -> GetValue().ToStdString(), startingHourList -> GetValue().ToStdString(),
-                            finishingMinList -> GetValue().ToStdString(), finishingHourList -> GetValue().ToStdString());
-
-    controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(), newTimeSet);
-    wxMessageBox(wxT("Your done task is added to your register! \n Check the daily register for review it"), wxT("Activity added"), wxOK | wxICON_INFORMATION);
-    m_parent -> Enable(true);
-    this -> Destroy();
 
 }
 
@@ -222,43 +228,32 @@ void AddNewActivityView::onModify(wxCommandEvent &event) {
     if(checkResult == 1) {
         wxMessageBox(wxT("To save your done task, you need to set almost a type."), wxT("Warning!"), wxOK | wxICON_EXCLAMATION);
         return;
-    } else if (checkResult == 2) {
-        wxMessageBox(wxT("Time format is not valid! Please fix it and try again."), wxT("Warning!"), wxOK | wxICON_EXCLAMATION);
-        return;
     }
 
-    controller -> modifyActivity(activityToModify, typeChoiceList -> GetValue().ToStdString(), descriptionTextBox -> GetValue().ToStdString(),
-                                 startingMinList -> GetValue().ToStdString(), startingHourList -> GetValue().ToStdString(), finishingMinList ->
-                                 GetValue().ToStdString(), finishingHourList -> GetValue().ToStdString());
-    wxMessageBox(wxT("Activity successfully modified!"), wxT("Done!"), wxOK | wxICON_INFORMATION);
-    m_parent -> Enable(true);
-    this -> Destroy();
+    try {
 
+        ActivityTime newTimeSet(startingMinList->GetValue().ToStdString(), startingHourList->GetValue().ToStdString(),
+                                finishingMinList->GetValue().ToStdString(),
+                                finishingHourList->GetValue().ToStdString());
+        controller -> modifyActivity(activityToModify, typeChoiceList -> GetValue().ToStdString(), descriptionTextBox -> GetValue().ToStdString(), newTimeSet);
+        wxMessageBox(wxT("Activity successfully modified!"), wxT("Done!"), wxOK | wxICON_INFORMATION);
+        m_parent -> Enable(true);
+        this -> Destroy();
+
+    }
+    catch (const WrongTimeFormatException& timeError) {
+
+        wxMessageBox(wxT("Time format is not valid! Please fix it and try again."), wxT("Warning!"), wxOK | wxICON_EXCLAMATION);
+        return;
+
+    }
 }
 
 int AddNewActivityView::checkForm() {
 
     if (typeChoiceList -> GetValue() == "...")
         return 1;
-    else {
-        if (std::atoi(startingHourList -> GetValue()) > std::atoi(finishingHourList -> GetValue())) {
-            return 2;
-        }
-        else {
-            if (std::atoi(startingHourList -> GetValue()) == std::atoi(finishingHourList -> GetValue()))
-                if (std::atoi(startingMinList -> GetValue()) >= std::atoi(finishingMinList -> GetValue()))
-                    return 2;
-                else
-                {
-                    return 0;
-                }
-            else {
-                return 0;
-
-            }
-        }
-    }
-
+    return 0;
 }
 
 wxComboBox *AddNewActivityView::getTypeChoiceList() const {
