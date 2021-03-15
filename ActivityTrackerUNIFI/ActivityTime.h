@@ -5,7 +5,6 @@
 #ifndef ACTIVITYTRACKERUNIFI_ACTIVITYTIME_H
 #define ACTIVITYTRACKERUNIFI_ACTIVITYTIME_H
 #include "Date.h"
-#include "WrongTimeFormatException.h"
 
 class ActivityTime : public Date {
 
@@ -20,19 +19,11 @@ public:
 
     const std::string &getStartingMin() const;
 
-    void setStartingMin(const std::string &startingMin);
-
     const std::string &getStartingHour() const;
-
-    void setStartingHour(const std::string &startingHour);
 
     const std::string &getFinishingMin() const;
 
-    void setFinishingMin(const std::string &finishingMin);
-
     const std::string &getFinishingHour() const;
-
-    void setFinishingHour(const std::string &finishingHour);
 
 private:
 

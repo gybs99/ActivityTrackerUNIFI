@@ -195,9 +195,9 @@ void AddNewActivityView::onCancel(wxCommandEvent& event) {
 
 void AddNewActivityView::onCreate(wxCommandEvent &event) {
 
-    int checkResult = checkForm();
+    int typeCheck = checkForm();
 
-    if(checkResult == 1) {
+    if(typeCheck == 1) {
         wxMessageBox(wxT("To save your done task, you need to set almost a type."), wxT("Warning!"), wxOK | wxICON_EXCLAMATION);
         return;
     }
@@ -206,7 +206,15 @@ void AddNewActivityView::onCreate(wxCommandEvent &event) {
         ActivityTime newTimeSet(startingMinList->GetValue().ToStdString(), startingHourList->GetValue().ToStdString(),
                                 finishingMinList->GetValue().ToStdString(),
                                 finishingHourList->GetValue().ToStdString());
-        controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(), newTimeSet);
+
+        int dateCheck = controller -> createActivity(typeChoiceList -> GetValue().ToStdString(),descriptionTextBox -> GetValue().ToStdString(), newTimeSet);
+
+        if (dateCheck == 1)
+        {
+            wxMessageBox(wxT("An error with the register date is happened! Check the system date."), wxT("Warning"), wxOK | wxICON_EXCLAMATION);
+            return;
+        }
+
         wxMessageBox(wxT("Your done task is added to your register! \n Check the daily register for review it"), wxT("Activity added"), wxOK | wxICON_INFORMATION);
         m_parent -> Enable(true);
         this -> Destroy();

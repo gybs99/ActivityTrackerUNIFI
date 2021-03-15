@@ -6,12 +6,14 @@
 #define ACTIVITYTRACKERUNIFI_DATE_H
 #include <ctime>
 #include <memory>
+#include "WrongTimeFormatException.h"
 
 class Date {
 
 public:
 
     Date();
+    int checkDateFormat();
     int getDay() const;
     int getMonth() const;
     int getYear() const;

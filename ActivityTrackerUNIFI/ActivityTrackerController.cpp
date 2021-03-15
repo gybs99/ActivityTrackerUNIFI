@@ -11,19 +11,28 @@ ActivityTrackerController::ActivityTrackerController(std::shared_ptr<ActivityTra
 
 }
 
-void ActivityTrackerController::createActivity(std::string newType, std::string newDescription, ActivityTime newTime) {
+int ActivityTrackerController::createActivity(std::string newType, std::string newDescription, ActivityTime newTime) {
 
-    managedActivity = std::make_shared<Activity>(std::move(newType), std::move(newDescription), std::move(newTime));
+    try {
 
-    if (!todayRegister) {
+        managedActivity = std::make_shared<Activity>(std::move(newType), std::move(newDescription), std::move(newTime));
 
-        todayRegister = std::make_shared<DailyActivityRegister>();          // If the activity is the first of the current day, a new reigster
-        loadedHistory -> addRegister(todayRegister);                     // will be created
+        if (!todayRegister) {
 
+            todayRegister = std::make_shared<DailyActivityRegister>();          // If the activity is the first of the current day, a new reigster
+            loadedHistory->addRegister(todayRegister);                     // will be created
+
+        }
+
+        todayRegister->addNewActivity(managedActivity);
+        todayRegister->notifyChange();
+        return 0;
     }
 
-    todayRegister -> addNewActivity(managedActivity);
-    todayRegister -> notifyChange();
+    catch (WrongTimeFormatException& timeError) {
+        std::cout << "Register Date format is not valid!";
+        return 1;
+    }
 
 }
 
