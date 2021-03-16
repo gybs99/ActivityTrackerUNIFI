@@ -129,7 +129,7 @@ void MainMenu::onToday(wxCommandEvent &event) {
 
 void MainMenu::onShowHistory(wxCommandEvent& event) {
 
-    if (controller -> getLoadedHistory() -> getHistory().empty())
+    if (controller -> isHistoryEmpty())
             wxMessageBox(wxT("History is now empty! In History will be added date in which there was added one or more activity!"),
                          wxT("Error"), wxOK | wxICON_EXCLAMATION);
     else

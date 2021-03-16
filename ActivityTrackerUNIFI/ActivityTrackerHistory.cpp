@@ -24,10 +24,6 @@ void ActivityTrackerHistory::removeRegister(std::shared_ptr<DailyActivityRegiste
 
 }
 
-const std::list<std::shared_ptr<DailyActivityRegister>> &ActivityTrackerHistory::getHistory() const {
-    return history;
-}
-
 std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::searchTodayRegister() {
     return searchRegister(currentDate -> tm_mday, currentDate -> tm_mon + 1, currentDate -> tm_year + 1900);
 }
@@ -66,5 +62,25 @@ std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::searchRegister(in
     }
 
     return nullptr;
+
+}
+
+bool ActivityTrackerHistory::isHistoryEmpty() {
+    return history.empty();
+}
+
+int ActivityTrackerHistory::getHistoryDimension() {
+    return history.size();
+}
+
+std::shared_ptr<DailyActivityRegister>& ActivityTrackerHistory::searchRegister(int registerPos) {
+
+    auto itr = history.begin();
+
+    for (int i = 0; i < registerPos; ++i) {
+        itr++;
+    }
+
+    return (*itr);
 
 }

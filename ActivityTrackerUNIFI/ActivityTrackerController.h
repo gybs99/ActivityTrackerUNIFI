@@ -26,6 +26,8 @@ public:
 
     std::shared_ptr<DailyActivityRegister> getRegisterSelected(std::string date);
 
+    std::shared_ptr<DailyActivityRegister>& getRegisterSelected(int registerPos);
+
     void removeRegister();
 
     const std::shared_ptr<DailyActivityRegister> &getTodayRegister() const;
@@ -33,6 +35,10 @@ public:
     const std::shared_ptr<ActivityTrackerHistory> &getLoadedHistory() const;
 
     const std::shared_ptr<Activity> &getManagedActivity() const;
+
+    bool isHistoryEmpty();
+
+    int getHistoryDimension();
 
 
 private:

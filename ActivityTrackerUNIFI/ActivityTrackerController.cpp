@@ -76,3 +76,15 @@ void ActivityTrackerController::removeRegister() {
     todayRegister = nullptr;                                         // it will be deleted from the history
 }
 
+bool ActivityTrackerController::isHistoryEmpty() {
+    return loadedHistory -> isHistoryEmpty();
+}
+
+int ActivityTrackerController::getHistoryDimension() {
+    return loadedHistory -> getHistoryDimension();
+}
+
+std::shared_ptr<DailyActivityRegister>& ActivityTrackerController::getRegisterSelected(int registerPos) {
+    return loadedHistory -> searchRegister(registerPos);
+}
+

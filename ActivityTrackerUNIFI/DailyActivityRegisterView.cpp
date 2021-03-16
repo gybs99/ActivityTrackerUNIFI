@@ -129,12 +129,23 @@ void DailyActivityRegisterView::onAddActivity(wxCommandEvent &event) {
 
 void DailyActivityRegisterView::createRegisterList() {
 
+    for (int registerPos = 0; registerPos < controller -> getHistoryDimension(); ++registerPos) {
+
+        std::shared_ptr<DailyActivityRegister>& registerTook = controller -> getRegisterSelected(registerPos);
+
+        listOfEntries -> Append(std::to_string(registerTook -> getRegisterDate().getDay()) + "/" + std::to_string(registerTook -> getRegisterDate().getMonth()) + "/" +
+                                std::to_string(registerTook -> getRegisterDate().getYear()));
+
+    }
+
+    /*
     for (const auto& itr : controller -> getLoadedHistory() -> getHistory()) {
 
         listOfEntries -> Append(std::to_string(itr -> getRegisterDate().getDay()) + "/" + std::to_string(itr -> getRegisterDate().getMonth()) + "/" +
                                 std::to_string(itr -> getRegisterDate().getYear()));
 
     }
+     */
 
 }
 
