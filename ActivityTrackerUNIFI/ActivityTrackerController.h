@@ -18,7 +18,7 @@ public:
 
     int createActivity(std::string newType, std::string newDescription, ActivityTime newTime);
 
-    void removeActivity(std::shared_ptr<Activity>& selectedActivity);
+    bool removeActivity(const std::shared_ptr<Activity>& selectedActivity);
 
     void modifyActivity(std::shared_ptr<Activity>& selectedActivity, std::string newType, std::string newDescription, const ActivityTime& newTime);
 

@@ -30,12 +30,12 @@ void DailyActivityRegister::notifyChange() {
 
 
 
-void DailyActivityRegister::removeActivity(const std::shared_ptr<Activity>& selectedActivity) {
+bool DailyActivityRegister::removeActivity(const std::shared_ptr<Activity>& selectedActivity) {
 
     bool found = false;
     auto itr = listOfActivity.begin();
 
-    while (!found)
+    while ((!found) && (itr != listOfActivity.end()))
     {
         if ( (*itr) == selectedActivity)
         {
@@ -46,6 +46,8 @@ void DailyActivityRegister::removeActivity(const std::shared_ptr<Activity>& sele
 
     }
     notifyChange();
+    return found;
+
 }
 
 const Date &DailyActivityRegister::getRegisterDate() const {
@@ -62,4 +64,8 @@ bool DailyActivityRegister::isListOfActivityEmpty() {
 
 int DailyActivityRegister::getNumberOfActivity() {
     return listOfActivity.size();
+}
+
+int DailyActivityRegister::getNumberOfViews() {
+    return registerViews.size();
 }

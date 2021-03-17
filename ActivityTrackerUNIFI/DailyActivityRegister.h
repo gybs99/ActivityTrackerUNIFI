@@ -24,7 +24,7 @@ public:
 
     void addNewActivity(std::shared_ptr<Activity> newActivity);
 
-    void removeActivity(const std::shared_ptr<Activity>& selectedActivity);
+    bool removeActivity(const std::shared_ptr<Activity>& selectedActivity);
 
     std::shared_ptr<Activity>& findActivity(int activitySelected);
 
@@ -34,11 +34,13 @@ public:
 
     int getNumberOfActivity();
 
+    int getNumberOfViews();
+
 private:
 
     std::vector<std::shared_ptr<Activity>> listOfActivity;
     tm* currentTime;
-    std::list<Observer*> registerViews {nullptr};
+    std::list<Observer*> registerViews;
     Date registerDate;
 
 };

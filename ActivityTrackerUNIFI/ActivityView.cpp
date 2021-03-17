@@ -109,10 +109,20 @@ void ActivityView::onOK(wxCommandEvent &event) {
 
 void ActivityView::onDelete(wxCommandEvent& wxCommandEvent) {
 
-    controller -> removeActivity(activityViewed);
-    wxMessageBox(wxT("Activity successfully deleted"), wxT(""), wxOK | wxICON_INFORMATION);
-    m_parent -> Enable(true);
-    this -> Destroy();
+    bool result = controller -> removeActivity(activityViewed);
+
+    if(result)
+    {
+        wxMessageBox(wxT("Activity successfully deleted"), wxT(""), wxOK | wxICON_INFORMATION);
+        m_parent -> Enable(true);
+        this -> Destroy();
+    }
+    else
+    {
+        wxMessageBox(wxT("An error was occurred during the elimination of the activity"), wxT(""), wxOK | wxICON_INFORMATION);
+        m_parent -> Enable(true);
+        this -> Destroy();
+    }
 
 }
 

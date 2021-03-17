@@ -43,7 +43,6 @@ TEST_F(ActivityTestGUIFixture, CreateActivityForm)
 {
 
     editActivityTest = new AddNewActivityView(nullptr, testApp -> controller);
-    editActivityTest -> Show();
 
     editActivityTest -> getTypeChoiceList() -> SetValue("Work");
     editActivityTest -> getDescriptionTextBox() -> SetValue("Test Description");
@@ -74,7 +73,6 @@ TEST_F(ActivityTestGUIFixture, ModifyActivityForm)
     createTestActivity();
 
     editActivityTest = new AddNewActivityView(nullptr, testApp -> controller, testApp -> controller -> getManagedActivity());
-    editActivityTest -> Show();
 
     editActivityTest -> getDescriptionTextBox() -> SetValue("Test Description modified");
 
@@ -98,7 +96,7 @@ TEST_F(ActivityTestGUIFixture, CheckIfViewAttach)
 
     activityViewTest = new ActivityView(nullptr, testApp -> controller -> getManagedActivity(), testApp -> controller);
 
-    EXPECT_EQ(activityViewTest -> getActivityViewed(), testApp -> controller -> getManagedActivity());
+    EXPECT_EQ(activityViewTest -> getActivityViewed() -> getNumberOfViews(), 1);
 
 }
 

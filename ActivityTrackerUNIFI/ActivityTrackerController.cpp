@@ -44,8 +44,8 @@ const std::shared_ptr<Activity> &ActivityTrackerController::getActivitySelected(
     return todayRegister -> findActivity(activitySelected);
 }
 
-void ActivityTrackerController::removeActivity(std::shared_ptr<Activity>& selectedActivity) {
-    todayRegister -> removeActivity(selectedActivity);
+bool ActivityTrackerController::removeActivity(const std::shared_ptr<Activity>& selectedActivity) {
+    return todayRegister -> removeActivity(selectedActivity);
 }
 
 void ActivityTrackerController::modifyActivity(std::shared_ptr<Activity> &selectedActivity, std::string newType, std::string newDescription,
