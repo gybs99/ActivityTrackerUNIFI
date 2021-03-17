@@ -60,6 +60,9 @@ public:
 
     const std::shared_ptr<Activity> &getActivityViewed() const;
 
+    std::string getViewDescription();               // Only used for test purpose for checking if Activity's notifyChange() works well.
+                                                    // In this test, the passed string is tiny. so passing by value is not a big problem.
+
 private:
     std::shared_ptr<Activity> activityViewed;
     std::string durationString;

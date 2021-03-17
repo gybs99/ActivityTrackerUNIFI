@@ -49,6 +49,10 @@ const ActivityTime &Activity::getDateAndDuration() const {
     return dateAndDuration;
 }
 
+int Activity::getNumberOfViews() {
+    return activityViews.size();
+}
+
 
 
 

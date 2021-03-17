@@ -12,7 +12,6 @@ protected:
     ActivityView* activityTestView {nullptr};
     std::shared_ptr<Activity> activityTest;
     std::shared_ptr<DailyActivityRegister> registerTest;
-    int firstElementID = 0;                                     //In the activity list, the first activity added will have this value of ID, so we want to check if it will be present on the list
 
     void createActivity() {
 

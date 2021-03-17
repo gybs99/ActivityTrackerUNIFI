@@ -140,3 +140,7 @@ const std::shared_ptr<ActivityTrackerController> &ActivityView::getController() 
 const std::shared_ptr<Activity> &ActivityView::getActivityViewed() const {
     return activityViewed;
 }
+
+std::string ActivityView::getViewDescription() {
+    return activityDescription -> GetLabel().ToStdString();
+}

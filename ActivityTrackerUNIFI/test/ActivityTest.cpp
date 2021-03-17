@@ -3,11 +3,22 @@
 //
 #include "gtest/gtest.h"
 #include "GUIFixture.cpp"
+#include "../ActivityView.h"
 
 class ActivityTestGUIFixture : public GUIFixture {
 
 protected:
+
     AddNewActivityView* editActivityTest {nullptr};
+    ActivityView* activityViewTest {nullptr};
+
+    void createTestActivity() {
+
+        ActivityTime timeTest("00", "00", "01", "00");
+
+        testApp -> controller -> createActivity("Work", "Test Description to modify", timeTest);
+
+    }
 
 };
 
@@ -60,9 +71,7 @@ TEST_F(ActivityTestGUIFixture, CreateActivityForm)
 
 TEST_F(ActivityTestGUIFixture, ModifyActivityForm)
 {
-    ActivityTime timeTest("00", "00", "01", "00");
-
-    testApp -> controller -> createActivity("Work", "Test Description to modify", timeTest);
+    createTestActivity();
 
     editActivityTest = new AddNewActivityView(nullptr, testApp -> controller, testApp -> controller -> getManagedActivity());
     editActivityTest -> Show();
@@ -82,3 +91,44 @@ TEST_F(ActivityTestGUIFixture, ModifyActivityForm)
     ASSERT_EQ(testApp -> controller -> getManagedActivity() -> getDescription(), "Test Description modified");
 
 }
+
+TEST_F(ActivityTestGUIFixture, CheckIfViewAttach)
+{
+    createTestActivity();
+
+    activityViewTest = new ActivityView(nullptr, testApp -> controller -> getManagedActivity(), testApp -> controller);
+
+    EXPECT_EQ(activityViewTest -> getActivityViewed(), testApp -> controller -> getManagedActivity());
+
+}
+
+TEST_F(ActivityTestGUIFixture, CheckIfViewDetach)
+{
+    createTestActivity();
+
+    activityViewTest = new ActivityView(nullptr, testApp -> controller -> getManagedActivity(), testApp -> controller);
+
+    activityViewTest -> detachView();
+
+    EXPECT_EQ(testApp -> controller -> getManagedActivity() -> getNumberOfViews(), 0);
+
+}
+
+TEST_F(ActivityTestGUIFixture, CheckNotifyChangeToViews)
+{
+    createTestActivity();
+
+    activityViewTest = new ActivityView(nullptr, testApp -> controller -> getManagedActivity(), testApp -> controller);
+
+    ActivityTime modifyTime("10", "10", "30", "10");
+
+    std::shared_ptr<Activity> toModify = testApp -> controller -> getManagedActivity();
+
+    testApp -> controller -> modifyActivity(toModify, "Work", "Text Changed", modifyTime);
+
+    EXPECT_EQ(activityViewTest -> getViewDescription(), "Text Changed");
+
+}
+
+
+

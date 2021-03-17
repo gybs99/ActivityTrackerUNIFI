@@ -28,6 +28,8 @@ public:
 
     const std::string &getType() const;
 
+    int getNumberOfViews();
+
     void setType(const std::string &newType);
 
     void modifyInfo(std::string newType, std::string newDescription);
