@@ -26,7 +26,7 @@ public:
 
     bool removeActivity(const std::shared_ptr<Activity>& selectedActivity);
 
-    std::shared_ptr<Activity>& findActivity(int activitySelected);
+    std::shared_ptr<Activity> findActivity(int activitySelected);
 
     const Date &getRegisterDate() const;
 

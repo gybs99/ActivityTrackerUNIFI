@@ -22,7 +22,7 @@ public:
 
     std::shared_ptr<DailyActivityRegister> searchRegister(int day, int month, int year);
 
-    std::shared_ptr<DailyActivityRegister>& searchRegister(int registerPos);
+    std::shared_ptr<DailyActivityRegister> searchRegister(int registerPos);
 
     std::shared_ptr<DailyActivityRegister> getSelectedRegister(const std::string& registerDate);
 

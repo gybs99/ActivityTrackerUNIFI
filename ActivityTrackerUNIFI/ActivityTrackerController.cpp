@@ -40,7 +40,7 @@ const std::shared_ptr<DailyActivityRegister> &ActivityTrackerController::getToda
     return todayRegister;
 }
 
-const std::shared_ptr<Activity> &ActivityTrackerController::getActivitySelected(int activitySelected) {
+std::shared_ptr<Activity> ActivityTrackerController::getActivitySelected(int activitySelected) {
     return todayRegister -> findActivity(activitySelected);
 }
 
@@ -80,7 +80,7 @@ int ActivityTrackerController::getHistoryDimension() {
     return loadedHistory -> getHistoryDimension();
 }
 
-std::shared_ptr<DailyActivityRegister>& ActivityTrackerController::getRegisterSelected(int registerPos) {
+std::shared_ptr<DailyActivityRegister> ActivityTrackerController::getRegisterSelected(int registerPos) {
     return loadedHistory -> searchRegister(registerPos);
 }
 

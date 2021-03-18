@@ -114,8 +114,17 @@ void DailyActivityRegisterView::onClose(wxCloseEvent& event) {
 
 void DailyActivityRegisterView::onClickingActivity(wxCommandEvent &event) {
 
-    activityDisplayed = new ActivityView(this, controller -> getActivitySelected(listOfEntries->GetSelection()), controller);
-    activityDisplayed -> Show();
+    if (controller -> getActivitySelected(listOfEntries -> GetSelection()))
+    {
+        activityDisplayed = new ActivityView(this, controller->getActivitySelected(listOfEntries->GetSelection()),
+                                             controller);
+        activityDisplayed->Show();
+    }
+    else
+    {
+        wxMessageBox(wxT("An error has occurred during the displaying of this activity. \n Probably the activity selected is missing"),
+                     wxT("Warning"), wxOK | wxICON_INFORMATION);
+    }
 
 }
 
@@ -131,21 +140,17 @@ void DailyActivityRegisterView::createRegisterList() {
 
     for (int registerPos = 0; registerPos < controller -> getHistoryDimension(); ++registerPos) {
 
-        std::shared_ptr<DailyActivityRegister>& registerTook = controller -> getRegisterSelected(registerPos);
+        std::shared_ptr<DailyActivityRegister> registerTook = controller -> getRegisterSelected(registerPos);
 
-        listOfEntries -> Append(std::to_string(registerTook -> getRegisterDate().getDay()) + "/" + std::to_string(registerTook -> getRegisterDate().getMonth()) + "/" +
+        if (registerTook)
+            listOfEntries -> Append(std::to_string(registerTook -> getRegisterDate().getDay()) + "/" + std::to_string(registerTook -> getRegisterDate().getMonth()) + "/" +
                                 std::to_string(registerTook -> getRegisterDate().getYear()));
-
+        else
+        {
+            wxMessageBox(wxT("An error has occurred during the displaying of the register's date \n Some dates could be missed!"),
+            wxT("Warning"), wxOK | wxICON_INFORMATION);
+        }
     }
-
-    /*
-    for (const auto& itr : controller -> getLoadedHistory() -> getHistory()) {
-
-        listOfEntries -> Append(std::to_string(itr -> getRegisterDate().getDay()) + "/" + std::to_string(itr -> getRegisterDate().getMonth()) + "/" +
-                                std::to_string(itr -> getRegisterDate().getYear()));
-
-    }
-     */
 
 }
 
@@ -155,17 +160,27 @@ void DailyActivityRegisterView::onClickingDate(wxCommandEvent& event) {
 
     registerViewed = controller -> getRegisterSelected(listOfEntries -> GetString(dateSelected).ToStdString());
 
-    DailyActivityRegisterView :: attachView();
-    updateView();
+    if(registerViewed)
+    {
+        DailyActivityRegisterView :: attachView();
+        updateView();
 
-    this -> SetTitle(std::to_string(registerViewed -> getRegisterDate().getDay()) + "/" + std::to_string(registerViewed -> getRegisterDate().getMonth()) + "/" +
-                     std::to_string(registerViewed -> getRegisterDate().getYear()));
+        this -> SetTitle(std::to_string(registerViewed -> getRegisterDate().getDay()) + "/" + std::to_string(registerViewed -> getRegisterDate().getMonth()) + "/" +
+                         std::to_string(registerViewed -> getRegisterDate().getYear()));
 
-    infoText -> SetLabel("    Double click an activity to display it!");
+        infoText -> SetLabel("    Double click an activity to display it!");
 
-    listOfEntries -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingActivity, this, ID_ActivityList);
+        listOfEntries -> Bind(wxEVT_LISTBOX_DCLICK, &DailyActivityRegisterView::onClickingActivity, this, ID_ActivityList);
 
-    addButton -> Enable(true);
+        addButton -> Enable(true);
+    }
+    else
+    {
+        wxMessageBox(wxT("An error has occurred during the date selection. Please retry or restart the app"),
+                     wxT("Warning"), wxOK | wxICON_EXCLAMATION);
+        m_parent -> Enable(true);
+        this -> Destroy();
+    }
 
 }
 

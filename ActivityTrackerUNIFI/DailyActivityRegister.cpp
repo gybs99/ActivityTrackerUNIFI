@@ -54,7 +54,9 @@ const Date &DailyActivityRegister::getRegisterDate() const {
     return registerDate;
 }
 
-std::shared_ptr<Activity>& DailyActivityRegister::findActivity(int activitySelected) {
+std::shared_ptr<Activity> DailyActivityRegister::findActivity(int activitySelected) {
+    if (activitySelected >= listOfActivity.size())
+        return nullptr;
     return listOfActivity[activitySelected];
 }
 

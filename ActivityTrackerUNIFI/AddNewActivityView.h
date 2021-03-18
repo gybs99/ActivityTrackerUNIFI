@@ -72,8 +72,8 @@ public:
 
 private:
 
-    const int static numberOfTypes {5};
-    const int static numberOfMinutes {60};
+    const int static numberOfTypes {5};             // These 3 constants are static because they're needed for initialization of
+    const int static numberOfMinutes {60};          // the time's list boxes vectors
     const int static numberOfHours {24};
 
     wxStaticText* typeText {nullptr};
@@ -102,7 +102,7 @@ private:
 
     wxString types[numberOfTypes] = {wxT("..."),wxT("Sport"), wxT("Work"), wxT("Hobby"), wxT("Other")};
     wxString hours[numberOfHours];
-    wxString mins[numberOfMinutes];
+    wxString minutes[numberOfMinutes];
 
 
 

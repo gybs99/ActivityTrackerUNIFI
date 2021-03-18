@@ -22,12 +22,13 @@ public:
 
     void modifyActivity(std::shared_ptr<Activity>& selectedActivity, std::string newType, std::string newDescription, const ActivityTime& newTime);
 
-    const std::shared_ptr<Activity> &getActivitySelected(int activitySelected);
+    std::shared_ptr<Activity> getActivitySelected(int activitySelected);
 
-    std::shared_ptr<DailyActivityRegister> getRegisterSelected(std::string date);
+    std::shared_ptr<DailyActivityRegister> getRegisterSelected(std::string date);         // Used to take the right register depending the entry clicked
+                                                                                          // in history's view
 
-    std::shared_ptr<DailyActivityRegister>& getRegisterSelected(int registerPos);
-
+    std::shared_ptr<DailyActivityRegister> getRegisterSelected(int registerPos);         // Used in the history's view for putting all registers inside
+                                                                                          // the list box
     void removeRegister();
 
     const std::shared_ptr<DailyActivityRegister> &getTodayRegister() const;

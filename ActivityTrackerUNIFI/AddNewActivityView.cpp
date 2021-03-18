@@ -79,9 +79,9 @@ void AddNewActivityView::createMinHoursVectors() {
 
     for (int i = 0; i < 60; ++i) {
         if(i < 10)
-            mins[i] = std::to_string(0) + std::to_string(i);
+            minutes[i] = std::to_string(0) + std::to_string(i);
         else
-            mins[i] = std::to_string(i);
+            minutes[i] = std::to_string(i);
     }
 }
 
@@ -132,7 +132,7 @@ void AddNewActivityView::assembleTimeStartView() {
     timeSpacer1 -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
 
     startingMinList = new wxComboBox(this, wxID_ANY, "00", wxDefaultPosition, wxSize(80,40),
-                                     numberOfMinutes, mins, wxCB_READONLY);
+                                     numberOfMinutes, minutes, wxCB_READONLY);
 
 
     durationSizer = new wxBoxSizer(wxHORIZONTAL);
@@ -152,7 +152,7 @@ void AddNewActivityView::assembleTimeFinishView() {
     timeSpacer2 -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));
 
     finishingMinList = new wxComboBox(this, wxID_ANY, "00", wxDefaultPosition, wxSize(80,40),
-                                      numberOfMinutes, mins, wxCB_READONLY);
+                                      numberOfMinutes, minutes, wxCB_READONLY);
 
     timeFinishText = new wxStaticText(this, wxID_ANY, "                  Finish ");
     timeFinishText -> SetFont(wxFont(20,wxROMAN, wxNORMAL, wxNORMAL));

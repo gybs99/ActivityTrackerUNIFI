@@ -73,7 +73,7 @@ int ActivityTrackerHistory::getHistoryDimension() {
     return history.size();
 }
 
-std::shared_ptr<DailyActivityRegister>& ActivityTrackerHistory::searchRegister(int registerPos) {
+std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::searchRegister(int registerPos) {
 
     auto itr = history.begin();
 
