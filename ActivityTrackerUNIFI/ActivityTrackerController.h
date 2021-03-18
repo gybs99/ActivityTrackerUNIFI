@@ -32,9 +32,9 @@ public:
 
     const std::shared_ptr<DailyActivityRegister> &getTodayRegister() const;
 
-    const std::shared_ptr<ActivityTrackerHistory> &getLoadedHistory() const;
-
     const std::shared_ptr<Activity> &getManagedActivity() const;
+
+    std::shared_ptr<DailyActivityRegister> searchRegister(int day, int month, int year);
 
     bool isHistoryEmpty();
 

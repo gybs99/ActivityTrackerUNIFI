@@ -63,10 +63,6 @@ const std::shared_ptr<Activity> &ActivityTrackerController::getManagedActivity()
     return managedActivity;
 }
 
-const std::shared_ptr<ActivityTrackerHistory> &ActivityTrackerController::getLoadedHistory() const {
-    return loadedHistory;
-}
-
 std::shared_ptr<DailyActivityRegister> ActivityTrackerController::getRegisterSelected(std::string date) {
     return loadedHistory -> getSelectedRegister(date);
 }
@@ -86,5 +82,9 @@ int ActivityTrackerController::getHistoryDimension() {
 
 std::shared_ptr<DailyActivityRegister>& ActivityTrackerController::getRegisterSelected(int registerPos) {
     return loadedHistory -> searchRegister(registerPos);
+}
+
+std::shared_ptr<DailyActivityRegister> ActivityTrackerController::searchRegister(int day, int month, int year) {
+    return loadedHistory -> searchRegister(day, month, year);
 }
 

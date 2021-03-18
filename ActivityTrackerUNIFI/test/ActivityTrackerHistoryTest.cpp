@@ -4,6 +4,7 @@
 #include "gtest/gtest.h"
 #include "GUIFixture.cpp"
 #include "../DailyActivityRegisterView.h"
+#include "../MainMenu.h"
 
 class HistoryTestFixture : public GUIFixture {
 
@@ -11,6 +12,7 @@ protected:
 
     std::shared_ptr<DailyActivityRegister> registerTest;
     DailyActivityRegisterView* historyView {nullptr};
+    MainMenu* menuTest {nullptr};
 
     int registerTestDay;
     int registerTestMonth;
@@ -40,10 +42,9 @@ TEST_F(HistoryTestFixture, AddRegisterTest) {
     getRegisterDateInfo();
 
     historyView = new DailyActivityRegisterView(nullptr, testApp -> controller);
-    historyView -> Show();
 
     ASSERT_TRUE(historyView->getListOfEntries() -> GetCount() != 0);
-    ASSERT_EQ(testApp -> controller -> getLoadedHistory() -> searchRegister(registerTestDay, registerTestMonth, registerTestYear), registerTest);
+    ASSERT_EQ(testApp -> controller -> searchRegister(registerTestDay, registerTestMonth, registerTestYear), registerTest);
 
 }
 
@@ -55,9 +56,39 @@ TEST_F(HistoryTestFixture, RemoveRegisterTest) {
     testApp -> controller -> removeRegister();
 
     historyView = new DailyActivityRegisterView(nullptr, testApp -> controller);
-    historyView -> Show();
 
     ASSERT_TRUE(historyView->getListOfEntries() -> GetCount() == 0);
-    ASSERT_EQ(testApp -> controller -> getLoadedHistory() -> searchRegister(registerTestDay, registerTestMonth, registerTestYear), nullptr);
+    ASSERT_EQ(testApp -> controller -> searchRegister(registerTestDay, registerTestMonth, registerTestYear), nullptr);
+
+}
+
+TEST_F(HistoryTestFixture, DisplayHistoryInfo) {
+
+    createActivity();
+    getRegisterDateInfo();
+
+    historyView = new DailyActivityRegisterView(nullptr, testApp -> controller);
+
+    std::string actualDate = std::to_string(registerTestDay) + "/" + std::to_string(registerTestMonth) + "/" +
+            std::to_string(registerTestYear);
+
+    ASSERT_EQ(historyView -> getListOfEntries() -> GetString(0), actualDate);
+
+}
+
+TEST_F(HistoryTestFixture, IfEmptyHistoryDeleted) {
+
+    menuTest = new MainMenu(testApp -> controller);
+
+    createActivity();
+
+    auto registerTestView = new DailyActivityRegisterView(menuTest, testApp -> controller -> getTodayRegister(),
+                                                                                testApp -> controller);
+
+    testApp -> controller -> removeActivity(testApp -> controller -> getManagedActivity());
+
+    registerTestView -> Close();
+
+    ASSERT_EQ(testApp -> controller -> getHistoryDimension(), 0);
 
 }
