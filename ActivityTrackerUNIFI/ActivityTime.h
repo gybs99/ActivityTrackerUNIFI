@@ -15,7 +15,7 @@ public:
 
     ActivityTime& operator=(const ActivityTime& toCopy) = default;
 
-    int checkTimeFormat();
+    bool checkTimeFormat();
 
     const std::string &getStartingMin() const;
 

@@ -8,7 +8,7 @@ ActivityTime::ActivityTime(std::string newStartingMin, std::string newStartingHo
                            Date(), startingMin(std::move(newStartingMin)), startingHour(std::move(newStartingHour)),
                            finishingMin(std::move(newFinishingMin)), finishingHour(std::move(newFinishingHour)) {
 
-    if (checkTimeFormat() == 1)
+    if (checkTimeFormat())
         throw WrongTimeFormatException();
 
 }
@@ -30,21 +30,21 @@ const std::string &ActivityTime::getFinishingHour() const {
     return finishingHour;
 }
 
-int ActivityTime::checkTimeFormat() {
+bool ActivityTime::checkTimeFormat() {
 
     if (std::atoi(startingHour.c_str()) > std::atoi(finishingHour.c_str())) {
-        return 1;
+        return true;
     }
     else {
         if (std::atoi(startingHour.c_str()) == std::atoi(finishingHour.c_str()))
             if (std::atoi(startingMin.c_str()) >= std::atoi(finishingMin.c_str()))
-                return 1;
+                return true;
             else
             {
-                return 0;
+                return false;
             }
         else {
-            return 0;
+            return false;
 
         }
     }

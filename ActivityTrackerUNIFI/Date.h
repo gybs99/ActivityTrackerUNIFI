@@ -13,7 +13,7 @@ class Date {
 public:
 
     Date();
-    int checkDateFormat() const;
+    bool checkDateFormat() const;
     int getDay() const;
     int getMonth() const;
     int getYear() const;
