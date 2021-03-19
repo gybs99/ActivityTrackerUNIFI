@@ -139,7 +139,7 @@ TEST_F(RegisterTestGUIFixture, DeleteAnInexistentActivity)
 
 }
 
-TEST_F(RegisterTestGUIFixture, ViewAnInexistentActivity)
+TEST_F(RegisterTestGUIFixture, TryToTakeAnInexistentActivity)
 {
     createActivity();
 

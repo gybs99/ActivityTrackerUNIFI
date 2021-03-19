@@ -93,7 +93,7 @@ TEST_F(HistoryTestFixture, IfEmptyHistoryDeleted) {
 
 }
 
-TEST_F(HistoryTestFixture, ViewAnInexistentDate)
+TEST_F(HistoryTestFixture, TryToTakeAnInexistentDate)
 {
     createActivity();
 
