@@ -4,11 +4,8 @@
 
 #include "Activity.h"
 
-Activity::Activity(std::string newType, std::string newDescription, ActivityTime newTime) : type(std::move(newType)), description(std::move(newDescription)),
-                    dateAndDuration(std::move(newTime)) {
-
-
-
+Activity::Activity(std::string newType, std::string newDescription, const ActivityTime& newTime) : type(std::move(newType)), description(std::move(newDescription)),
+                    dateAndDuration(newTime) {
 }
 
 void Activity::subscribeView(Observer *newView) {
@@ -20,9 +17,11 @@ void Activity::unsubscribeView(Observer *removedView) {
 }
 
 void Activity::notifyChange() {
+
     if (!activityViews.empty())
     for(auto view : activityViews)
         view -> updateView();
+
 }
 
 const std::string &Activity::getDescription() const {

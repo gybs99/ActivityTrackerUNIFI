@@ -30,7 +30,7 @@ int Date::getYear() const {
     return year;
 }
 
-int Date::checkDateFormat() {
+int Date::checkDateFormat() const {
 
     if ((year < 1900) || (year > 9999))        // It will be assumed that a managed date is greater than 1900 and don't reach more than 9999
         return 1;
@@ -56,13 +56,18 @@ int Date::checkDateFormat() {
     if(month % 2 == 0) {                    // Check if any month take the right maximum number of days
         if ((month <= 6) && (day > 30))
             return 1;
-        else if (day > 31)
-            return 1;
+        else {
+            if (day > 31)
+                return 1;
+        }
     }
-    else if ((month <= 7) && (day > 31))
+    else
+        if ((month <= 7) && (day > 31))
             return 1;
-        else if (day > 30)
+        else {
+            if (day > 30)
             return 1;
+        }
 
     return 0;
 

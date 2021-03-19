@@ -5,5 +5,4 @@
 #include "WrongTimeFormatException.h"
 
 WrongTimeFormatException::WrongTimeFormatException() : std::exception() {
-
 }

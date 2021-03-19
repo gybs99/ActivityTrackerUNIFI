@@ -14,9 +14,9 @@ protected:
     DailyActivityRegisterView* historyView {nullptr};
     MainMenu* menuTest {nullptr};
 
-    int registerTestDay;
-    int registerTestMonth;
-    int registerTestYear;
+    int registerTestDay {1};
+    int registerTestMonth {1};
+    int registerTestYear {1};
 
     void createActivity() {
 

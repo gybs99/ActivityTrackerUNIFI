@@ -8,6 +8,7 @@
 
 class Observer {
 public:
+
     virtual ~Observer() {}
 
     virtual void updateView() = 0;

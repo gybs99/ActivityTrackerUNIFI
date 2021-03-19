@@ -70,6 +70,7 @@ AddNewActivityView::AddNewActivityView(wxFrame* registerView, std::shared_ptr<Ac
 
 
 void AddNewActivityView::createMinHoursVectors() {
+
     for (int i = 0; i < 24; ++i) {
        if(i < 10)
            hours[i] = std::to_string(0) + std::to_string(i);
@@ -83,6 +84,7 @@ void AddNewActivityView::createMinHoursVectors() {
         else
             minutes[i] = std::to_string(i);
     }
+
 }
 
 void AddNewActivityView::assembleDescriptionView() {
@@ -262,6 +264,7 @@ int AddNewActivityView::checkForm() {
     if (typeChoiceList -> GetValue() == "...")
         return 1;
     return 0;
+
 }
 
 wxComboBox *AddNewActivityView::getTypeChoiceList() const {

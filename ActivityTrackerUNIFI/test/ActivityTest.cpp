@@ -41,7 +41,6 @@ TEST(Activity, StandardActivityConstruction)        // It sees if the Date with 
 
 TEST_F(ActivityTestGUIFixture, CreateActivityForm)
 {
-
     editActivityTest = new AddNewActivityView(nullptr, testApp -> controller);
 
     editActivityTest -> getTypeChoiceList() -> SetValue("Work");
@@ -125,7 +124,6 @@ TEST_F(ActivityTestGUIFixture, CheckNotifyChangeToViews)
     testApp -> controller -> modifyActivity(toModify, "Work", "Text Changed", modifyTime);
 
     EXPECT_EQ(activityViewTest -> getViewDescription(), "Text Changed");
-
 }
 
 

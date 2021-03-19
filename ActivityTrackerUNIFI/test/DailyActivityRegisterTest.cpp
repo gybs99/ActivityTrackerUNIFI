@@ -145,5 +145,4 @@ TEST_F(RegisterTestGUIFixture, ViewAnInexistentActivity)
 
     ASSERT_TRUE(testApp -> controller -> getActivitySelected(0) != nullptr);
     ASSERT_TRUE(testApp -> controller -> getActivitySelected(1) == nullptr);
-
 }

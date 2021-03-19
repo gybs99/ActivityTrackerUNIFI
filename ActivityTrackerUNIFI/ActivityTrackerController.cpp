@@ -11,11 +11,11 @@ ActivityTrackerController::ActivityTrackerController(std::shared_ptr<ActivityTra
 
 }
 
-int ActivityTrackerController::createActivity(std::string newType, std::string newDescription, ActivityTime newTime) {
+int ActivityTrackerController::createActivity(std::string newType, std::string newDescription, const ActivityTime& newTime) {
 
     try {
 
-        managedActivity = std::make_shared<Activity>(std::move(newType), std::move(newDescription), std::move(newTime));
+        managedActivity = std::make_shared<Activity>(std::move(newType), std::move(newDescription), newTime);
 
         if (!todayRegister) {
 
@@ -63,7 +63,7 @@ const std::shared_ptr<Activity> &ActivityTrackerController::getManagedActivity()
     return managedActivity;
 }
 
-std::shared_ptr<DailyActivityRegister> ActivityTrackerController::getRegisterSelected(std::string date) {
+std::shared_ptr<DailyActivityRegister> ActivityTrackerController::getRegisterSelected(const std::string& date) {
     return loadedHistory -> getSelectedRegister(date);
 }
 

@@ -16,7 +16,7 @@ public:
 
     explicit ActivityTrackerController(std::shared_ptr<ActivityTrackerHistory> loadingHistory);
 
-    int createActivity(std::string newType, std::string newDescription, ActivityTime newTime);
+    int createActivity(std::string newType, std::string newDescription, const ActivityTime& newTime);
 
     bool removeActivity(const std::shared_ptr<Activity>& selectedActivity);
 
@@ -24,7 +24,7 @@ public:
 
     std::shared_ptr<Activity> getActivitySelected(int activitySelected);
 
-    std::shared_ptr<DailyActivityRegister> getRegisterSelected(std::string date);         // Used to take the right register depending the entry clicked
+    std::shared_ptr<DailyActivityRegister> getRegisterSelected(const std::string& date);         // Used to take the right register depending the entry clicked
                                                                                           // in history's view
 
     std::shared_ptr<DailyActivityRegister> getRegisterSelected(int registerPos);         // Used in the history's view for putting all registers inside

@@ -64,6 +64,7 @@ public:
                                                     // In this test, the passed string is tiny. so passing by value is not a big problem.
 
 private:
+
     std::shared_ptr<Activity> activityViewed;
     std::string durationString;
 

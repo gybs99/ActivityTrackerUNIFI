@@ -27,6 +27,7 @@ public:
 class GUIFixture : public ::testing::Test {
 
 protected:
+
     TestApp* testApp;
     void SetUp() override
     {

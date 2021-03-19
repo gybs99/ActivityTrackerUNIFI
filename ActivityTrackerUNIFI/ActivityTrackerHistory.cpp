@@ -6,22 +6,16 @@
 
 
 ActivityTrackerHistory::ActivityTrackerHistory() : systemTime(time(nullptr)) {
-
     currentDate = localtime((&systemTime));
-
 }
 
 
 void ActivityTrackerHistory::addRegister(std::shared_ptr<DailyActivityRegister>& newRegister) {
-
     history.push_back(newRegister);
-
 }
 
-void ActivityTrackerHistory::removeRegister(std::shared_ptr<DailyActivityRegister>& toDelete) {
-
+void ActivityTrackerHistory::removeRegister(const std::shared_ptr<DailyActivityRegister>& toDelete) {
     history.remove(toDelete);
-
 }
 
 std::shared_ptr<DailyActivityRegister> ActivityTrackerHistory::searchTodayRegister() {

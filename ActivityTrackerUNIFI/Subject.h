@@ -10,6 +10,7 @@
 
 
 class Subject {
+
 public:
 
     virtual void subscribeView(Observer* newView) = 0;

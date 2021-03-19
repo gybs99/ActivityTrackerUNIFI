@@ -16,7 +16,7 @@ class Activity : public Subject {
 
 public:
 
-    Activity(std::string newType, std::string newDescription, ActivityTime newTime);
+    Activity(std::string newType, std::string newDescription, const ActivityTime& newTime);
 
     void subscribeView(Observer *newView) override;
 

@@ -10,6 +10,7 @@ class WrongTimeFormatException : public std::exception {
 
 public:
     WrongTimeFormatException();
+
 };
 
 

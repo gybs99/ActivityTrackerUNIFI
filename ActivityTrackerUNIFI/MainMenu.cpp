@@ -78,6 +78,7 @@ void MainMenu::setBoxSizer() {
     mainMenuSizer -> Add(lookTodayButton, 0, wxCENTER, 20);
 
     this -> SetSizer(mainMenuSizer);
+
 }
 
 void MainMenu::onInfo(wxCommandEvent& event) {

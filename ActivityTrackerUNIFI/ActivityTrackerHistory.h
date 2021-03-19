@@ -16,7 +16,7 @@ public:
 
     void addRegister(std::shared_ptr<DailyActivityRegister>& newRegister);
 
-    void removeRegister(std::shared_ptr<DailyActivityRegister>& toDelete);
+    void removeRegister(const std::shared_ptr<DailyActivityRegister>& toDelete);
 
     std::shared_ptr<DailyActivityRegister> searchTodayRegister();
 
