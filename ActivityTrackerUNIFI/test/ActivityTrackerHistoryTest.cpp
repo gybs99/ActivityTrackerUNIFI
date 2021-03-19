@@ -92,3 +92,14 @@ TEST_F(HistoryTestFixture, IfEmptyHistoryDeleted) {
     ASSERT_EQ(testApp -> controller -> getHistoryDimension(), 0);
 
 }
+
+TEST_F(HistoryTestFixture, ViewAnInexistentDate)
+{
+    createActivity();
+
+    historyView = new DailyActivityRegisterView(nullptr, testApp -> controller);
+
+    ASSERT_TRUE(testApp -> controller -> getRegisterSelected("99/99/99") == nullptr);
+    ASSERT_TRUE(testApp -> controller -> getRegisterSelected(historyView -> getListOfEntries() -> GetString(0).ToStdString()) != nullptr);
+
+}

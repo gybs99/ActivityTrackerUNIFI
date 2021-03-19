@@ -130,11 +130,20 @@ TEST_F(RegisterTestGUIFixture, DeleteAnInexistentActivity)
 {
     createActivity();
 
-    ActivityTime timeTest6("00", "00", "00", "01");
-    std::shared_ptr<Activity> activityToDelete = std::make_shared<Activity>("Work", "Test Description", timeTest6);
+    ActivityTime timeTest("00", "00", "00", "01");
+    std::shared_ptr<Activity> activityToDelete = std::make_shared<Activity>("Work", "Test Description", timeTest);
 
     bool result = testApp -> controller -> removeActivity(activityToDelete);
 
     EXPECT_EQ(result, false);
+
+}
+
+TEST_F(RegisterTestGUIFixture, ViewAnInexistentActivity)
+{
+    createActivity();
+
+    ASSERT_TRUE(testApp -> controller -> getActivitySelected(0) != nullptr);
+    ASSERT_TRUE(testApp -> controller -> getActivitySelected(1) == nullptr);
 
 }
